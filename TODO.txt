@@ -1,0 +1,48 @@
+How to pronounce my name (DONE)
+
+Include picture of trashbot at the top (DONE)
+
+Include picture of me with the UMTRI car (DONE)
+Trashbot video (DONE)
+Research paper from 598 (DONE)
+
+Other projects to include on website:
+UMTRI (DONE)
+Self-driving cars (DONE)
+Trashbot (DONE)
+EECS467 escape challenge video (DONE)
+Kineval (DONE)
+SLAM Videos from 568
+Implementation of iSAM? Paper for iSAM. JCBB
+EECS460 Magnet ball controller
+Mention I'm currently working on KD-Tree project
+
+Other cool stuff section:
+Include Youtube channel (DONE)
+Me teaching EECS203 (DONE)
+Ethics paper (DONE)
+Used to work at CHEPS (DONE)
+MDP Project (DONE)
+
+Philosophy;
+My mousetrap (NO)
+What an engineer is. Yusei Fudo (NO)
+Pictures of me (NO)
+Volunteering in Detroit (NO)
+Anime (DONE)
+Board Games (DONE)
+Traveling (DONE)
+Learning to play guitar (DONE)
+
+NOTES:
+Car image used in rob599 section is based on ce8857e7-a098-4f2b-9afb-a81a16510821
+
+Ordering of Projects:
+UMTRI
+599 Neural Net
+568 iSAM
+598 Motion Planning
+Trashbot
+467 Botlab
+Kineval
+460 Ball
