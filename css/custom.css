@@ -1,0 +1,23 @@
+.mb-5 {
+    margin-top: 1rem!important;
+    margin-bottom: 1rem!important;
+}
+
+section.resume-section {
+    border-bottom: 1px solid #dee2e6;
+    padding-top: 0rem!important;
+    padding-bottom: 0rem!important;
+    min-height: 25vh;
+}
+
+body {
+    line-height: 1.2;
+}
+
+.bg-primary {
+    background-color: #417c39!important;
+}
+
+.text-primary {
+    color: #417c39!important;
+}
