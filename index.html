@@ -86,7 +86,7 @@
             <br>
             <br>
             
-            My first name <i>Ajaay</i> is a modification of the more common Indian name <a href="https://en.wikipedia.org/wiki/Ajay_(given_name)"><i>Ajay</i></a>. I respond to many pronunciations of it and have no preference any of them. The most common pronunciations are Ay-Jay, Uhh-Jay, and Uhh-Jie. <br><br>
+            My first name <i>Ajaay</i> is a modification of the Indian name <a href="https://en.wikipedia.org/wiki/Ajay_(given_name)"><i>Ajay</i></a>. I respond to many pronunciations of it and have no preference for any of them. The most common pronunciations are Ay-Jay, Uhh-Jay, and Uhh-Jie. <br><br>
             My last name <i>Chandrasekaran</i> is based on the Indian name <a href="https://en.wikipedia.org/wiki/Chandrasekhar"> <i> Chandrasekhar</i></a>. I pronounce it as Chan-dra-say-ker-in.
 		  </p>
           <ul class="list-inline list-social-icons mb-0">
@@ -115,13 +115,26 @@
           <h2 class="mb-5">Projects</h2>
           <p> 
 		  <p><strong>Collision Estimation for Safe Planning</strong></p>
-          
-		  <ul>
-			  <li>Implementing the titular <a href="http://www.doc.ic.ac.uk/~ajd/Publications/davison_etal_pami2007.pdf">work by Davison, et al</a>
-			  </li>
-		  </ul>
-		  </br>
-		  </br>
+          [<a href="resources/ajaay_paper.pdf">Paper</a>]
+          <center>
+            <img src="img/env_setup.png" width="400px;">
+            <img src="img/motion_pic.PNG" width="400px;">
+          </center>
+          <br>
+          For my Motion Planning course, I devised and implemented a Gaussian Mixture Model-based algorithm in C++ to expand upon existing methods to estimate the probability that a robot following a pre-generated motion plan would collide with an obstacle.
+          <br><br>
+          The motivation for this work is that a robot can benefit from quantifying the approximate safety of a motion plan before executing it. While a motion planner should generate a collision-free path, collisions may be possible as the robot follows the path due to natural uncertainty in the data it receives from its sensors and random noise in how it makes movements. <br><br>
+
+          Existing methods to compute the exact probability of collision for a motion plan rely on running thousands of Monte-Carlo simulations of the robot following the motion plan, which is computationally expensive. The goal of this work is to estimate the probability of collision in a lower amount of time.
+
+          Given a probability of collision before executing a motion plan, a robot can either execute it or revise the plan until it can find a "safer" plan.
+          <br><br>
+          For this work, I utilized the OpenRAVE simulation framework and Armadillo C++ linear algebra library to simulate a linear feedback controller and an Extended Kalman Filter estimate for the position of the PR2 robot as it followed a motion plan. I performed experiments to examine my algorithm's performance and presented my research in a paper and a conference talk.
+          <br>
+          <br>
+          Unfortunately, my algorithm did not perform as well as I had hoped, but I learned much from the experience in regards to conducting independent research.
+          <br><br>
+
 
 		  <p><strong>Resonant Evil: Rocking Drones Through Decoupled Ultrasonic Transducer 
 			  Affecting MEMS Gyroscopes</strong></p>

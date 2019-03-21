@@ -16,3 +16,11 @@ SLAM Video
 EECS467 video
 Research paper from 598
 Ethics paper
+
+Other projects to include on website:
+UMTRI
+Self-driving cars
+Trashbot
+Kineval
+Implementation of EKF SLAM? iSAM?
+Paper
