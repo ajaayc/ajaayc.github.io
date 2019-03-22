@@ -1,4 +1,4 @@
-How to pronounce my name
+How to pronounce my name (DONE)
 Personal info:
 Traveling
 Learning to play guitar
@@ -14,7 +14,7 @@ Me teaching EECS203
 Trashbot video
 SLAM Video
 EECS467 video
-Research paper from 598
+Research paper from 598 (DONE)
 Ethics paper
 
 Other projects to include on website:
@@ -24,3 +24,6 @@ Trashbot
 Kineval
 Implementation of EKF SLAM? iSAM?
 Paper
+
+NOTES:
+Car image used on site is based on ce8857e7-a098-4f2b-9afb-a81a16510821
