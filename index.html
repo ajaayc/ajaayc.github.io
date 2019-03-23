@@ -155,18 +155,32 @@
           [<a href="https://github.com/bonsairobo/trashbot">Code</a>]<br>
           <br>
           <center>
-            <img src="img/trashbot.jpg" width="400;"><br><br>
             <div class="vid">
               <iframe width="560" height="315" src="https://www.youtube.com/embed/a6qHyMERqR0?start=29" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	        </div>
           </center>
           <br>
-          For my Autonomous Robotics Laboratory senior design course, I collaborated with a team to build a robot that autonomously navigates and detects and removes trash in its environment.
+          For my Autonomous Robotics Laboratory senior design course, I collaborated with a team to build a robot that autonomously navigates and detects and removes trash in its environment. The motivation for this project stemmed from noticing the plethora of trash across the UofM campus during football Saturdays. In theory, we could deploy a fleet of these trash collecting robots after a football game to pick up and dispose of various pieces of trash.<br><br>
 
-          Implemented forward and inverse kinematics as well as trajectory planning algorithms in Python for movement of a robotic arm to efficiently pick up and dispose of objects detected via 3D point cloud data from a Microsoft Kinect
-          
-		  <br>
-		  <br>
+          We built the robot over a span of 2 months from the ground up, and it was comprised of various hardware subsystems, including:
+          <ul>
+            <li>A <a href="https://april.eecs.umich.edu/updates/2015/07/01/magic2.html">MagicBot</a> base</li>
+            <li>An Arduino and Motor controllers</li>
+            <li>A robotic arm</li>
+            <li>A Microsoft Kinect</li>
+            <li>A PS2 Controller</li>
+          </ul>
+
+          My major contribution to this project was in the getting the TrashBot's robotic arm to function properly. My teammate programmatically analyzed point clouds of data from the Microsoft Kinect attached to the robot, and he provided data to the robotic arm representing the centroids of various objects.
+          <br><br>
+          Given the [x,y,z] position of an object centroid in the frame of the Kinect coordinate system, I used Python to apply homogeneous matrix transformations to convert the coordinates to the frame of the robotic arm's coordinate system. Following that, I implemented a trignometry-based inverse kinematics algorithm to determine the joint angles that the arm would need in order to position itself over that object's centroid point. Finally, I implemented a state machine to facilate the movement of the arm to pick up and dispose of an object into the MagicBot's onboard trash receptable without collisions. <br><br>
+
+          This experience gave me the opportunity to work with various physical components and it made me very comfortable with getting my hands dirty. We enjoyed many trips to the local hardware store to piece this robot together. It was very rewarding to see the final product!<br><br>
+
+          <center>
+            <img src="img/trashbot.jpg" width="400;">
+            <img src="img/insideTrashbot.jpg" width="400;">
+          </center><br><br>
 
 		  <p><strong>Robotic Manipulation and Control</strong></p>
 		  <ul>

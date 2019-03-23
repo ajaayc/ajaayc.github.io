@@ -4,6 +4,7 @@ Traveling
 Learning to play guitar
 
 Include picture of trashbot at the top
+Include Youtube channel
 My mousetrap
 What an engineer is. Yusei Fudo
 Anime
@@ -12,16 +13,16 @@ Pictures of me
 Videos
 Include picture of me with the UMTRI car
 Me teaching EECS203
-Trashbot video
+Trashbot video (DONE)
 SLAM Video
-EECS467 video
+EECS467 escape challenge video
 Research paper from 598 (DONE)
 Ethics paper
 
 Other projects to include on website:
 UMTRI
-Self-driving cars
-Trashbot
+Self-driving cars (DONE)
+Trashbot (DONE)
 Kineval
 Implementation of EKF SLAM? iSAM?
 Paper
