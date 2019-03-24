@@ -191,13 +191,37 @@
             <div class="vid">
               <img src="img/velodyne.png" width="400;">
               <img src="img/mobileye.JPG" width="400;"><br><br>
-              <img src="img/ajaayCar.JPG" width="400;">
 	        </div>
           </center>
           <br>
 
-          As a student research assistant at the University of Michigan Transportation Research Institute in Ann Arbor, MI, I worked under <a href="http://www.umtri.umich.edu/who-we-are/staff-directory/byoung-keon-daniel-park">Dr. Daniel Park</a> on a project to evaluate the effectiveness of various road lanemarking materials.
-          
+          As a research assistant at the University of Michigan Transportation Research Institute in Ann Arbor, MI, I worked under <a href="http://www.umtri.umich.edu/who-we-are/staff-directory/byoung-keon-daniel-park">Dr. Daniel Park</a> on a project to evaluate the effectiveness of various road lanemarking materials. The project was funded by the Michigan Department of Transportation (MDOT), and our goal was to determine how different lanemarking materials fared over time in the capricious Michigan weather. <br><br>
+
+          A section of the US-23 N highway between Ann Arbor, MI and Brighton, MI was paved with different lanemarking materials along different stretches, and we sought to perform a study over a 2-year span to determine how well each lanemarking material lasted over time.
+
+          <br><br>
+          To achieve our goal we needed a way to take measurements of the lanemarkings' conditions on the US-23 highway once during each month so that after the 2-year period we could retrospectively analyze how the lanemarkings' conditions changed over time. Our solution to this problem was to equip a Honda Accord car with various sensors, including:
+          <ul>
+            <li>Novatel GPS</li>
+            <li><a href="https://quanergy.com/m8/">Quanergy M-8 Lidar</a></li>
+            <li><a href="https://www.mobileye.com/en-us/">Mobileye unit</a></li>
+            <li>Camera</li>
+          </ul>
+          We proceeded to then engineer a software system that would be executed on the car to collect data of the road conditions from each of these sensors as a human operator drove the car along the US-23 N highway once each month.
+          <br><br>
+          <center>
+            <img src="img/ajaayCar.JPG" width="400;">
+          </center>
+          <br><br>
+
+          For this project, I developed multi-threaded C++ code utilizing VTK and PCL libraries to extract, interpret, and visualize data collected from our Lidar. We experimented with two Lidar's: The Quanergy M-8 and the Velodyne HDL-64E. Each of these Lidars outputs [x,y,z] point clouds of their surroundings as well as point <a href="http://desktop.arcgis.com/en/arcmap/10.3/manage-data/las-dataset/what-is-intensity-data-.htm">intensities</a>. We were mostly interested in examining the point intensity measurements of the landmarkings. In theory, we could see how the intensity of the points representing lanemarkings changed over time. The degradation of the lanemarkings from the Michigan weather would result in lower intensity points returned by the Lidar for various lanemarking materias.
+
+          <br><br>
+          I also developed C++ code to interface with our car's Mobileye unit via the vehicle's CAN message network. The Mobileye communicated data regarding the status of the left and right lanemarkings on the road in front of the driver. Its data arrived in real-time as a sequence of bytes that needed to be converted into a human readable format.
+          <br><br>
+          Finally, I facilated the collection of data from all four of our sensors simultaneously by helping to create a single module that would run all four sensor collection programs together as individual threads of a single CPU process. The module ran on a single HP i7 laptop during each of the car's monthly drives.
+          <br><br>
+          I was very proud of our final software system. This project necessitated a wonderful combination of both robotics and computer science knowledge.<br><br>
           <center>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/agMfXfZdug4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </center>

@@ -1,33 +1,33 @@
 How to pronounce my name (DONE)
-Personal info:
-Traveling
-Learning to play guitar
 
-Include picture of trashbot at the top
+Include picture of trashbot at the top (DONE)
+
+Include picture of me with the UMTRI car (DONE)
+Trashbot video (DONE)
+Research paper from 598 (DONE)
+
+Other projects to include on website:
+UMTRI (DONE)
+Self-driving cars (DONE)
+Trashbot (DONE)
+Kineval
+Implementation of EKF SLAM? iSAM? Paper for iSAM
+SLAM Video from 568
+EECS467 escape challenge video
+EECS460 Magnet ball controller
+
+Other cool stuff section:
 Include Youtube channel
+Me teaching EECS203
+Ethics paper
+
+Misc Section:
 My mousetrap
 What an engineer is. Yusei Fudo
 Anime
 Pictures of me
-
-Videos
-Include picture of me with the UMTRI car
-Me teaching EECS203
-Trashbot video (DONE)
-SLAM Video from 568
-EECS467 escape challenge video
-EECS460 Magnet ball controller
-Research paper from 598 (DONE)
-Ethics paper
-
-Other projects to include on website:
-UMTRI
-Self-driving cars (DONE)
-Trashbot (DONE)
-Kineval
-Implementation of EKF SLAM? iSAM?
-Paper for iSAM
-Ethics Ppaer
+Traveling
+Learning to play guitar
 
 NOTES:
-Car image used on site is based on ce8857e7-a098-4f2b-9afb-a81a16510821
+Car image used in rob599 section is based on ce8857e7-a098-4f2b-9afb-a81a16510821
