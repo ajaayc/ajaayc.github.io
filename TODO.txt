@@ -11,9 +11,8 @@ UMTRI (DONE)
 Self-driving cars (DONE)
 Trashbot (DONE)
 EECS467 escape challenge video (DONE)
-SLAM Videos from 568 (LATER)
-Implementation of iSAM? Paper for iSAM. JCBB (LATER)
-EKF SLAM 568 video (LATER)
+SLAM Videos from 568
+Implementation of iSAM? Paper for iSAM. JCBB
 Kineval
 EECS460 Magnet ball controller
 Mention I'm currently working on KD-Tree project
@@ -26,13 +25,14 @@ Used to work at CHEPS (DONE)
 MDP Project (DONE)
 
 Philosophy;
-My mousetrap
-What an engineer is. Yusei Fudo
-Anime
-Pictures of me
-Traveling
-Learning to play guitar
-Volunteering in Detroit
+My mousetrap (NO)
+What an engineer is. Yusei Fudo (NO)
+Pictures of me (NO)
+Volunteering in Detroit (NO)
+Anime (DONE)
+Board Games (DONE)
+Traveling (DONE)
+Learning to play guitar (DONE)
 
 NOTES:
 Car image used in rob599 section is based on ce8857e7-a098-4f2b-9afb-a81a16510821
