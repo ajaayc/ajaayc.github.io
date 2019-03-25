@@ -20,8 +20,9 @@ Mention I'm currently working on KD-Tree project
 
 Other cool stuff section:
 Include Youtube channel (DONE)
-Me teaching EECS203
-Ethics paper
+Me teaching EECS203 (DONE)
+Ethics paper (DONE)
+Used to work at CHEPS (DONE)
 
 Misc Section:
 My mousetrap
