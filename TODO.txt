@@ -10,11 +10,12 @@ Other projects to include on website:
 UMTRI (DONE)
 Self-driving cars (DONE)
 Trashbot (DONE)
+EECS467 escape challenge video (DONE)
 Kineval
-Implementation of EKF SLAM? iSAM? Paper for iSAM
-SLAM Video from 568
-EECS467 escape challenge video
+Implementation of iSAM? Paper for iSAM
+SLAM Videos from 568
 EECS460 Magnet ball controller
+Mention I'm currently working on KD-Tree project
 
 Other cool stuff section:
 Include Youtube channel (DONE)
@@ -28,6 +29,7 @@ Anime
 Pictures of me
 Traveling
 Learning to play guitar
+Volunteering in Detroit
 
 NOTES:
 Car image used in rob599 section is based on ce8857e7-a098-4f2b-9afb-a81a16510821
