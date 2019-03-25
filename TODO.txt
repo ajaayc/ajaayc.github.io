@@ -17,7 +17,7 @@ EECS467 escape challenge video
 EECS460 Magnet ball controller
 
 Other cool stuff section:
-Include Youtube channel
+Include Youtube channel (DONE)
 Me teaching EECS203
 Ethics paper
 
