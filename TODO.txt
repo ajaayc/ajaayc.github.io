@@ -11,9 +11,9 @@ UMTRI (DONE)
 Self-driving cars (DONE)
 Trashbot (DONE)
 EECS467 escape challenge video (DONE)
+Kineval (DONE)
 SLAM Videos from 568
 Implementation of iSAM? Paper for iSAM. JCBB
-Kineval
 EECS460 Magnet ball controller
 Mention I'm currently working on KD-Tree project
 
