@@ -114,75 +114,6 @@
         <div class="my-auto">
           <h2 class="mb-5">Projects</h2>
           <p> 
-		  <p><strong>Collision Estimation for Safe Planning</strong></p>
-          [<a href="resources/ajaay_paper.pdf">Paper</a>]<br>
-          [Code]
-          <center>
-            <img src="img/env_setup.png" width="400px;">
-            <img src="img/motion_pic.PNG" width="400px;">
-          </center>
-          <br>
-          For my Motion Planning course, I devised and implemented a Gaussian Mixture Model-based algorithm in C++ to expand upon existing methods to estimate the probability that a robot following a pre-generated motion plan would collide with an obstacle.
-          <br><br>
-          The motivation for this work is that a robot can benefit from quantifying the approximate safety of a motion plan before executing it. While a motion planner should generate a collision-free path, collisions may be possible as the robot follows the path due to natural uncertainty in the data it receives from its sensors and random noise in how it makes movements. <br><br>
-
-          Existing methods to compute the exact probability of collision for a motion plan rely on running thousands of Monte-Carlo simulations of the robot following the motion plan, which is computationally expensive. The goal of this work is to estimate the probability of collision in a lower amount of time.
-
-          Given a probability of collision before executing a motion plan, a robot can either execute it or revise the plan until it can find a "safer" plan.
-          <br><br>
-          For this work, I utilized the OpenRAVE simulation framework and Armadillo C++ linear algebra library to simulate a linear feedback controller and an Extended Kalman Filter estimate for the position of the PR2 robot as it followed a motion plan. I performed experiments to examine my algorithm's performance and presented my research in a paper and a conference talk.
-          <br>
-          <br>
-          Unfortunately, my algorithm did not perform as well as I had hoped, but I learned much from the experience in regards to conducting independent research.
-          <br><br>
-
-
-		  <p><strong>Deep Neural Network Vehicle Detection System</strong></p>
-          [<a href="https://github.com/ajaayc/Car_Detection/blob/master/Perception%20Final%20Report.pdf">Report</a>]<br>
-          [<a href="https://github.com/ajaayc/Car_Detection">Code</a>]<br>
-          <br>
-          <center>
-            <img src="img/carBox.jpg" width="400px;">
-            <img src="img/graph.png" width="400px;">
-          </center><br>
-          For my Self-Driving Cars course, I worked in a team to implement a classifier to count the number of cars in an arbitrary image generated from Grand Theft Auto (GTA) simulation. We utilized the TensorFlow Python Object Detector API on AWS EC2 GPU instances to train a fast-RCNN with 50 layers. We trained the RCNN on ~ 6,000 training images with known bounding box locations of cars and we specified two classifications for a detected object: {Car, Not Car}.
-
-          <br><br>
-          Using our model, my team ranked 5th place among 35 teams in the class competition by achieving a 63% mean absolute error on the instructor's test set of GTA images with unknown car counts.
-          <br><br>
-
-		  <p><strong>Trashbot</strong></p>
-          [<a href="https://github.com/bonsairobo/trashbot">Code</a>]<br>
-          <br>
-          <center>
-            <div class="vid">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/a6qHyMERqR0?start=29" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	        </div>
-          </center>
-          <br>
-          For my Autonomous Robotics Laboratory senior design course, I collaborated with a team to build a robot that autonomously navigates and detects and removes trash in its environment. The motivation for this project stemmed from noticing the plethora of trash across the UofM campus during football Saturdays. In theory, we could deploy a fleet of these trash collecting robots after a football game to pick up and dispose of various pieces of trash.<br><br>
-
-          We built the robot over a span of 2 months from the ground up, and it was comprised of various hardware subsystems, including:
-          <ul>
-            <li>A <a href="https://april.eecs.umich.edu/updates/2015/07/01/magic2.html">MagicBot</a> base</li>
-            <li>An Arduino and Motor controllers</li>
-            <li>A robotic arm</li>
-            <li>A Microsoft Kinect</li>
-            <li>A PS2 Controller</li>
-          </ul>
-
-          My major contribution to this project was in the getting the TrashBot's robotic arm to function properly. My teammate programmatically analyzed point clouds of data from the Microsoft Kinect attached to the robot, and he provided data to the robotic arm representing the centroids of various objects.
-          <br><br>
-          Given the [x,y,z] position of an object centroid in the frame of the Kinect coordinate system, I used Python to apply homogeneous matrix transformations to convert the coordinates to the frame of the robotic arm's coordinate system. Following that, I implemented a trignometry-based inverse kinematics algorithm to determine the joint angles that the arm would need in order to position itself over that object's centroid point. Finally, I implemented a state machine to facilate the movement of the arm to pick up and dispose of an object into the MagicBot's onboard trash receptable without collisions. <br><br>
-
-          This experience gave me the opportunity to work with various physical components and it made me very comfortable with getting my hands dirty. We enjoyed many trips to the local hardware store to piece this robot together. It was very rewarding to see the final product!<br><br>
-
-          <center>
-            <div class="vid">
-              <img src="img/trashbot.jpg" width="400;">
-              <img src="img/insideTrashbot.jpg" width="400;"><br><br>
-	        </div>
-          </center>
 
 		  <p><strong>MDOT Lane Marking Evaluation</strong></p>
           [Code]<br>
@@ -227,6 +158,93 @@
           </center>
           
           <br><br>
+
+		  <p><strong>Collision Estimation for Safe Planning</strong></p>
+          [<a href="resources/ajaay_paper.pdf">Paper</a>]<br>
+          [Code]
+          <center>
+            <img src="img/env_setup.png" width="400px;">
+            <img src="img/motion_pic.PNG" width="400px;">
+          </center>
+          <br>
+          For my Motion Planning course, I devised and implemented a Gaussian Mixture Model-based algorithm in C++ to expand upon existing methods to estimate the probability that a robot following a pre-generated motion plan would collide with an obstacle.
+          <br><br>
+          The motivation for this work is that a robot can benefit from quantifying the approximate safety of a motion plan before executing it. While a motion planner should generate a collision-free path, collisions may be possible as the robot follows the path due to natural uncertainty in the data it receives from its sensors and random noise in how it makes movements. <br><br>
+
+          Existing methods to compute the exact probability of collision for a motion plan rely on running thousands of Monte-Carlo simulations of the robot following the motion plan, which is computationally expensive. The goal of this work is to estimate the probability of collision in a lower amount of time.
+
+          Given a probability of collision before executing a motion plan, a robot can either execute it or revise the plan until it can find a "safer" plan.
+          <br><br>
+          For this work, I utilized the OpenRAVE simulation framework and Armadillo C++ linear algebra library to simulate a linear feedback controller and an Extended Kalman Filter estimate for the position of the PR2 robot as it followed a motion plan. I performed experiments to examine my algorithm's performance and presented my research in a paper and a conference talk.
+          <br>
+          <br>
+          Unfortunately, my algorithm did not perform as well as I had hoped, but I learned much from the experience in regards to conducting independent research.
+          <br><br>
+
+
+		  <p><strong>Deep Neural Network Vehicle Detection System</strong></p>
+          [<a href="https://github.com/ajaayc/Car_Detection/blob/master/Perception%20Final%20Report.pdf">Report</a>]<br>
+          [<a href="https://github.com/ajaayc/Car_Detection">Code</a>]<br>
+          <br>
+          <center>
+            <img src="img/carBox.jpg" width="400px;">
+            <img src="img/graph.png" width="400px;">
+          </center><br>
+          For my Self-Driving Cars course, I worked in a team to implement a classifier to count the number of cars in an arbitrary image generated from Grand Theft Auto (GTA) simulation. We utilized the TensorFlow Python Object Detector API on AWS EC2 GPU instances to train a fast-RCNN with 50 layers. We trained the RCNN on ~ 6,000 training images with known bounding box locations of cars and we specified two classifications for a detected object: {Car, Not Car}.
+
+          <br><br>
+          Using our model, my team ranked 5th place among 35 teams in the class competition by achieving a 63% mean absolute error on the instructor's test set of GTA images with unknown car counts.
+          <br><br>
+
+	  <p><strong>Mobile Robotics iSAM Implementation</strong></p>
+	      [<a href="https://github.com/Scarabrine/EECS568Project_Team2_iSAM">Code</a>]<br><br>
+          <center>
+            <div class="vid">
+              <img src="img/victoriaPark.png" width="400">
+              <img src="img/JCBB.png" width="400">
+	        </div>
+          </center>
+          <br><br>
+	      For my Mobile Robotics course, I worked in a team to implement the <a href="https://www.cc.gatech.edu/~kaess/pub/Kaess08tro.pdf">incremental smoothing and mapping</a> approach to the Simultaneous Localization and Mapping (SLAM) problem. <br><br>Prior to working on this project, I had implemented various state estimation algorithms in Matlab for localization, including the <a href="https://www.youtube.com/watch?v=AM1hES5_WQ4">Extended Kalman Filter</a>, the <a href="https://www.youtube.com/watch?v=xWZ333vlYUE">Unscented Kalman Filter</a>, and the <a href="https://www.youtube.com/watch?v=46N7dpGq4Uw">Particle Filter</a>. This project was unique for me in that it was the first smoothing algorithm I worked with to tackle the SLAM problem. Filtering approaches to SLAM generally estimate the current state of a robot given a sequence of past measurements and actions. However, smoothing approaches improve upon the estimates of the entire sequence of the current and past states of the robot, considering the sequence as an overarching model to be smoothened.
+	  <br><br>
+	  My main contribution to this project was in the implementation of the <a href="http://webdiis.unizar.es/~jdtardos/papers/Neira_TRA_2001.pdf">joint compatibility branch and bound (JCBB) algorithm</a> for data association. At a single point in time, given a set of N robot sensor measurements and M landmarks, the JCBB algorithm examines various combinations of sensor-landmark mappings and uses the Mahalanobis Distance metric to determine which measurements are most likely to be associated with which landmarks.
+      <br><br>
+      We applied the iSAM algorithm on the <a href="http://www-personal.acfr.usyd.edu.au/nebot/victoria_park.htm">Victoria Park dataset</a>. The JCBB algorithm proved to be more effective than standard data association methods when we applied it within the iSAM algorithm on the dataset.
+	  <br>
+	  <br>
+
+		  <p><strong>Trashbot</strong></p>
+          [<a href="https://github.com/bonsairobo/trashbot">Code</a>]<br>
+          <br>
+          <center>
+            <div class="vid">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/a6qHyMERqR0?start=29" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	        </div>
+          </center>
+          <br>
+          For my Autonomous Robotics Laboratory senior design course, I collaborated with a team to build a robot that autonomously navigates and detects and removes trash in its environment. The motivation for this project stemmed from noticing the plethora of trash across the UofM campus during football Saturdays. In theory, we could deploy a fleet of these trash collecting robots after a football game to pick up and dispose of various pieces of trash.<br><br>
+
+          We built the robot over a span of 2 months from the ground up, and it was comprised of various hardware subsystems, including:
+          <ul>
+            <li>A <a href="https://april.eecs.umich.edu/updates/2015/07/01/magic2.html">MagicBot</a> base</li>
+            <li>An Arduino and Motor controllers</li>
+            <li>A robotic arm</li>
+            <li>A Microsoft Kinect</li>
+            <li>A PS2 Controller</li>
+          </ul>
+
+          My major contribution to this project was in the getting the TrashBot's robotic arm to function properly. My teammate programmatically analyzed point clouds of data from the Microsoft Kinect attached to the robot, and he provided data to the robotic arm representing the centroids of various objects.
+          <br><br>
+          Given the [x,y,z] position of an object centroid in the frame of the Kinect coordinate system, I used Python to apply homogeneous matrix transformations to convert the coordinates to the frame of the robotic arm's coordinate system. Following that, I implemented a trignometry-based inverse kinematics algorithm to determine the joint angles that the arm would need in order to position itself over that object's centroid point. Finally, I implemented a state machine to facilate the movement of the arm to pick up and dispose of an object into the MagicBot's onboard trash receptable without collisions. <br><br>
+
+          This experience gave me the opportunity to work with various physical components and it made me very comfortable with getting my hands dirty. We enjoyed many trips to the local hardware store to piece this robot together. It was very rewarding to see the final product!<br><br>
+
+          <center>
+            <div class="vid">
+              <img src="img/trashbot.jpg" width="400;">
+              <img src="img/insideTrashbot.jpg" width="400;"><br><br>
+	        </div>
+          </center>
 
 		  <p><strong>BotLab Challenge</strong></p>
           <br>
@@ -282,22 +300,7 @@
           I look back very fondly on the experience of working with this framework, as it was my first introduction to robotics.
 		  <br>
 		  <br>
-	  <p><strong>Mobile Robotics iSAM Implementation</strong></p>
-	      [<a href="https://github.com/Scarabrine/EECS568Project_Team2_iSAM">Code</a>]<br><br>
-          <center>
-            <div class="vid">
-              <img src="img/victoriaPark.png" width="400">
-              <img src="img/JCBB.png" width="400">
-	        </div>
-          </center>
-          <br><br>
-	      For my Mobile Robotics course, I worked in a team to implement the <a href="https://www.cc.gatech.edu/~kaess/pub/Kaess08tro.pdf">incremental smoothing and mapping</a> approach to the Simultaneous Localization and Mapping (SLAM) problem. <br><br>Prior to working on this project, I had implemented various state estimation algorithms in Matlab for localization, including the <a href="https://www.youtube.com/watch?v=AM1hES5_WQ4">Extended Kalman Filter</a>, the <a href="https://www.youtube.com/watch?v=xWZ333vlYUE">Unscented Kalman Filter</a>, and the <a href="https://www.youtube.com/watch?v=46N7dpGq4Uw">Particle Filter</a>. This project was unique for me in that it was the first smoothing algorithm I worked with to tackle the SLAM problem. Filtering approaches to SLAM generally estimate the current state of a robot given a sequence of past measurements and actions. However, smoothing approaches improve upon the estimates of the entire sequence of the current and past states of the robot, considering the sequence as an overarching model to be smoothened.
-	  <br><br>
-	  My main contribution to this project was in the implementation of the <a href="http://webdiis.unizar.es/~jdtardos/papers/Neira_TRA_2001.pdf">joint compatibility branch and bound (JCBB) algorithm</a> for data association. At a single point in time, given a set of N robot sensor measurements and M landmarks, the JCBB algorithm examines various combinations of sensor-landmark mappings and uses the Mahalanobis Distance metric to determine which measurements are most likely to be associated with which landmarks.
-      <br><br>
-      We applied the iSAM algorithm on the <a href="http://www-personal.acfr.usyd.edu.au/nebot/victoria_park.htm">Victoria Park dataset</a>. The JCBB algorithm proved to be more effective than standard data association methods when we applied it within the iSAM algorithm on the dataset.
-	  <br>
-	  <br>
+          
       	  <p><strong>PID Controller for Magnetically Levitated Ball</strong></p>
           <center>
             <div class="vid">
@@ -305,6 +308,7 @@
             </div>
           </center><br>
           For my Control Systems Design course, I worked in a team to build a PID controller in Simulink to control the position of a magnetically levitated ball. Building the controller required first deriving a physical model consisting of the magnetic and gravitational forces acting upon the ball. Aftering deriving the physical model, we linearized the model about the input current required to cause the magnetic force to keep the ball at a constant height. Following that, we tuned our PID controller to meet specifications for steady-state error, settling time, and overshoot.
+          <br><br>
         </div>
       </section>
 
@@ -321,7 +325,7 @@
             </li>
             <br>
             <li>
-              Here's a <a href="https://www.youtube.com/watch?v=b2tw21Ra3BU">video</a> of me talking about a simulation I helped develop in C++ of the phlebotomy clinic at the UofM Comprehensive Cancer Center. Before I pursued my interest in robotics, I worked on healthcare-related projects for 2 years at the Center for Healthcare and Engineering as a research assistant for Professor <a href="https://amycohn.engin.umich.edu/">Amy Cohn</a>.
+              Here's a <a href="https://www.youtube.com/watch?v=b2tw21Ra3BU">video</a> of me describing a simulation I helped develop in C++ of the phlebotomy clinic at the UofM Comprehensive Cancer Center. Before I pursued my interest in robotics, I worked on healthcare-related projects for 2 years at the Center for Healthcare and Engineering as a research assistant for Professor <a href="https://amycohn.engin.umich.edu/">Amy Cohn</a>.
             </li>
             <br>
             <li>
