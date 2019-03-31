@@ -77,7 +77,7 @@
             <br>
             <br>
             
-            My first name <i>Ajaay</i> is a modification of the Indian name <a href="https://en.wikipedia.org/wiki/Ajay_(given_name)"><i>Ajay</i></a>. I respond to many pronunciations of it and have no preference for any of them. The most common pronunciations are Ay-Jay, Uhh-Jay, and Uhh-Jie. <br><br>
+            My first name <i>Ajaay</i> is a modification of the Indian name <a href="https://en.wikipedia.org/wiki/Ajay_(given_name)"><i>Ajay</i></a>. I respond to many pronunciations of it and have no preference for any of them. The most common pronunciations are Ay-Jay (AJ), Uhh-Jay, and Uhh-Jie. <br><br>
             My last name <i>Chandrasekaran</i> is based on the Indian name <a href="https://en.wikipedia.org/wiki/Chandrasekhar"> <i> Chandrasekhar</i></a>. I pronounce it as Chan-dra-say-ker-in.
 		  </p>
           <ul class="list-inline list-social-icons mb-0">
@@ -126,29 +126,29 @@
           </center>
           <br>
 
-          As a research assistant at the University of Michigan Transportation Research Institute in Ann Arbor, MI, I worked under <a href="http://www.umtri.umich.edu/who-we-are/staff-directory/byoung-keon-daniel-park">Dr. Daniel Park</a> on a project to evaluate the effectiveness of various road lanemarking materials. The project was funded by the Michigan Department of Transportation (MDOT), and our goal was to determine how different lanemarking materials fared over time in the capricious Michigan weather. <br><br>
+          As a research assistant at the University of Michigan Transportation Research Institute in Ann Arbor, MI, I worked under Dr. <a href="https://sites.google.com/view/danielpark/home">Daniel Park</a> on a project to evaluate the effectiveness of various road lanemarking materials. The project was funded by the Michigan Department of Transportation (MDOT).<br><br>
 
-          A section of the US-23 N highway between Ann Arbor, MI and Brighton, MI was paved with different lanemarking materials along different stretches, and we sought to perform a study over a 2-year span to determine how well each lanemarking material lasted over time.
+          In 2017, a section of the US-23 highway between Ann Arbor, MI and Brighton, MI was paved with different lanemarking materials along different stretches. We planned to perform a study over a 2-year period to determine how well each lanemarking material on the highway lasted over time; we expected that the different stretches of the highway would be impacted similarly by various environmental factors, such as temperature and precipitation.
 
           <br><br>
-          To achieve our goal we needed a way to take measurements of the lanemarkings' conditions on the US-23 highway once during each month so that after the 2-year period we could retrospectively analyze how the lanemarkings' conditions changed over time. Our solution to this problem was to equip a Honda Accord car with various sensors, including:
+          To achieve our goal we required a method to take measurements of the lanemarkings' conditions on the US-23 highway once during each month so that after the 2-year period we could retrospectively analyze how the lanemarkings' conditions changed over time. Our solution to this problem was to equip a Honda Accord car with various sensors, including:
           <ul>
             <li>Novatel GPS</li>
             <li><a href="https://quanergy.com/m8/">Quanergy M-8 Lidar</a></li>
             <li><a href="https://www.mobileye.com/en-us/">Mobileye unit</a></li>
             <li>Camera</li>
           </ul>
-          We proceeded to then engineer a software system that would be executed on the car to collect data of the road conditions from each of these sensors as a human operator drove the car along the US-23 N highway once each month.
+          We proceeded to then engineer a software system that would be executed on the car to collect data of the road conditions from each of these sensors while a human operator drove the car along the US-23 highway once each month.
           <br><br>
           <center>
             <img src="img/ajaayCar.JPG" width="400;">
           </center>
           <br><br>
 
-          For this project, I developed multi-threaded C++ code utilizing VTK and PCL libraries to extract, interpret, and visualize data collected from our Lidar. We experimented with two Lidar's: The Quanergy M-8 and the Velodyne HDL-64E. Each of these Lidars outputs [x,y,z] point clouds of their surroundings as well as point <a href="http://desktop.arcgis.com/en/arcmap/10.3/manage-data/las-dataset/what-is-intensity-data-.htm">intensities</a>. We were mostly interested in examining the point intensity measurements of the landmarkings. In theory, we could see how the intensity of the points representing lanemarkings changed over time. The degradation of the lanemarkings from the Michigan weather would result in lower intensity points returned by the Lidar for various lanemarking materias.
+          For this project, I developed multi-threaded C++ code utilizing the VTK and PCL libraries to extract, interpret, and visualize data collected from our Lidar. We experimented with two Lidar's: The Quanergy M-8 and the Velodyne HDL-64E. Each of these Lidars outputs [x,y,z] point clouds of their surroundings as well as point <a href="http://desktop.arcgis.com/en/arcmap/10.3/manage-data/las-dataset/what-is-intensity-data-.htm">intensities</a>. We were mostly interested in examining the point intensity measurements of the landmarkings. In theory, we could see how the intensity values of the points representing lanemarkings changed over time. The degradation of the highway pavement by the Michigan weather would result in lower intensity points returned by the Lidar for various lanemarking materials.
 
           <br><br>
-          I also developed C++ code to interface with our car's Mobileye unit via the vehicle's CAN message network. The Mobileye communicated data regarding the status of the left and right lanemarkings on the road in front of the driver. Its data arrived in real-time as a sequence of bytes that needed to be converted into a human readable format.
+          I also developed C++ code to interface with our car's Mobileye unit via the vehicle's CAN message network. The Mobileye communicated data regarding the status of the left and right lanemarkings on the road in front of the driver. Its data arrived in real time as a sequence of bytes that needed to be converted into a human readable format.
           <br><br>
           Finally, I facilated the collection of data from all four of our sensors simultaneously by helping to create a single module that would run all four sensor collection programs together as individual threads of a single CPU process. The module ran on a single HP i7 laptop during each of the car's monthly drives.
           <br><br>
@@ -169,18 +169,16 @@
           <br>
           For my Motion Planning course, I devised and implemented a Gaussian Mixture Model-based algorithm in C++ to expand upon existing methods to estimate the probability that a robot following a pre-generated motion plan would collide with an obstacle.
           <br><br>
-          The motivation for this work is that a robot can benefit from quantifying the approximate safety of a motion plan before executing it. While a motion planner should generate a collision-free path, collisions may be possible as the robot follows the path due to natural uncertainty in the data it receives from its sensors and random noise in how it makes movements. <br><br>
+          The motivation for this work is that a robot can benefit from quantifying the approximate safety of a motion plan before executing it. While a motion planner should generate a collision-free path, collisions may be possible as the robot follows the path due to natural uncertainty in the data it receives from its sensors and random noise in how it makes movements. Given a probability of collision before executing a motion plan, a robot can either execute it or revise the plan until it can find a "safer" plan.<br><br>
 
-          Existing methods to compute the exact probability of collision for a motion plan rely on running thousands of Monte-Carlo simulations of the robot following the motion plan, which is computationally expensive. The goal of this work is to estimate the probability of collision in a lower amount of time.
+          Existing methods to compute the exact probability of collision for a motion plan rely on running thousands of Monte-Carlo simulations of the robot following the motion plan, which is computationally expensive. The goal of this work is to accurately estimate the probability of collision in a shorter amount of time.
 
-          Given a probability of collision before executing a motion plan, a robot can either execute it or revise the plan until it can find a "safer" plan.
           <br><br>
-          For this work, I utilized the OpenRAVE simulation framework and Armadillo C++ linear algebra library to simulate a linear feedback controller and an Extended Kalman Filter estimate for the position of the PR2 robot as it followed a motion plan. I performed experiments to examine my algorithm's performance and presented my research in a paper and a conference talk.
+          For this work, I utilized the OpenRAVE simulation framework and Armadillo C++ linear algebra library to simulate a linear feedback controller and an Extended Kalman Filter estimate for the position of a PR2 robot as it attempted to follow a pre-generated motion plan. I performed experiments to examine my algorithm's performance and presented my research in a paper and a conference talk.
           <br>
           <br>
-          Unfortunately, my algorithm did not perform as well as I had hoped, but I learned much from the experience in regards to conducting independent research.
+          Unfortunately, my algorithm did not perform as well as I had hoped, but I learned much from the experience in regards to conducting independent research. I plan to work more on my algorithm in the future to improve its accuracy in estimating a probability of collision for a motion plan.
           <br><br>
-
 
 		  <p><strong>Deep Neural Network Vehicle Detection System</strong></p>
           [<a href="https://github.com/ajaayc/Car_Detection/blob/master/Perception%20Final%20Report.pdf">Report</a>]<br>
@@ -224,18 +222,18 @@
           <br>
           For my Autonomous Robotics Laboratory senior design course, I collaborated with a team to build a robot that autonomously navigates and detects and removes trash in its environment. The motivation for this project stemmed from noticing the plethora of trash across the UofM campus during football Saturdays. In theory, we could deploy a fleet of these trash collecting robots after a football game to pick up and dispose of various pieces of trash.<br><br>
 
-          We built the robot over a span of 2 months from the ground up, and it was comprised of various hardware subsystems, including:
+          We built the robot over a span of 2 months, and it was comprised of various hardware subsystems, including:
           <ul>
             <li>A <a href="https://april.eecs.umich.edu/updates/2015/07/01/magic2.html">MagicBot</a> base</li>
-            <li>An Arduino and Motor controllers</li>
+            <li>An Arduino and motor controllers</li>
             <li>A robotic arm</li>
             <li>A Microsoft Kinect</li>
             <li>A PS2 Controller</li>
           </ul>
 
-          My major contribution to this project was in the getting the TrashBot's robotic arm to function properly. My teammate programmatically analyzed point clouds of data from the Microsoft Kinect attached to the robot, and he provided data to the robotic arm representing the centroids of various objects.
+          My major contribution to this project was in engineering the TrashBot's robotic arm to pick up various objects. My teammate programmatically analyzed point clouds of data from the Microsoft Kinect attached to the robot, and he provided data to the robotic arm representing the centroids of various objects.
           <br><br>
-          Given the [x,y,z] position of an object centroid in the frame of the Kinect coordinate system, I used Python to apply homogeneous matrix transformations to convert the coordinates to the frame of the robotic arm's coordinate system. Following that, I implemented a trignometry-based inverse kinematics algorithm to determine the joint angles that the arm would need in order to position itself over that object's centroid point. Finally, I implemented a state machine to facilate the movement of the arm to pick up and dispose of an object into the MagicBot's onboard trash receptable without collisions. <br><br>
+          Given the [x,y,z] position of an object centroid in the frame of the Kinect coordinate system, I used Python to apply homogeneous matrix transformations to convert the coordinates to the frame of the robotic arm's coordinate system. Following that, I implemented a trignometry-based inverse kinematics algorithm to determine the joint angles that the arm would need in order to position its endeffector (claw) over that object's centroid point. Finally, I implemented a state machine to facilate the movement of the arm to pick up and dispose of an object into the TrashBot's onboard trash receptable without collisions. <br><br>
 
           This experience gave me the opportunity to work with various physical components and it made me very comfortable with getting my hands dirty. We enjoyed many trips to the local hardware store to piece this robot together. It was very rewarding to see the final product!<br><br>
 
@@ -296,9 +294,6 @@
 	        </div>
           </center>
 
-          <br>
-          I look back very fondly on the experience of working with this framework, as it was my first introduction to robotics.
-		  <br>
 		  <br>
           
       	  <p><strong>PID Controller for Magnetically Levitated Ball</strong></p>
@@ -329,7 +324,7 @@
             </li>
             <br>
             <li>
-              I worked on a year-long team software development project for the UofM Kellogg Eye Center (KEC). Under the guidance of Professor <a href="http://www.andrewdeorio.com/"> Andrew DeOrio </a>, we built a web-based machine learning tool to help ophthalmologists around the world determine the specific gene causing a patient's genetic retinal dystrophy. Here's a <a href="resources/KECPoster.pdf">poster</a> that presents the project.<br><br> For a separate project, I also made this <a href="https://github.com/ajaayc/kec-class">prototype</a> of a website for KEC to use to distribute educational resources to residents in ophthalmology.
+              I worked on a year-long team software development project for the UofM Kellogg Eye Center (KEC). Under the guidance of Professor <a href="http://www.andrewdeorio.com/"> Andrew DeOrio </a>, we built a web-based machine learning tool to help ophthalmologists around the world determine the specific gene causing a patient's genetic retinal dystrophy. Here's a <a href="resources/KECPoster.pdf">poster</a> that presents the project.<br><br> For a different project, I made this <a href="https://github.com/ajaayc/kec-class">prototype</a> of a website for KEC to use to distribute educational resources to its residents in ophthalmology.
             </li>
           </ul>
         </div>
@@ -343,7 +338,7 @@
           I enjoy playing various board and card games, such as Settlers of Catan, Betrayal, Coup, and StarRealms. I also enjoy watching anime, my favorite shows being Steins; Gate, Code Geass, Attack on Titan, Clannad, and Monster. Recently I have started traveling more, and I'm trying to learn how to play the guitar as well.
 
           <br><br>
-          I grew up in Novi, MI and went to Novi High School. Following that, I went to school at the University of Michigan in Ann Arbor, MI. I am very proud of myself today, and I am very grateful for the support of many people. My parents always supported me, my growth, and my interests. There is no way I can pay them back for what they've done for me. I have also been fortunate to have many good friends and teachers who've always encouraged me to be the best I can be. You know who you are; thank you for everything!<br><br>
+          I grew up in Novi, MI and went to Novi High School. Following that, I went to school at the University of Michigan in Ann Arbor, MI. I consider myself very fortunate to have the support of many people as I pursue my work. My parents always supported me, my growth, and my interests. There is no way I can pay them back for what they have done for me. I have also been fortunate to have many incredible teachers and friends who have always encouraged me to be the best I can be. You know who you are; thank you for everything!<br><br>
         </div>
       </section>
 
