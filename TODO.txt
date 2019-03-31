@@ -36,3 +36,13 @@ Learning to play guitar (DONE)
 
 NOTES:
 Car image used in rob599 section is based on ce8857e7-a098-4f2b-9afb-a81a16510821
+
+Ordering of Projects:
+UMTRI
+599 Neural Net
+568 iSAM
+598 Motion Planning
+Trashbot
+467 Botlab
+Kineval
+460 Ball
