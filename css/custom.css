@@ -15,9 +15,38 @@ body {
 }
 
 .bg-primary {
-    background-color: #717c39!important;
+    background-color: #7c4439!important;
 }
 
 .text-primary {
-    color: #717c39!important;
+    color: #7c4439!important;
+}
+
+.card-item {
+	display: inline-block;
+	margin: 20px;
+	align-items: bottom;
+	vertical-align: middle;
+}
+
+/* Square card */
+.demo-card-square.mdl-card {
+	width: 200px;
+	height: 350px;
+}
+
+.demo-card-square>.mdl-card__title {
+	color: rgb(64, 64, 64);
+	background: center/100% no-repeat;
+}
+
+.demo-card-square>.mdl-card__title>h2 {
+	background-color: rgba(200, 200, 200, 0.6);
+	backdrop-filter: blur(2px);
+}
+
+.logo {
+	border-radius: 5px;
+	padding: 5px;
+	height: 40px;
 }
