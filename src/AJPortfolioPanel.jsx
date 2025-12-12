@@ -1,11 +1,8 @@
-// Minimal green-themed portfolio with floating left-side panel, popups for details, top navigation bar
-// Tailwind CSS + Framer Motion required
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaYoutube, FaLinkedin } from 'react-icons/fa';
+import LeftPanel from './LeftPanel';
 
-export default function AJPortfolioPanels() {
+export default function AJPortfolioPanel() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedCompany, setSelectedCompany] = useState(null);
 
@@ -23,42 +20,13 @@ export default function AJPortfolioPanels() {
     { id: 4, name: 'Company D', role: 'Role at Company D', description: 'Detailed info about Company D', images: ['https://via.placeholder.com/300x180', 'https://via.placeholder.com/300x180'] },
   ];
 
-  const personalWebsite = 'https://yourwebsite.com';
-
-  const scrollToSection = (id) => {
-    const el = document.getElementById(id);
-    if(el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <div className="relative bg-white text-gray-900 font-sans antialiased flex flex-col md:flex-row">
-      {/* Left fixed panel - always visible */}
-      <aside className="flex flex-col w-64 md:w-1/4 lg:w-1/5 h-screen fixed top-0 left-0 bg-green-50 p-6 border-r border-green-200 z-10">
-        <div className="flex-shrink-0 w-full flex justify-center mb-4">
-          <div className="w-32 h-32 bg-green-100 flex items-center justify-center rounded-full text-green-500 font-bold text-xl">Photo</div>
-        </div>
-        <h1 className="text-3xl font-bold text-green-800 mb-4">Hi, I'm AJ.</h1>
-        <p className="text-gray-700 mb-4">
-          I’m a robotics and software engineer who loves building reliable systems,
-          exploring autonomy, and sharing what I learn along the way.
-        </p>
-        <div className="flex gap-4 mt-auto">
-          <a href={personalWebsite} target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-green-600"><FaGithub size={20} /></a>
-          <a href={personalWebsite} target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-green-600"><FaYoutube size={20} /></a>
-          <a href={personalWebsite} target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-green-600"><FaLinkedin size={20} /></a>
-        </div>
-      </aside>
+    <div className="flex flex-1 bg-white text-gray-900 font-sans antialiased">
+      {/* Left Panel */}
+      <LeftPanel />
 
-      {/* Main content */}
-      <main className="ml-64 md:ml-1/4 lg:ml-1/5 max-w-full mx-auto px-6 py-16 relative z-10">
-        {/* TOP NAV BAR */}
-        <nav className="flex justify-evenly mb-12 sticky top-0 bg-white z-20 py-4 border-b border-green-200">
-          <button onClick={() => scrollToSection('about')} className="text-green-700 font-semibold hover:underline">About</button>
-          <button onClick={() => scrollToSection('experience')} className="text-green-700 font-semibold hover:underline">Experience</button>
-          <button onClick={() => scrollToSection('projects')} className="text-green-700 font-semibold hover:underline">Projects</button>
-          <button onClick={() => scrollToSection('contact')} className="text-green-700 font-semibold hover:underline">Contact</button>
-        </nav>
-
+      {/* Main Content */}
+      <main className="flex-1 max-w-full mx-auto px-6 py-16">
         {/* ABOUT */}
         <section id="about" className="py-16">
           <h2 className="text-2xl font-bold text-green-700 mb-6">About Me</h2>
@@ -67,12 +35,12 @@ export default function AJPortfolioPanels() {
           </p>
         </section>
 
-        {/* PROFESSIONAL EXPERIENCE */}
+        {/* PROFESSIONAL EXPERIENCE CARDS */}
         <section id="experience" className="py-16">
           <h2 className="text-2xl font-bold text-green-700 mb-6">Professional Experience</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {companies.map(company => (
-              <div key={company.id} onClick={() => setSelectedCompany(company)} className="border border-green-200 rounded-xl p-4 flex flex-col items-center gap-4 cursor-pointer">
+              <div key={company.id} onClick={() => setSelectedCompany(company)} className="border border-green-200 rounded-xl p-4 flex flex-col items-center gap-4 cursor-pointer hover:shadow-lg transition-shadow">
                 <div className="w-full h-36 bg-green-100 flex items-center justify-center text-green-500 font-bold text-xl">Logo</div>
                 <div className="text-center">
                   <h3 className="font-semibold text-lg text-gray-900">{company.name}</h3>
@@ -83,12 +51,12 @@ export default function AJPortfolioPanels() {
           </div>
         </section>
 
-        {/* PROJECTS */}
+        {/* PROJECT CARDS */}
         <section id="projects" className="py-16">
           <h2 className="text-2xl font-bold text-green-700 mb-6">Projects</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {projects.map(project => (
-              <div key={project.id} onClick={() => setSelectedProject(project)} className="border border-green-200 rounded-xl p-4 flex flex-col items-center gap-4 cursor-pointer">
+              <div key={project.id} onClick={() => setSelectedProject(project)} className="border border-green-200 rounded-xl p-4 flex flex-col items-center gap-4 cursor-pointer hover:shadow-lg transition-shadow">
                 <div className="w-full h-36 bg-green-100 flex items-center justify-center text-green-500 font-bold text-xl">Image</div>
                 <h3 className="font-semibold text-lg text-gray-900">{project.title}</h3>
                 <p className="text-sm text-gray-600 mt-1">{project.short}</p>
@@ -101,7 +69,7 @@ export default function AJPortfolioPanels() {
         <section id="contact" className="py-16">
           <h2 className="text-2xl font-bold text-green-700 mb-6">Contact</h2>
           <p className="text-gray-600 leading-relaxed max-w-full">
-            Placeholder contact info: You can put your email, social links, or contact form here.
+            Placeholder contact info.
           </p>
         </section>
       </main>
