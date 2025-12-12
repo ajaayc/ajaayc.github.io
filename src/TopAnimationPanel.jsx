@@ -1,27 +1,39 @@
-// TopAnimationPanel with bidirectional RRT visualization including obstacles and highlighting final path
-// Tailwind CSS + Framer Motion required
-
+// TopAnimationPanel.jsx
 import React, { useRef, useEffect, useState } from 'react';
 
-export default function TopAnimationPanel() {
+export default function TopAnimationPanel({ navbarId }) {
   const canvasRef = useRef(null);
-  const [animationComplete, setAnimationComplete] = useState(false);
+  const [panelHeight, setPanelHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    function updateHeight() {
+      const navbar = document.getElementById(navbarId);
+      const navbarHeight = navbar ? navbar.offsetHeight : 0;
+      const fraction = 0.8; // 60% of remaining viewport
+      setPanelHeight((window.innerHeight - navbarHeight) * fraction);
+    }
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+    return () => window.removeEventListener('resize', updateHeight);
+  }, [navbarId]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = panelHeight;
 
     const start = { x: 100, y: canvas.height / 2 };
     const goal = { x: canvas.width - 100, y: canvas.height / 2 };
+
     const nodesStart = [{ node: start, parent: null }];
     const nodesGoal = [{ node: goal, parent: null }];
 
     const obstacles = [
-      { x: canvas.width/2 - 100, y: canvas.height/2 - 50, width: 200, height: 100 },
-      { x: canvas.width/3, y: canvas.height/3, width: 100, height: 150 },
-      { x: canvas.width*0.7, y: canvas.height*0.3, width: 120, height: 80 }
+      { x: canvas.width / 2 - 100, y: canvas.height / 2 - 50, width: 200, height: 100 },
+      { x: canvas.width / 3, y: canvas.height / 3, width: 100, height: 150 },
+      { x: canvas.width * 0.7, y: canvas.height * 0.3, width: 120, height: 80 }
     ];
 
     function distance(a, b) {
@@ -42,7 +54,10 @@ export default function TopAnimationPanel() {
     }
 
     function collidesWithObstacles(node) {
-      return obstacles.some(obs => node.x >= obs.x && node.x <= obs.x + obs.width && node.y >= obs.y && node.y <= obs.y + obs.height);
+      return obstacles.some(obs =>
+        node.x >= obs.x && node.x <= obs.x + obs.width &&
+        node.y >= obs.y && node.y <= obs.y + obs.height
+      );
     }
 
     function isPathFree(a, b, stepSize = 5) {
@@ -76,12 +91,6 @@ export default function TopAnimationPanel() {
       ctx.stroke();
     }
 
-    function drawGoalStar(goal) {
-      ctx.fillStyle = 'gold';
-      ctx.font = '30px Arial';
-      ctx.fillText('★', goal.x - 15, goal.y + 10);
-    }
-
     function drawObstacles() {
       ctx.fillStyle = 'gray';
       obstacles.forEach(obs => ctx.fillRect(obs.x, obs.y, obs.width, obs.height));
@@ -93,17 +102,28 @@ export default function TopAnimationPanel() {
       }
     }
 
+    function initialDraw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawObstacles();
+
+      ctx.fillStyle = 'green';
+      ctx.font = '54px Arial';
+      ctx.textBaseline = 'bottom';
+      const text = 'AJ Chandrasekaran';
+      const textWidth = ctx.measureText(text).width;
+      ctx.fillText(text, canvas.width - textWidth - 20, canvas.height - 20);
+    }
+
     function animate() {
       if (connected) return;
 
-      // Expand start tree
       let newNodeStart;
       for (let attempt = 0; attempt < 10; attempt++) {
         const rand1 = randomNode();
         const nearestStart = nearest(nodesStart, rand1);
         const candidate = stepToward(nearestStart.node, rand1);
         if (!collidesWithObstacles(candidate) && isPathFree(nearestStart.node, candidate)) {
-          newNodeStart = { node: candidate, parent: nearestStart }; 
+          newNodeStart = { node: candidate, parent: nearestStart };
           nodesStart.push(newNodeStart);
           drawLine(nearestStart.node, newNodeStart.node, 'green');
           drawNode(newNodeStart.node, 'green');
@@ -111,7 +131,6 @@ export default function TopAnimationPanel() {
         }
       }
 
-      // Expand goal tree
       let newNodeGoal;
       for (let attempt = 0; attempt < 10; attempt++) {
         const rand2 = randomNode();
@@ -126,11 +145,9 @@ export default function TopAnimationPanel() {
         }
       }
 
-      // Check for connection
       for (const nStart of nodesStart) {
         for (const nGoal of nodesGoal) {
           if (distance(nStart.node, nGoal.node) < 10 && isPathFree(nStart.node, nGoal.node)) {
-            // Trace back path
             let path = [];
             let temp = nStart;
             while (temp) { path.push(temp.node); temp = temp.parent; }
@@ -141,7 +158,6 @@ export default function TopAnimationPanel() {
 
             drawFinalPath(finalPath);
             connected = true;
-            setAnimationComplete(true);
             return;
           }
         }
@@ -150,34 +166,23 @@ export default function TopAnimationPanel() {
       if (!connected) requestAnimationFrame(animate);
     }
 
-    function initialDraw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawObstacles();
-      ctx.fillStyle = 'green';
-      ctx.fillRect(start.x - 10, start.y - 10, 20, 20); // start node
-      drawGoalStar(goal);
-
-      // Draw name in lower-left corner, bigger font
-      ctx.fillStyle = 'green';
-      ctx.font = '54px Arial';
-      ctx.textBaseline = 'bottom';
-      ctx.fillText('AJ Chandrasekaran', 20, canvas.height - 20);
-    }
-
     initialDraw();
     requestAnimationFrame(animate);
 
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = panelHeight;
       initialDraw();
       if (connected) drawFinalPath(finalPath);
     });
-  }, []);
+  }, [panelHeight]);
 
   return (
-    <div className="w-full h-screen relative bg-green-100 m-0 p-0">
-      <canvas ref={canvasRef} className="w-full h-full block" />
+    <div
+      className="w-full relative bg-green-100"
+      style={{ height: `${panelHeight}px` }}
+    >
+      <canvas ref={canvasRef} className="w-full h-full" />
     </div>
   );
 }
