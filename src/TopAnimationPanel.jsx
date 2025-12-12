@@ -156,6 +156,12 @@ export default function TopAnimationPanel() {
       ctx.fillStyle = 'green';
       ctx.fillRect(start.x - 10, start.y - 10, 20, 20); // start node
       drawGoalStar(goal);
+
+      // Draw name in lower-left corner, bigger font
+      ctx.fillStyle = 'green';
+      ctx.font = '54px Arial';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText('AJ Chandrasekaran', 20, canvas.height - 20);
     }
 
     initialDraw();
@@ -170,13 +176,8 @@ export default function TopAnimationPanel() {
   }, []);
 
   return (
-    <div className="w-full h-screen relative bg-green-100">
-      <canvas ref={canvasRef} className="w-full h-full" />
-      {!animationComplete && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-6xl font-bold text-green-700">Hi, I'm AJ</h1>
-        </div>
-      )}
+    <div className="w-full h-screen relative bg-green-100 m-0 p-0">
+      <canvas ref={canvasRef} className="w-full h-full block" />
     </div>
   );
 }
