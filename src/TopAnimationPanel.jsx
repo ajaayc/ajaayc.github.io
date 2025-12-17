@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState } from 'react';
 
 export default function TopAnimationPanel({ navbarId }) {
   const canvasRef = useRef(null);
+  const initializedRef = useRef(false);
   const [panelHeight, setPanelHeight] = useState(window.innerHeight);
 
   useEffect(() => {
@@ -19,6 +20,10 @@ export default function TopAnimationPanel({ navbarId }) {
   }, [navbarId]);
 
   useEffect(() => {
+    // 🔒 Prevent double initialization (React Strict Mode fix)
+    if (initializedRef.current) return;
+    initializedRef.current = true;
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -30,15 +35,50 @@ export default function TopAnimationPanel({ navbarId }) {
     const nodesStart = [{ node: start, parent: null }];
     const nodesGoal = [{ node: goal, parent: null }];
 
-    const obstacles = [
-      { x: canvas.width / 2 - 100, y: canvas.height / 2 - 50, width: 200, height: 100 },
-      { x: canvas.width / 3, y: canvas.height / 3, width: 100, height: 150 },
-      { x: canvas.width * 0.7, y: canvas.height * 0.3, width: 120, height: 80 }
-    ];
-
     function distance(a, b) {
       return Math.hypot(a.x - b.x, a.y - b.y);
     }
+
+    function rectContainsPoint(rect, p) {
+      return (
+        p.x >= rect.x &&
+        p.x <= rect.x + rect.width &&
+        p.y >= rect.y &&
+        p.y <= rect.y + rect.height
+      );
+    }
+
+    function generateRandomObstacles(count = 25) {
+      const obstacles = [];
+      const minSize = 60;
+      const maxSize = 160;
+      const padding = 40;
+
+      while (obstacles.length < count) {
+        const width = minSize + Math.random() * (maxSize - minSize);
+        const height = minSize + Math.random() * (maxSize - minSize);
+
+        const x =
+          padding + Math.random() * (canvas.width - width - 2 * padding);
+        const y =
+          padding + Math.random() * (canvas.height - height - 2 * padding);
+
+        const candidate = { x, y, width, height };
+
+        if (
+          rectContainsPoint(candidate, start) ||
+          rectContainsPoint(candidate, goal)
+        ) {
+          continue;
+        }
+
+        obstacles.push(candidate);
+      }
+
+      return obstacles;
+    }
+
+    const obstacles = generateRandomObstacles();
 
     function randomNode() {
       return { x: Math.random() * canvas.width, y: Math.random() * canvas.height };
@@ -52,13 +92,18 @@ export default function TopAnimationPanel({ navbarId }) {
 
     function stepToward(from, to, stepSize = 20) {
       const theta = Math.atan2(to.y - from.y, to.x - from.x);
-      return { x: from.x + stepSize * Math.cos(theta), y: from.y + stepSize * Math.sin(theta) };
+      return {
+        x: from.x + stepSize * Math.cos(theta),
+        y: from.y + stepSize * Math.sin(theta)
+      };
     }
 
     function collidesWithObstacles(node) {
       return obstacles.some(obs =>
-        node.x >= obs.x && node.x <= obs.x + obs.width &&
-        node.y >= obs.y && node.y <= obs.y + obs.height
+        node.x >= obs.x &&
+        node.x <= obs.x + obs.width &&
+        node.y >= obs.y &&
+        node.y <= obs.y + obs.height
       );
     }
 
@@ -84,14 +129,10 @@ export default function TopAnimationPanel({ navbarId }) {
       if (type === 'circle') {
         ctx.arc(node.x, node.y, 5 * size, 0, 2 * Math.PI);
         ctx.fill();
-      }
-
-      else if (type === 'square') {
+      } else if (type === 'square') {
         const s = 12 * size;
         ctx.fillRect(node.x - s / 2, node.y - s / 2, s, s);
-      }
-
-      else if (type === 'star') {
+      } else if (type === 'star') {
         const spikes = 5;
         const outerRadius = 14 * size;
         const innerRadius = 6 * size;
@@ -112,7 +153,6 @@ export default function TopAnimationPanel({ navbarId }) {
           ctx.lineTo(xx, yy);
           rot += step;
         }
-        ctx.lineTo(x, y - outerRadius);
         ctx.closePath();
         ctx.fill();
       }
@@ -149,7 +189,6 @@ export default function TopAnimationPanel({ navbarId }) {
       const textWidth = ctx.measureText(text).width;
       ctx.fillText(text, canvas.width - textWidth - 20, canvas.height - 20);
 
-      // 🔹 Bigger start & goal markers
       drawNode(start, 'square', 'green', 1.8);
       drawNode(goal, 'star', 'yellow', 1.8);
     }
@@ -181,11 +220,11 @@ export default function TopAnimationPanel({ navbarId }) {
         for (const nGoal of nodesGoal) {
           if (distance(nStart.node, nGoal.node) < 10 && isPathFree(nStart.node, nGoal.node)) {
             let path = [];
-            let temp = nStart;
-            while (temp) { path.push(temp.node); temp = temp.parent; }
+            let t = nStart;
+            while (t) { path.push(t.node); t = t.parent; }
             path.reverse();
-            temp = nGoal;
-            while (temp) { path.push(temp.node); temp = temp.parent; }
+            t = nGoal;
+            while (t) { path.push(t.node); t = t.parent; }
             finalPath = path;
             drawFinalPath(finalPath);
             connected = true;
@@ -199,13 +238,6 @@ export default function TopAnimationPanel({ navbarId }) {
 
     initialDraw();
     requestAnimationFrame(animate);
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = panelHeight;
-      initialDraw();
-      if (connected) drawFinalPath(finalPath);
-    });
   }, [panelHeight]);
 
   return (
