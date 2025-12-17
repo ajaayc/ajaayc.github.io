@@ -9,7 +9,7 @@ export default function TopAnimationPanel({ navbarId }) {
     function updateHeight() {
       const navbar = document.getElementById(navbarId);
       const navbarHeight = navbar ? navbar.offsetHeight : 0;
-      const fraction = 0.8; // 60% of remaining viewport
+      const fraction = 0.8;
       setPanelHeight((window.innerHeight - navbarHeight) * fraction);
     }
 
@@ -45,7 +45,9 @@ export default function TopAnimationPanel({ navbarId }) {
     }
 
     function nearest(nodes, point) {
-      return nodes.reduce((a, b) => (distance(a.node, point) < distance(b.node, point) ? a : b));
+      return nodes.reduce((a, b) =>
+        distance(a.node, point) < distance(b.node, point) ? a : b
+      );
     }
 
     function stepToward(from, to, stepSize = 20) {
@@ -75,11 +77,45 @@ export default function TopAnimationPanel({ navbarId }) {
     let connected = false;
     let finalPath = [];
 
-    function drawNode(node, color = 'green') {
+    function drawNode(node, type = 'circle', color = 'green', size = 1) {
       ctx.fillStyle = color;
       ctx.beginPath();
-      ctx.arc(node.x, node.y, 5, 0, 2 * Math.PI);
-      ctx.fill();
+
+      if (type === 'circle') {
+        ctx.arc(node.x, node.y, 5 * size, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+
+      else if (type === 'square') {
+        const s = 12 * size;
+        ctx.fillRect(node.x - s / 2, node.y - s / 2, s, s);
+      }
+
+      else if (type === 'star') {
+        const spikes = 5;
+        const outerRadius = 14 * size;
+        const innerRadius = 6 * size;
+        let rot = Math.PI / 2 * 3;
+        let x = node.x;
+        let y = node.y;
+        let step = Math.PI / spikes;
+
+        ctx.moveTo(x, y - outerRadius);
+        for (let i = 0; i < spikes; i++) {
+          let xx = x + Math.cos(rot) * outerRadius;
+          let yy = y + Math.sin(rot) * outerRadius;
+          ctx.lineTo(xx, yy);
+          rot += step;
+
+          xx = x + Math.cos(rot) * innerRadius;
+          yy = y + Math.sin(rot) * innerRadius;
+          ctx.lineTo(xx, yy);
+          rot += step;
+        }
+        ctx.lineTo(x, y - outerRadius);
+        ctx.closePath();
+        ctx.fill();
+      }
     }
 
     function drawLine(a, b, color = 'blue', width = 2) {
@@ -106,43 +142,39 @@ export default function TopAnimationPanel({ navbarId }) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawObstacles();
 
+      const text = 'AJ Chandrasekaran';
       ctx.fillStyle = 'green';
       ctx.font = '54px Arial';
       ctx.textBaseline = 'bottom';
-      const text = 'AJ Chandrasekaran';
       const textWidth = ctx.measureText(text).width;
       ctx.fillText(text, canvas.width - textWidth - 20, canvas.height - 20);
+
+      // 🔹 Bigger start & goal markers
+      drawNode(start, 'square', 'green', 1.8);
+      drawNode(goal, 'star', 'yellow', 1.8);
     }
 
     function animate() {
       if (connected) return;
 
-      let newNodeStart;
-      for (let attempt = 0; attempt < 10; attempt++) {
-        const rand1 = randomNode();
-        const nearestStart = nearest(nodesStart, rand1);
-        const candidate = stepToward(nearestStart.node, rand1);
-        if (!collidesWithObstacles(candidate) && isPathFree(nearestStart.node, candidate)) {
-          newNodeStart = { node: candidate, parent: nearestStart };
-          nodesStart.push(newNodeStart);
-          drawLine(nearestStart.node, newNodeStart.node, 'green');
-          drawNode(newNodeStart.node, 'green');
-          break;
-        }
+      const randStart = randomNode();
+      const nearestStart = nearest(nodesStart, randStart);
+      const newStart = stepToward(nearestStart.node, randStart);
+      if (!collidesWithObstacles(newStart) && isPathFree(nearestStart.node, newStart)) {
+        const node = { node: newStart, parent: nearestStart };
+        nodesStart.push(node);
+        drawLine(nearestStart.node, newStart, 'green');
+        drawNode(newStart, 'circle', 'green');
       }
 
-      let newNodeGoal;
-      for (let attempt = 0; attempt < 10; attempt++) {
-        const rand2 = randomNode();
-        const nearestGoal = nearest(nodesGoal, rand2);
-        const candidate = stepToward(nearestGoal.node, rand2);
-        if (!collidesWithObstacles(candidate) && isPathFree(nearestGoal.node, candidate)) {
-          newNodeGoal = { node: candidate, parent: nearestGoal };
-          nodesGoal.push(newNodeGoal);
-          drawLine(nearestGoal.node, newNodeGoal.node, 'red');
-          drawNode(newNodeGoal.node, 'red');
-          break;
-        }
+      const randGoal = randomNode();
+      const nearestGoal = nearest(nodesGoal, randGoal);
+      const newGoal = stepToward(nearestGoal.node, randGoal);
+      if (!collidesWithObstacles(newGoal) && isPathFree(nearestGoal.node, newGoal)) {
+        const node = { node: newGoal, parent: nearestGoal };
+        nodesGoal.push(node);
+        drawLine(nearestGoal.node, newGoal, 'red');
+        drawNode(newGoal, 'circle', 'red');
       }
 
       for (const nStart of nodesStart) {
@@ -155,7 +187,6 @@ export default function TopAnimationPanel({ navbarId }) {
             temp = nGoal;
             while (temp) { path.push(temp.node); temp = temp.parent; }
             finalPath = path;
-
             drawFinalPath(finalPath);
             connected = true;
             return;
@@ -163,7 +194,7 @@ export default function TopAnimationPanel({ navbarId }) {
         }
       }
 
-      if (!connected) requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
     }
 
     initialDraw();
@@ -178,10 +209,7 @@ export default function TopAnimationPanel({ navbarId }) {
   }, [panelHeight]);
 
   return (
-    <div
-      className="w-full relative bg-green-100"
-      style={{ height: `${panelHeight}px` }}
-    >
+    <div className="w-full relative bg-green-100" style={{ height: `${panelHeight}px` }}>
       <canvas ref={canvasRef} className="w-full h-full" />
     </div>
   );
