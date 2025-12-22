@@ -8,35 +8,46 @@ export default function AJPortfolioPanel() {
   const [selectedCompany, setSelectedCompany] = useState(null);
 
   const projects = [
-    {
-      id: 1,
-      title: 'Project One',
-      short: 'Short description of Project One',
-      long: 'Detailed description with image for Project One',
-      images: ['https://via.placeholder.com/300x180', 'https://via.placeholder.com/300x180'],
-    },
-    {
-      id: 2,
-      title: 'Project Two',
-      short: 'Short description of Project Two',
-      long: 'Detailed description with image for Project Two',
-      images: ['https://via.placeholder.com/300x180', 'https://via.placeholder.com/300x180'],
-    },
-    {
-      id: 3,
-      title: 'Project Three',
-      short: 'Short description of Project Three',
-      long: 'Detailed description with image for Project Three',
-      images: ['https://via.placeholder.com/300x180', 'https://via.placeholder.com/300x180'],
-    },
-    {
-      id: 4,
-      title: 'Project Four',
-      short: 'Short description of Project Four',
-      long: 'Detailed description with image for Project Four',
-      images: ['https://via.placeholder.com/300x180', 'https://via.placeholder.com/300x180'],
-    },
-  ];
+  {
+    id: 1,
+    title: 'MDOT Lane Marking Evaluation',
+    short: 'Evaluated lane markings using LiDAR data',
+    long: 'Performed a detailed evaluation of lane markings using LiDAR and computer vision techniques. The study included data preprocessing, feature extraction, and automated analysis to assess the condition and visibility of lane markings across highways.',
+    date: 'Sept 2016 - Dec 2016',
+    images: ['/img/velodyne.png', 'https://via.placeholder.com/300x180'],
+    paperLink: 'https://example.com/mdot-paper.pdf',
+    codeLink: 'https://github.com/example/mdot-lane-marking',
+  },
+  {
+    id: 2,
+    title: 'Autonomous Parking Assistant',
+    short: 'Developed parking assistance algorithms',
+    long: 'Created a system that uses camera and sensor data to assist in automated parking. Implemented path planning, collision detection, and steering control. Tested extensively on real vehicles with varying parking scenarios.',
+    date: 'Jan 2017 - Jun 2017',
+    images: ['https://via.placeholder.com/300x180'],
+    // No paper or code link provided
+  },
+  {
+    id: 3,
+    title: 'Traffic Sign Recognition',
+    short: 'Machine learning for traffic sign detection',
+    long: 'Implemented a convolutional neural network (CNN) to detect and classify traffic signs from dashcam videos. Achieved high accuracy and robust performance under different lighting and weather conditions.',
+    date: 'Jul 2017 - Dec 2017',
+    images: ['https://via.placeholder.com/300x180', 'https://via.placeholder.com/300x180'],
+    paperLink: 'https://example.com/traffic-sign-paper.pdf',
+    // No code link
+  },
+  {
+    id: 4,
+    title: 'Vehicle Trajectory Prediction',
+    short: 'Predicting vehicle motion in traffic',
+    long: 'Developed models to predict vehicle trajectories using historical motion data and sensor inputs. Applied recurrent neural networks (RNNs) and probabilistic models to improve prediction accuracy.',
+    date: 'Jan 2018 - Mar 2018',
+    images: ['https://via.placeholder.com/300x180'],
+    codeLink: 'https://github.com/example/vehicle-trajectory',
+    // No paper link
+  },
+];
 
   const companies = [
     {
@@ -112,11 +123,18 @@ export default function AJPortfolioPanel() {
               <div
                 key={project.id}
                 onClick={() => setSelectedProject(project)}
-                className="border border-green-200 rounded-xl p-4 flex flex-col items-center gap-4 cursor-pointer hover:shadow-lg transition-shadow"
+                className="border border-green-200 rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer hover:shadow-lg transition-shadow"
               >
                 <div className="w-full h-36 bg-green-100 flex items-center justify-center text-green-500 font-bold text-xl">Image</div>
+
+                {/* Title */}
                 <h3 className="font-semibold text-lg text-gray-900">{project.title}</h3>
-                <p className="text-sm text-gray-600 mt-1">{project.short}</p>
+
+                {/* Date interval */}
+                {project.date && <p className="text-xs text-gray-500">{project.date}</p>}
+
+                {/* Short description */}
+                <p className="text-sm text-gray-600">{project.short}</p>
               </div>
             ))}
           </div>
