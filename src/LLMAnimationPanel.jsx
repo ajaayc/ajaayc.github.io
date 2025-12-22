@@ -13,20 +13,13 @@ import React, { useEffect, useRef } from "react";
  * - Subtle glow effect for a modern AI aesthetic
  */
 
-// const SAMPLE_TEXT = [
-//   "\nWelcome to the website of Ajaay (AJ) Chandrasekaran.",
-//   "Initializing large language model...",
-//   "Loading parameters (7.2B)...",
-//   "Aligning neural weights...",
-//   "Calibrating attention layers...",
-//   "Ready. Generating response:",
-//   "\nHello! I'm an AI model designed to reason, generate, and assist — one token at a time.",
-// ].join("\n");
-
 const SAMPLE_TEXT = [
-  "\nBehold! The bidirectional-RRT! An algorithm, which builds a tree across the configuration space, yielding a collision-free path from start to finish.",
-  "\nIt remains my favorite algorithm.",
-  "\n\nWho am I, you may ask? The name's AJ. AJ Chandrasekaran."
+  "\najaay@SPECTRAL-PC> cat welcome_to_the_show.txt",
+  "\nBehold! The bidirectional-RRT! An algorithm, which relays a spectacular show. Two trees each reaching towards each other across a configuration space of deadly obstacles.",
+  "It remains my favorite algorithm.",
+  "\nWho am I, you may ask?",
+  "\nThe name's AJ. AJ Chandrasekaran.",
+  "\najaay@SPECTRAL-PC>"
 ].join("\n");
 
 export default function LLMAnimationPanel({ height = 260 }) {
@@ -41,7 +34,7 @@ export default function LLMAnimationPanel({ height = 260 }) {
     canvas.width = width;
     canvas.height = heightPx;
 
-    const fontSize = 16;
+    const fontSize = 14;
     const lineHeight = 22;
     const padding = 20;
 
@@ -53,17 +46,29 @@ export default function LLMAnimationPanel({ height = 260 }) {
 
     function wrapText() {
       const maxWidth = width - padding * 2;
-      const words = SAMPLE_TEXT.slice(0, charIndex).split(" ");
-
-      lines = [""];
-      for (let word of words) {
-        const testLine = lines[lines.length - 1] + word + " ";
-        if (ctx.measureText(testLine).width > maxWidth) {
-          lines.push(word + " ");
-        } else {
-          lines[lines.length - 1] = testLine;
-        }
-      }
+      const rawText = SAMPLE_TEXT.slice(0, charIndex);
+      
+      // Split by newlines first
+      const paragraphs = rawText.split("\n");
+    
+      lines = [];
+    
+      paragraphs.forEach((para) => {
+        const words = para.split(" ");
+        let line = "";
+    
+        words.forEach((word) => {
+          const testLine = line + word + " ";
+          if (ctx.measureText(testLine).width > maxWidth) {
+            lines.push(line);
+            line = word + " ";
+          } else {
+            line = testLine;
+          }
+        });
+    
+        lines.push(line); // push remaining line
+      });
     }
 
     function draw() {
@@ -100,7 +105,7 @@ export default function LLMAnimationPanel({ height = 260 }) {
         wrapText();
       }
       draw();
-    }, 20);
+    }, 15);
 
     const cursorInterval = setInterval(() => {
       cursorVisible = !cursorVisible;
