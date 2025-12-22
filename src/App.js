@@ -19,10 +19,10 @@ function App() {
       <TopNavigationBar scrollToSection={scrollToSection} />
 
       {/* Full-width animation panel */}
-      {/*<LLMAnimationPanel />*/}
+      <RRTAnimationPanel />
 
       {/* Full-width animation panel */}
-      <RRTAnimationPanel />
+      <LLMAnimationPanel />
 
       {/* Portfolio with left panel and cards */}
       <div ref={portfolioRef} className="flex flex-1">

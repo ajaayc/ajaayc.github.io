@@ -13,14 +13,20 @@ import React, { useEffect, useRef } from "react";
  * - Subtle glow effect for a modern AI aesthetic
  */
 
+// const SAMPLE_TEXT = [
+//   "\nWelcome to the website of Ajaay (AJ) Chandrasekaran.",
+//   "Initializing large language model...",
+//   "Loading parameters (7.2B)...",
+//   "Aligning neural weights...",
+//   "Calibrating attention layers...",
+//   "Ready. Generating response:",
+//   "\nHello! I'm an AI model designed to reason, generate, and assist — one token at a time.",
+// ].join("\n");
+
 const SAMPLE_TEXT = [
-  "\nWelcome to the website of Ajaay (AJ) Chandrasekaran.",
-  "Initializing large language model...",
-  "Loading parameters (7.2B)...",
-  "Aligning neural weights...",
-  "Calibrating attention layers...",
-  "Ready. Generating response:",
-  "\nHello! I'm an AI model designed to reason, generate, and assist — one token at a time.",
+  "\nBehold! The bidirectional-RRT! An algorithm, which builds a tree across the configuration space, yielding a collision-free path from start to finish.",
+  "\nIt remains my favorite algorithm.",
+  "\n\nWho am I, you may ask? The name's AJ. AJ Chandrasekaran."
 ].join("\n");
 
 export default function LLMAnimationPanel({ height = 260 }) {
@@ -94,7 +100,7 @@ export default function LLMAnimationPanel({ height = 260 }) {
         wrapText();
       }
       draw();
-    }, 40);
+    }, 20);
 
     const cursorInterval = setInterval(() => {
       cursorVisible = !cursorVisible;
