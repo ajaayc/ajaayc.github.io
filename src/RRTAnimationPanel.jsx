@@ -1,7 +1,7 @@
-// TopAnimationPanel.jsx
+// RRTAnimationPanel.jsx
 import React, { useRef, useEffect, useState } from 'react';
 
-export default function TopAnimationPanel({ navbarId }) {
+export default function RRTAnimationPanel({ navbarId }) {
   const canvasRef = useRef(null);
   const initializedRef = useRef(false);
   const [panelHeight, setPanelHeight] = useState(window.innerHeight);
@@ -182,12 +182,13 @@ export default function TopAnimationPanel({ navbarId }) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawObstacles();
 
-      const text = 'AJ Chandrasekaran';
-      ctx.fillStyle = 'green';
-      ctx.font = '54px Arial';
-      ctx.textBaseline = 'bottom';
-      const textWidth = ctx.measureText(text).width;
-      ctx.fillText(text, canvas.width - textWidth - 20, canvas.height - 20);
+      //Draw name
+      //const text = 'AJ Chandrasekaran';
+      //ctx.fillStyle = 'green';
+      //ctx.font = '54px Arial';
+      //ctx.textBaseline = 'bottom';
+      //const textWidth = ctx.measureText(text).width;
+      //ctx.fillText(text, canvas.width - textWidth - 20, canvas.height - 20);
 
       drawNode(start, 'square', 'green', 1.8);
       drawNode(goal, 'star', 'yellow', 1.8);
