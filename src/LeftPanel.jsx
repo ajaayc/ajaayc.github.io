@@ -13,12 +13,12 @@ export default function LeftPanel() {
         <img
           src="img/guardian_cropped.jpg"
           alt="AJ Profile"
-          className="w-96 h-72 rounded-xl object-cover"
+          className="w-72 h-96 rounded-2xl object-cover"
         />
       </div>
       <h1 className="text-3xl font-bold text-green-800 mb-4">Hi, I'm AJ.</h1>
       <p className="text-gray-700 mb-4">
-        I’m a robotics and software engineer who loves building reliable systems,
+        I’m a software engineer who loves building reliable systems,
         exploring autonomy, and sharing what I learn along the way.
       </p>
       <div className="flex gap-4 mt-4">
