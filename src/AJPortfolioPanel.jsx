@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LeftPanel from './LeftPanel';
 
@@ -19,6 +19,18 @@ export default function AJPortfolioPanel() {
     { id: 3, name: 'Company C', role: 'Role at Company C', description: 'Detailed info about Company C', images: ['https://via.placeholder.com/300x180', 'https://via.placeholder.com/300x180'] },
     { id: 4, name: 'Company D', role: 'Role at Company D', description: 'Detailed info about Company D', images: ['https://via.placeholder.com/300x180', 'https://via.placeholder.com/300x180'] },
   ];
+
+  // Close modal with Escape key
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') {
+        setSelectedProject(null);
+        setSelectedCompany(null);
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, []);
 
   return (
     <div className="flex flex-1 bg-white text-gray-900 font-sans antialiased">
@@ -76,34 +88,74 @@ export default function AJPortfolioPanel() {
 
       {/* Popups */}
       <AnimatePresence>
+        {/* Project Modal */}
         {selectedProject && (
-          <motion.div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <motion.div className="bg-white rounded-xl p-6 max-w-3xl w-full" initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }}>
+          <motion.div
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+            role="dialog"
+            aria-modal="true"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white rounded-xl p-6 max-w-3xl w-full relative"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+            >
+              {/* Close Icon */}
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 text-2xl font-bold"
+                aria-label="Close modal"
+              >
+                &times;
+              </button>
+
               <h3 className="text-xl font-bold mb-2">{selectedProject.title}</h3>
               <div className="flex gap-2 mb-4 flex-wrap">
                 {selectedProject.images.map((img, idx) => (
-                  <img key={idx} src={img} alt={`${selectedProject.title} ${idx+1}`} className="w-48 h-48 object-cover rounded" />
+                  <img key={idx} src={img} alt={`${selectedProject.title} ${idx + 1}`} className="w-48 max-w-full h-auto object-cover rounded" />
                 ))}
               </div>
               <p>{selectedProject.long}</p>
-              <button onClick={() => setSelectedProject(null)} className="mt-4 px-4 py-2 bg-green-600 text-white rounded">Close</button>
             </motion.div>
           </motion.div>
         )}
 
+        {/* Company Modal */}
         {selectedCompany && (
-          <motion.div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <motion.div className="bg-white rounded-xl p-6 max-w-3xl w-full" initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }}>
+          <motion.div
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+            role="dialog"
+            aria-modal="true"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white rounded-xl p-6 max-w-3xl w-full relative"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+            >
+              {/* Close Icon */}
+              <button
+                onClick={() => setSelectedCompany(null)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 text-2xl font-bold"
+                aria-label="Close modal"
+              >
+                &times;
+              </button>
+
               <h3 className="text-xl font-bold mb-2">{selectedCompany.name}</h3>
               <div className="flex gap-2 mb-4 flex-wrap">
                 {selectedCompany.images.map((img, idx) => (
-                  <img key={idx} src={img} alt={`${selectedCompany.name} ${idx+1}`} className="w-48 h-48 object-cover rounded" />
+                  <img key={idx} src={img} alt={`${selectedCompany.name} ${idx + 1}`} className="w-48 max-w-full h-auto object-cover rounded" />
                 ))}
               </div>
               <p>{selectedCompany.description}</p>
-              <button onClick={() => setSelectedCompany(null)} className="mt-4 px-4 py-2 bg-green-600 text-white rounded">Close</button>
             </motion.div>
           </motion.div>
         )}
