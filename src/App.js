@@ -22,7 +22,7 @@ function App() {
       <LLMAnimationPanel />
 
       {/* Full-width animation panel */}
-      <RRTAnimationPanel />
+      {/* <RRTAnimationPanel /> */}
 
       {/* Portfolio with left panel and cards */}
       <div ref={portfolioRef} className="flex flex-1">

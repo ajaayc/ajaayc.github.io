@@ -4,25 +4,21 @@ import React, { useEffect, useRef } from "react";
  * LLMAnimationPanel
  * -----------------
  * A lightweight animated panel that visually simulates an LLM generating text.
- * Designed for use at the top of a personal website (hero / header area).
- *
- * Visual behavior:
- * - Monospaced "terminal-like" text
- * - Characters appear one-by-one with a blinking cursor
- * - Lines wrap naturally and scroll upward when full
- * - Subtle glow effect for a modern AI aesthetic
  */
 
 const SAMPLE_TEXT = [
+   "Initializing large language model...Loading parameters (7.2B)...Aligning neural weights...Calibrating attention layers...",
+   "Ready. Generating response:",
   "\najaay@SPECTRAL-PC> cat welcome_to_the_show.txt",
-  "\nBehold! The bidirectional-RRT! An algorithm, which relays a spectacular show. Two trees each reaching towards each other across a configuration space of deadly obstacles.",
-  "It remains my favorite algorithm.",
+  //"\nBehold! The bidirectional-RRT! An algorithm, which relays a spectacular dance. Two trees each reaching towards each other across a configuration space of deadly obstacles.",
+  //"It is my favorite algorithm.",
   "\nWho am I, you may ask?",
   "\nThe name's AJ. AJ Chandrasekaran.",
+  "\nWelcome to my personal site.",
   "\najaay@SPECTRAL-PC>"
 ].join("\n");
 
-export default function LLMAnimationPanel({ height = 260 }) {
+export default function LLMAnimationPanel({ height = 330 }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -38,7 +34,10 @@ export default function LLMAnimationPanel({ height = 260 }) {
     const lineHeight = 22;
     const padding = 20;
 
-    ctx.font = `${fontSize}px monospace`;
+    const normalFont = `${fontSize}px monospace`;
+    const boldFont = `bold ${fontSize}px monospace`;
+
+    ctx.font = normalFont;
 
     let charIndex = 0;
     let lines = [""];
@@ -47,16 +46,14 @@ export default function LLMAnimationPanel({ height = 260 }) {
     function wrapText() {
       const maxWidth = width - padding * 2;
       const rawText = SAMPLE_TEXT.slice(0, charIndex);
-      
-      // Split by newlines first
       const paragraphs = rawText.split("\n");
-    
+
       lines = [];
-    
+
       paragraphs.forEach((para) => {
         const words = para.split(" ");
         let line = "";
-    
+
         words.forEach((word) => {
           const testLine = line + word + " ";
           if (ctx.measureText(testLine).width > maxWidth) {
@@ -66,8 +63,8 @@ export default function LLMAnimationPanel({ height = 260 }) {
             line = testLine;
           }
         });
-    
-        lines.push(line); // push remaining line
+
+        lines.push(line);
       });
     }
 
@@ -78,21 +75,64 @@ export default function LLMAnimationPanel({ height = 260 }) {
       ctx.fillStyle = "#0b0f14";
       ctx.fillRect(0, 0, width, heightPx);
 
-      // Text glow
+      // Glow
       ctx.shadowColor = "#4cc9f0";
       ctx.shadowBlur = 8;
-      ctx.fillStyle = "#d9faff";
 
       const maxLines = Math.floor((heightPx - padding * 2) / lineHeight);
       const visibleLines = lines.slice(-maxLines);
 
       visibleLines.forEach((line, i) => {
-        ctx.fillText(line, padding, padding + i * lineHeight);
+        let x = padding;
+        const y = padding + i * lineHeight;
+
+        const highlightTokens = ["AJ Chandrasekaran", "AJ"];
+        let remaining = line;
+
+        while (remaining.length > 0) {
+          let matchIndex = -1;
+          let matchedToken = null;
+
+          for (const token of highlightTokens) {
+            const idx = remaining.indexOf(token);
+            if (idx !== -1 && (matchIndex === -1 || idx < matchIndex)) {
+              matchIndex = idx;
+              matchedToken = token;
+            }
+          }
+
+          // No highlight left
+          if (matchIndex === -1) {
+            ctx.font = normalFont;
+            ctx.fillStyle = "#d9faff";
+            ctx.fillText(remaining, x, y);
+            x += ctx.measureText(remaining).width;
+            break;
+          }
+
+          // Draw text before highlight
+          if (matchIndex > 0) {
+            const before = remaining.slice(0, matchIndex);
+            ctx.font = normalFont;
+            ctx.fillStyle = "#d9faff";
+            ctx.fillText(before, x, y);
+            x += ctx.measureText(before).width;
+          }
+
+          // Draw highlighted token (RED + BOLD)
+          ctx.font = boldFont;
+          ctx.fillStyle = "#ff4d4d";
+          ctx.fillText(matchedToken, x, y);
+          x += ctx.measureText(matchedToken).width;
+
+          remaining = remaining.slice(matchIndex + matchedToken.length);
+        }
       });
 
       // Cursor
       if (cursorVisible) {
         const lastLine = visibleLines[visibleLines.length - 1] || "";
+        ctx.font = normalFont;
         const cursorX = padding + ctx.measureText(lastLine).width;
         const cursorY = padding + (visibleLines.length - 1) * lineHeight;
         ctx.fillRect(cursorX + 2, cursorY - fontSize + 4, 10, fontSize);
@@ -105,7 +145,7 @@ export default function LLMAnimationPanel({ height = 260 }) {
         wrapText();
       }
       draw();
-    }, 15);
+    }, 13);
 
     const cursorInterval = setInterval(() => {
       cursorVisible = !cursorVisible;
@@ -115,7 +155,7 @@ export default function LLMAnimationPanel({ height = 260 }) {
       width = canvas.offsetWidth;
       canvas.width = width;
       canvas.height = heightPx;
-      ctx.font = `${fontSize}px monospace`;
+      ctx.font = normalFont;
       wrapText();
     }
 
