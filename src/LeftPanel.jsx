@@ -9,9 +9,12 @@ export default function LeftPanel() {
   return (
     <aside className="flex flex-col w-64 md:w-1/4 lg:w-1/5 bg-green-50 p-6 border-r border-green-200">
       <div className="flex-shrink-0 w-full flex justify-center mb-4">
-        <div className="w-32 h-32 bg-green-100 flex items-center justify-center rounded-full text-green-500 font-bold text-xl">
-          Photo
-        </div>
+        {/* Profile image */}
+        <img
+          src="img/guardian_cropped.jpg"
+          alt="AJ Profile"
+          className="w-96 h-72 rounded-xl object-cover"
+        />
       </div>
       <h1 className="text-3xl font-bold text-green-800 mb-4">Hi, I'm AJ.</h1>
       <p className="text-gray-700 mb-4">
