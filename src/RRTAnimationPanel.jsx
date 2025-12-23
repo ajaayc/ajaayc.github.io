@@ -1,11 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 
-export default function RRTAnimationPanel({ navbarId }) {
+export default function RRTAnimationPanel({ navbarId, startAnimation }) {
   const canvasRef = useRef(null);
   const initializedRef = useRef(false);
   const [panelHeight, setPanelHeight] = useState(window.innerHeight);
-  const [startAnimation, setStartAnimation] = useState(false);
-
   const [obstacles, setObstacles] = useState([]);
   const [start, setStart] = useState({ x: 100, y: 0 });
   const [goal, setGoal] = useState({ x: 0, y: 0 });
@@ -29,7 +27,6 @@ export default function RRTAnimationPanel({ navbarId }) {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    // Use parent container width to avoid stretched drawing
     const width = canvas.parentElement.offsetWidth;
     const height = panelHeight;
 
@@ -189,16 +186,6 @@ export default function RRTAnimationPanel({ navbarId }) {
 
   return (
     <div className="w-full relative bg-green-100" style={{ height: `${panelHeight}px` }}>
-      {!startAnimation && (
-        <div className="absolute top-4 left-4 z-10">
-          <button
-            className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
-            onClick={() => setStartAnimation(true)}
-          >
-            Check out this animation of a bidirection RRT! 
-          </button>
-        </div>
-      )}
       <canvas ref={canvasRef} className="w-full h-full" />
     </div>
   );

@@ -159,14 +159,13 @@ export default function AJPortfolioPanel() {
 
 
 
-        {/* RRT Animation Section */}
-        <section id="rrt" className="py-16 px-0 -mx-6">
-          {!rrtStarted && (
-            <RRTPromptPanel height={400} onStart={handleStartRRT} />
-          )}
-          {rrtStarted && (
-            <RRTAnimationPanel navbarId="navbar" />
-          )}
+        {/* RRT Section */}
+        <section id="rrt" className="py-16 px-0 -mx-6 space-y-4">
+          {/* RRTPromptPanel: user presses Enter to start */}
+          <RRTPromptPanel onEnter={() => setRrtStarted(true)} />
+
+          {/* RRTAnimationPanel: starts animation when rrtStarted is true */}
+          <RRTAnimationPanel navbarId="navbar" startAnimation={rrtStarted} />
         </section>
       </main>
 

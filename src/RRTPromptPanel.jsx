@@ -1,28 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-export default function RRTPromptPanel({ height = 330, onStart }) {
+export default function RRTPromptPanel({ onEnter, height = 200 }) {
   const canvasRef = useRef(null);
-  const [charIndex, setCharIndex] = useState(0);
-  const [cursorVisible, setCursorVisible] = useState(true);
-  const [textLines, setTextLines] = useState(["Press Enter to start RRT animation..."]);
+  const [showCursor, setShowCursor] = useState(true);
+  const [entered, setEntered] = useState(false);
+
+  const promptText = "Press ENTER to run the bidirectional RRT animation";
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-
-    let width = canvas.offsetWidth;
+    const width = canvas.offsetWidth;
     const heightPx = height;
     canvas.width = width;
     canvas.height = heightPx;
 
-    const fontSize = 14;
+    const fontSize = 16;
     const lineHeight = 22;
     const padding = 20;
+    const font = `${fontSize}px monospace`;
+    ctx.font = font;
 
-    const normalFont = `${fontSize}px monospace`;
-    ctx.font = normalFont;
-
-    let lines = [...textLines];
+    let animationFrame;
 
     function draw() {
       ctx.clearRect(0, 0, width, heightPx);
@@ -31,69 +30,49 @@ export default function RRTPromptPanel({ height = 330, onStart }) {
       ctx.fillStyle = "#0b0f14";
       ctx.fillRect(0, 0, width, heightPx);
 
-      // Glow
-      ctx.shadowColor = "#4cc9f0";
-      ctx.shadowBlur = 8;
-
-      const maxLines = Math.floor((heightPx - padding * 2) / lineHeight);
-      const visibleLines = lines.slice(-maxLines);
-
-      visibleLines.forEach((line, i) => {
-        const x = padding;
-        const y = padding + i * lineHeight;
-        ctx.fillStyle = "#d9faff";
-        ctx.fillText(line, x, y);
-      });
+      // Text
+      ctx.fillStyle = "#d9faff";
+      ctx.fillText(promptText, padding, padding + fontSize);
 
       // Cursor
-      if (cursorVisible) {
-        const lastLine = visibleLines[visibleLines.length - 1] || "";
-        const cursorX = padding + ctx.measureText(lastLine).width;
-        const cursorY = padding + (visibleLines.length - 1) * lineHeight;
+      if (!entered && showCursor) {
+        const textWidth = ctx.measureText(promptText).width;
         ctx.fillStyle = "#d9faff";
-        ctx.fillRect(cursorX + 2, cursorY - fontSize + 4, 10, fontSize);
+        ctx.fillRect(padding + textWidth + 4, padding, 10, fontSize);
       }
     }
 
-    const cursorInterval = setInterval(() => {
-      setCursorVisible((v) => !v);
-    }, 500);
-
-    function handleResize() {
-      width = canvas.offsetWidth;
-      canvas.width = width;
-      canvas.height = heightPx;
-      ctx.font = normalFont;
+    function loop() {
       draw();
+      animationFrame = requestAnimationFrame(loop);
     }
 
-    window.addEventListener("resize", handleResize);
+    loop();
 
-    draw();
+    return () => cancelAnimationFrame(animationFrame);
+  }, [showCursor, entered, height]);
 
-    return () => {
-      clearInterval(cursorInterval);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [height, textLines, cursorVisible]);
+  // Blink cursor
+  useEffect(() => {
+    const interval = setInterval(() => setShowCursor((prev) => !prev), 500);
+    return () => clearInterval(interval);
+  }, []);
 
-  // Handle Enter key
+  // Listen for Enter key
   useEffect(() => {
     function handleKeyDown(e) {
-      if (e.key === "Enter") {
-        if (onStart) onStart();
+      if (e.key === "Enter" && !entered) {
+        setEntered(true);
+        onEnter();
       }
     }
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onStart]);
+  }, [entered, onEnter]);
 
   return (
-    <div style={{ width: "100%", height }}>
-      <canvas
-        ref={canvasRef}
-        style={{ width: "100%", height: "100%", display: "block" }}
-      />
+    <div className="w-full relative bg-black rounded-md shadow-lg overflow-hidden" style={{ height: `${height}px` }}>
+      <canvas ref={canvasRef} className="w-full h-full" />
     </div>
   );
 }
