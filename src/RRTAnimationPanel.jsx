@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, forwardRef } from 'react';
 
-export default function RRTAnimationPanel({ navbarId, startAnimation }) {
+const RRTAnimationPanel = forwardRef(({ navbarId, startAnimation }, ref) => {
   const canvasRef = useRef(null);
   const initializedRef = useRef(false);
   const [panelHeight, setPanelHeight] = useState(window.innerHeight);
@@ -185,8 +185,10 @@ export default function RRTAnimationPanel({ navbarId, startAnimation }) {
   }, [startAnimation, panelHeight, start, goal, obstacles]);
 
   return (
-    <div className="w-full relative bg-green-100" style={{ height: `${panelHeight}px` }}>
+    <div ref={ref} className="w-full relative bg-green-100" style={{ height: `${panelHeight}px` }}>
       <canvas ref={canvasRef} className="w-full h-full" />
     </div>
   );
-}
+});
+
+export default RRTAnimationPanel;

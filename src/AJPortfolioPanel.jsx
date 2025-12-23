@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import LeftPanel from './LeftPanel';
 import ProjectModal from './modals/ProjectModal';
 import CompanyModal from './modals/CompanyModal';
@@ -10,8 +10,17 @@ export default function AJPortfolioPanel() {
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [rrtStarted, setRrtStarted] = useState(false);
 
+  //const rrtAnimationRef = useRef(null);
+  const rrtPanelRef = useRef(null);
+
   const handleStartRRT = () => {
     setRrtStarted(true);
+    if (rrtPanelRef.current) {
+      // Wait for the panel to mount and have a height
+      setTimeout(() => {
+        rrtPanelRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
   };
 
   const projects = [
@@ -162,10 +171,10 @@ export default function AJPortfolioPanel() {
         {/* RRT Section */}
         <section id="rrt" className="py-16 px-0 -mx-6 space-y-4">
           {/* RRTPromptPanel: user presses Enter to start */}
-          <RRTPromptPanel onEnter={() => setRrtStarted(true)} />
+          <RRTPromptPanel onEnter={handleStartRRT} />
 
           {/* RRTAnimationPanel: starts animation when rrtStarted is true */}
-          <RRTAnimationPanel navbarId="navbar" startAnimation={rrtStarted} />
+          <RRTAnimationPanel ref={rrtPanelRef} navbarId="navbar" startAnimation={rrtStarted} />
         </section>
       </main>
 
