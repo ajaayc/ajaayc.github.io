@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import LeftPanel from './LeftPanel';
 import ProjectModal from './modals/ProjectModal';
 import CompanyModal from './modals/CompanyModal';
+import RRTPromptPanel from './RRTPromptPanel';
 import RRTAnimationPanel from './RRTAnimationPanel';
 
 export default function AJPortfolioPanel() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedCompany, setSelectedCompany] = useState(null);
+  const [rrtStarted, setRrtStarted] = useState(false);
+
+  const handleStartRRT = () => {
+    setRrtStarted(true);
+  };
 
   const projects = [
   {
@@ -151,9 +157,16 @@ export default function AJPortfolioPanel() {
           </p>
         </section>
 
-        {/* RRT Animation */}
+
+
+        {/* RRT Animation Section */}
         <section id="rrt" className="py-16 px-0 -mx-6">
-          <RRTAnimationPanel navbarId="navbar" />
+          {!rrtStarted && (
+            <RRTPromptPanel height={400} onStart={handleStartRRT} />
+          )}
+          {rrtStarted && (
+            <RRTAnimationPanel navbarId="navbar" />
+          )}
         </section>
       </main>
 
