@@ -1,13 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 /**
  * LLMAnimationPanel
  * -----------------
- * A lightweight animated panel that visually simulates an LLM generating text.
+ * A full-screen animated panel that visually simulates an LLM generating text.
  */
 
 const SAMPLE_TEXT = [
-  "Initializing large language model...Loading parameters (7.2B)...Aligning neural weights...Calibrating attention layers...",
+  "Initializing large language model...",
+  "Loading parameters (7.2B)...",
+  "Aligning neural weights...",
+  "Calibrating attention layers...",
   "Ready. Generating response:",
   "\najaay@SPECTRAL-PC> cat welcome_to_the_show.txt",
   "\nWho am I, you may ask?",
@@ -16,21 +19,22 @@ const SAMPLE_TEXT = [
   "\najaay@SPECTRAL-PC>"
 ].join("\n");
 
-export default function LLMAnimationPanel({ height = 330 }) {
+export default function LLMAnimationPanel() {
   const canvasRef = useRef(null);
+  const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
-    let width = canvas.offsetWidth;
-    const heightPx = height;
+    let width = windowSize.width;
+    let heightPx = windowSize.height;
     canvas.width = width;
     canvas.height = heightPx;
 
-    const fontSize = 14;
-    const lineHeight = 22;
-    const padding = 20;
+    const fontSize = Math.floor(heightPx * 0.035); // 3.5% of screen height
+    const lineHeight = fontSize * 1.5;
+    const padding = fontSize * 1.5;
 
     const normalFont = `${fontSize}px monospace`;
     const boldFont = `bold ${fontSize}px monospace`;
@@ -74,9 +78,9 @@ export default function LLMAnimationPanel({ height = 330 }) {
       ctx.fillStyle = "#0b0f14";
       ctx.fillRect(0, 0, width, heightPx);
 
-      // Glow
+      // Glow effect
       ctx.shadowColor = "#4cc9f0";
-      ctx.shadowBlur = 8;
+      ctx.shadowBlur = 10;
 
       const maxLines = Math.floor((heightPx - padding * 2) / lineHeight);
       const visibleLines = lines.slice(-maxLines);
@@ -125,14 +129,14 @@ export default function LLMAnimationPanel({ height = 330 }) {
         }
       });
 
-      // Cursor (solid when done)
+      // Solid cursor at the end
       if (cursorVisible) {
         const lastLine = visibleLines[visibleLines.length - 1] || "";
         ctx.font = normalFont;
         const cursorX = padding + ctx.measureText(lastLine).width;
         const cursorY = padding + (visibleLines.length - 1) * lineHeight;
         ctx.fillStyle = "#d9faff";
-        ctx.fillRect(cursorX + 2, cursorY - fontSize + 4, 10, fontSize);
+        ctx.fillRect(cursorX + 2, cursorY - fontSize + 4, fontSize / 2 + 4, fontSize);
       }
     }
 
@@ -142,11 +146,11 @@ export default function LLMAnimationPanel({ height = 330 }) {
         wrapText();
       } else if (!typingDone) {
         typingDone = true;
-        cursorVisible = true; // solid cursor at end
+        cursorVisible = true; // solid cursor at the end
         clearInterval(cursorInterval);
       }
       draw();
-    }, 8);
+    }, 12); // slightly slower typing for dramatic effect
 
     const cursorInterval = setInterval(() => {
       if (!typingDone) {
@@ -155,7 +159,8 @@ export default function LLMAnimationPanel({ height = 330 }) {
     }, 500);
 
     function handleResize() {
-      width = canvas.offsetWidth;
+      width = window.innerWidth;
+      heightPx = window.innerHeight;
       canvas.width = width;
       canvas.height = heightPx;
       ctx.font = normalFont;
@@ -169,10 +174,19 @@ export default function LLMAnimationPanel({ height = 330 }) {
       clearInterval(cursorInterval);
       window.removeEventListener("resize", handleResize);
     };
-  }, [height]);
+  }, [windowSize]);
+
+  // Update window size state on resize to trigger effect
+  useEffect(() => {
+    function onResize() {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    }
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   return (
-    <div style={{ width: "100%", height }}>
+    <div style={{ width: "100%", height: "100vh", overflow: "hidden" }}>
       <canvas
         ref={canvasRef}
         style={{ width: "100%", height: "100%", display: "block" }}
