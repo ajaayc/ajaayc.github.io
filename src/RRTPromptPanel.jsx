@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 
-export default function RRTPromptPanel({ onEnter, height = 200 }) {
+export default function RRTPromptPanel({ onEnter, height = 300 }) {
   const canvasRef = useRef(null);
-  const [showCursor, setShowCursor] = useState(true);
+  const [showCursor, setShowCursor] = useState(true); // only used for typing effect
   const [entered, setEntered] = useState(false);
   const [linesToDisplay, setLinesToDisplay] = useState([]);
   const [charIndex, setCharIndex] = useState(0);
 
   const promptLines = [
-    "ajaay@SPECTRAL-PC> bazel build //rrt_runner",
-    "ajaay@SPECTRAL-PC> ./build/rrt_runner",
+    "ajaay@SPECTRAL-PC> cat something_cool.txt",
+    "",
+    "Hey, want to see something cool?",
+    "",
+    "ajaay@SPECTRAL-PC> bazel build //main:rrt_runner",
+    "ajaay@SPECTRAL-PC> ./bazel-bin/main/rrt_runner",
     "-----------------------------------------------------------------------------",
     "Press ENTER to run the bidirectional RRT animation",
     "-----------------------------------------------------------------------------"
@@ -50,16 +54,20 @@ export default function RRTPromptPanel({ onEnter, height = 200 }) {
         const currentLine = promptLines[linesToDisplay.length].slice(0, charIndex);
         ctx.fillText(currentLine, padding, padding + linesToDisplay.length * lineHeight + fontSize);
 
-        // Cursor
+        // Cursor for typing
         if (showCursor) {
           const textWidth = ctx.measureText(currentLine).width;
           ctx.fillRect(padding + textWidth + 4, padding + linesToDisplay.length * lineHeight, 10, fontSize);
         }
       }
 
-      // After Enter pressed, show empty terminal prompt
+      // After Enter pressed, show empty terminal prompt with solid cursor
       if (entered) {
-        ctx.fillText("ajaay@SPECTRAL-PC>", padding, padding + (linesToDisplay.length + 1) * lineHeight);
+        const promptY = padding + (linesToDisplay.length + 1) * lineHeight;
+        ctx.fillText("ajaay@SPECTRAL-PC>", padding, promptY);
+        // Solid cursor at end
+        const textWidth = ctx.measureText("ajaay@SPECTRAL-PC> ").width;
+        ctx.fillRect(padding + textWidth + 4, promptY - fontSize, 10, fontSize);
       }
     }
 
@@ -73,27 +81,27 @@ export default function RRTPromptPanel({ onEnter, height = 200 }) {
     return () => cancelAnimationFrame(animationFrame);
   }, [showCursor, linesToDisplay, charIndex, entered, height]);
 
-  // Blink cursor
+  // Blink cursor only during typing
   useEffect(() => {
+    if (entered) return; // stop blinking after Enter
     const interval = setInterval(() => setShowCursor((prev) => !prev), 500);
     return () => clearInterval(interval);
-  }, []);
+  }, [entered]);
 
   // Typing effect
   useEffect(() => {
-    if (entered) return;
+    if (entered) return; // stop typing after Enter
     if (linesToDisplay.length >= promptLines.length) return;
 
     const timeout = setTimeout(() => {
       const currentLine = promptLines[linesToDisplay.length];
       if (charIndex + 1 > currentLine.length) {
-        // Finished current line
         setLinesToDisplay((prev) => [...prev, currentLine]);
         setCharIndex(0);
       } else {
         setCharIndex((i) => i + 1);
       }
-    }, 40);
+    }, 10);
 
     return () => clearTimeout(timeout);
   }, [charIndex, linesToDisplay, entered]);
