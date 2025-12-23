@@ -28,11 +28,16 @@ export default function RRTAnimationPanel({ navbarId }) {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = panelHeight;
 
-    const s = { x: 100, y: canvas.height / 2 };
-    const g = { x: canvas.width - 100, y: canvas.height / 2 };
+    // Use parent container width to avoid stretched drawing
+    const width = canvas.parentElement.offsetWidth;
+    const height = panelHeight;
+
+    canvas.width = width;
+    canvas.height = height;
+
+    const s = { x: 100, y: height / 2 };
+    const g = { x: width - 100, y: height / 2 };
     setStart(s);
     setGoal(g);
 
@@ -46,11 +51,11 @@ export default function RRTAnimationPanel({ navbarId }) {
       const maxSize = 160;
       const padding = 40;
       while (obs.length < count) {
-        const width = minSize + Math.random() * (maxSize - minSize);
-        const height = minSize + Math.random() * (maxSize - minSize);
-        const x = padding + Math.random() * (canvas.width - width - 2 * padding);
-        const y = padding + Math.random() * (canvas.height - height - 2 * padding);
-        const candidate = { x, y, width, height };
+        const w = minSize + Math.random() * (maxSize - minSize);
+        const h = minSize + Math.random() * (maxSize - minSize);
+        const x = padding + Math.random() * (width - w - 2 * padding);
+        const y = padding + Math.random() * (height - h - 2 * padding);
+        const candidate = { x, y, width: w, height: h };
         if (rectContainsPoint(candidate, s) || rectContainsPoint(candidate, g)) continue;
         obs.push(candidate);
       }
@@ -61,23 +66,20 @@ export default function RRTAnimationPanel({ navbarId }) {
     setObstacles(obsArray);
 
     // Draw static scene once
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = 'gray';
     obsArray.forEach(o => ctx.fillRect(o.x, o.y, o.width, o.height));
 
-    // Draw start node
+    // Draw start node (square)
     ctx.fillStyle = 'green';
     ctx.fillRect(s.x - 10, s.y - 10, 20, 20);
 
     // Draw goal node (star)
     ctx.fillStyle = 'yellow';
     ctx.beginPath();
-    const spikes = 5;
-    const outer = 14;
-    const inner = 6;
+    const spikes = 5, outer = 14, inner = 6;
     let rot = Math.PI / 2 * 3;
-    let x = g.x;
-    let y = g.y;
+    let x = g.x, y = g.y;
     let step = Math.PI / spikes;
     ctx.moveTo(x, y - outer);
     for (let i = 0; i < spikes; i++) {
@@ -98,14 +100,14 @@ export default function RRTAnimationPanel({ navbarId }) {
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = panelHeight;
+    const width = canvas.width;
+    const height = canvas.height;
 
     const nodesStart = [{ node: start, parent: null }];
     const nodesGoal = [{ node: goal, parent: null }];
 
     function distance(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
-    function randomNode() { return { x: Math.random() * canvas.width, y: Math.random() * canvas.height }; }
+    function randomNode() { return { x: Math.random() * width, y: Math.random() * height }; }
     function nearest(nodes, p) { return nodes.reduce((a, b) => distance(a.node, p) < distance(b.node, p) ? a : b); }
     function stepToward(from, to, stepSize = 20) {
       const theta = Math.atan2(to.y - from.y, to.x - from.x);
@@ -182,30 +184,7 @@ export default function RRTAnimationPanel({ navbarId }) {
       requestAnimationFrame(animate);
     }
 
-    // Draw static scene once before animation starts
-    ctx.fillStyle = 'gray';
-    obstacles.forEach(o => ctx.fillRect(o.x, o.y, o.width, o.height));
-    ctx.fillStyle = 'green';
-    ctx.fillRect(start.x - 10, start.y - 10, 20, 20);
-    ctx.fillStyle = 'yellow';
-    ctx.beginPath();
-    const spikes = 5, outer = 14, inner = 6;
-    let rot = Math.PI / 2 * 3;
-    let x = goal.x;
-    let y = goal.y;
-    let step = Math.PI / spikes;
-    ctx.moveTo(x, y - outer);
-    for (let i = 0; i < spikes; i++) {
-      ctx.lineTo(x + Math.cos(rot) * outer, y + Math.sin(rot) * outer);
-      rot += step;
-      ctx.lineTo(x + Math.cos(rot) * inner, y + Math.sin(rot) * inner);
-      rot += step;
-    }
-    ctx.closePath();
-    ctx.fill();
-
     requestAnimationFrame(animate);
-
   }, [startAnimation, panelHeight, start, goal, obstacles]);
 
   return (
@@ -216,7 +195,7 @@ export default function RRTAnimationPanel({ navbarId }) {
             className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
             onClick={() => setStartAnimation(true)}
           >
-            Start RRT Animation
+            Check out this animation of a bidirection RRT! 
           </button>
         </div>
       )}
