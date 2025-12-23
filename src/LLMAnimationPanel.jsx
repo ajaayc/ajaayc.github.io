@@ -7,11 +7,9 @@ import React, { useEffect, useRef } from "react";
  */
 
 const SAMPLE_TEXT = [
-   "Initializing large language model...Loading parameters (7.2B)...Aligning neural weights...Calibrating attention layers...",
-   "Ready. Generating response:",
+  "Initializing large language model...Loading parameters (7.2B)...Aligning neural weights...Calibrating attention layers...",
+  "Ready. Generating response:",
   "\najaay@SPECTRAL-PC> cat welcome_to_the_show.txt",
-  //"\nBehold! The bidirectional-RRT! An algorithm, which relays a spectacular dance. Two trees each reaching towards each other across a configuration space of deadly obstacles.",
-  //"It is my favorite algorithm.",
   "\nWho am I, you may ask?",
   "\nThe name's AJ. AJ Chandrasekaran.",
   "\nWelcome to my personal site.",
@@ -26,7 +24,7 @@ export default function LLMAnimationPanel({ height = 330 }) {
     const ctx = canvas.getContext("2d");
 
     let width = canvas.offsetWidth;
-    let heightPx = height;
+    const heightPx = height;
     canvas.width = width;
     canvas.height = heightPx;
 
@@ -42,6 +40,7 @@ export default function LLMAnimationPanel({ height = 330 }) {
     let charIndex = 0;
     let lines = [""];
     let cursorVisible = true;
+    let typingDone = false;
 
     function wrapText() {
       const maxWidth = width - padding * 2;
@@ -101,7 +100,6 @@ export default function LLMAnimationPanel({ height = 330 }) {
             }
           }
 
-          // No highlight left
           if (matchIndex === -1) {
             ctx.font = normalFont;
             ctx.fillStyle = "#d9faff";
@@ -110,7 +108,6 @@ export default function LLMAnimationPanel({ height = 330 }) {
             break;
           }
 
-          // Draw text before highlight
           if (matchIndex > 0) {
             const before = remaining.slice(0, matchIndex);
             ctx.font = normalFont;
@@ -119,7 +116,6 @@ export default function LLMAnimationPanel({ height = 330 }) {
             x += ctx.measureText(before).width;
           }
 
-          // Draw highlighted token (RED + BOLD)
           ctx.font = boldFont;
           ctx.fillStyle = "#ff4d4d";
           ctx.fillText(matchedToken, x, y);
@@ -129,12 +125,13 @@ export default function LLMAnimationPanel({ height = 330 }) {
         }
       });
 
-      // Cursor
+      // Cursor (solid when done)
       if (cursorVisible) {
         const lastLine = visibleLines[visibleLines.length - 1] || "";
         ctx.font = normalFont;
         const cursorX = padding + ctx.measureText(lastLine).width;
         const cursorY = padding + (visibleLines.length - 1) * lineHeight;
+        ctx.fillStyle = "#d9faff";
         ctx.fillRect(cursorX + 2, cursorY - fontSize + 4, 10, fontSize);
       }
     }
@@ -143,12 +140,18 @@ export default function LLMAnimationPanel({ height = 330 }) {
       if (charIndex < SAMPLE_TEXT.length) {
         charIndex++;
         wrapText();
+      } else if (!typingDone) {
+        typingDone = true;
+        cursorVisible = true; // solid cursor at end
+        clearInterval(cursorInterval);
       }
       draw();
-    }, 13);
+    }, 8);
 
     const cursorInterval = setInterval(() => {
-      cursorVisible = !cursorVisible;
+      if (!typingDone) {
+        cursorVisible = !cursorVisible;
+      }
     }, 500);
 
     function handleResize() {

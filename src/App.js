@@ -21,13 +21,13 @@ function App() {
       {/* Full-width animation panel */}
       <LLMAnimationPanel />
 
-      {/* Full-width animation panel */}
-      {/* <RRTAnimationPanel /> */}
-
       {/* Portfolio with left panel and cards */}
       <div ref={portfolioRef} className="flex flex-1">
         <AJPortfolioPanel />
       </div>
+
+      {/* Full-width animation panel */}
+      {/* <RRTAnimationPanel /> */}
 
     </div>
   );

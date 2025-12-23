@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import LeftPanel from './LeftPanel';
 import ProjectModal from './modals/ProjectModal';
 import CompanyModal from './modals/CompanyModal';
+import RRTAnimationPanel from './RRTAnimationPanel';
 
 export default function AJPortfolioPanel() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -148,6 +149,11 @@ export default function AJPortfolioPanel() {
           <p className="text-gray-600 leading-relaxed max-w-full">
             Placeholder contact info.
           </p>
+        </section>
+
+        {/* RRT Animation */}
+        <section id="rrt" className="py-16 px-0 -mx-6">
+          <RRTAnimationPanel navbarId="navbar" />
         </section>
       </main>
 
