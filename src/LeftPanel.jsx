@@ -2,7 +2,7 @@
 import React from 'react';
 import { FaGithub, FaYoutube, FaLinkedin } from 'react-icons/fa';
 
-export default function LeftPanel() {
+export default function LeftPanel({ id }) {
   const personalWebsite = 'https://yourwebsite.com';
   const iconSize = 52; // single variable for all icon sizes
 

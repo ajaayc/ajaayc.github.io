@@ -1,3 +1,4 @@
+// LLMAnimationPanel.jsx
 import React, { useEffect, useRef, useState } from "react";
 
 /**
@@ -27,7 +28,9 @@ export default function LLMAnimationPanel() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
-    let width = windowSize.width;
+    // Measure available width by subtracting left panel width
+    const leftPanelWidth = document.querySelector("#left-panel")?.offsetWidth || 0;
+    let width = window.innerWidth - leftPanelWidth;
     let heightPx = windowSize.height;
     canvas.width = width;
     canvas.height = heightPx;
@@ -159,7 +162,8 @@ export default function LLMAnimationPanel() {
     }, 500);
 
     function handleResize() {
-      width = window.innerWidth;
+      const leftPanelWidth = document.querySelector("#left-panel")?.offsetWidth || 0;
+      width = window.innerWidth - leftPanelWidth;
       heightPx = window.innerHeight;
       canvas.width = width;
       canvas.height = heightPx;
