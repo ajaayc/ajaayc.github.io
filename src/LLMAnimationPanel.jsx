@@ -28,16 +28,16 @@ export default function LLMAnimationPanel() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
-    // Measure available width by subtracting left panel width
-    const leftPanelWidth = document.querySelector("#left-panel")?.offsetWidth || 0;
-    let width = window.innerWidth - leftPanelWidth;
-    let heightPx = windowSize.height;
+    // Measure canvas width based on parent container
+    const container = canvas.parentElement;
+    let width = container.clientWidth;
+    let heightPx = container.clientHeight;
     canvas.width = width;
     canvas.height = heightPx;
 
-    const fontSize = Math.floor(heightPx * 0.035); // 3.5% of screen height
+    const fontSize = Math.floor(heightPx * 0.035);
     const lineHeight = fontSize * 1.5;
-    const padding = fontSize * 1.5;
+    const padding = fontSize * 2; // slightly larger for better spacing
 
     const normalFont = `${fontSize}px monospace`;
     const boldFont = `bold ${fontSize}px monospace`;
@@ -46,7 +46,7 @@ export default function LLMAnimationPanel() {
 
     let charIndex = 0;
     let lines = [""];
-    let cursorVisible = true;
+    let cursorVisible = true; // solid cursor at the end
     let typingDone = false;
 
     function wrapText() {
@@ -162,9 +162,8 @@ export default function LLMAnimationPanel() {
     }, 500);
 
     function handleResize() {
-      const leftPanelWidth = document.querySelector("#left-panel")?.offsetWidth || 0;
-      width = window.innerWidth - leftPanelWidth;
-      heightPx = window.innerHeight;
+      width = container.clientWidth;
+      heightPx = container.clientHeight;
       canvas.width = width;
       canvas.height = heightPx;
       ctx.font = normalFont;
@@ -190,7 +189,7 @@ export default function LLMAnimationPanel() {
   }, []);
 
   return (
-    <div style={{ width: "100%", height: "100vh", overflow: "hidden" }}>
+    <div style={{ width: "100%", height: "100%", overflow: "hidden", flex: 1 }}>
       <canvas
         ref={canvasRef}
         style={{ width: "100%", height: "100%", display: "block" }}
