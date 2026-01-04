@@ -98,8 +98,6 @@ export default function AJPortfolioPanel() {
 
   return (
     <div className="flex flex-1 bg-white text-gray-900 font-sans antialiased">
-      {/* Left Panel */}
-      <LeftPanel />
 
       {/* Main Content */}
       <main className="flex-1 max-w-full mx-auto px-6 py-16">

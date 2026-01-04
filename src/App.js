@@ -2,6 +2,7 @@ import TopNavigationBar from './TopNavigationBar';
 import RRTAnimationPanel from './RRTAnimationPanel';
 import LLMAnimationPanel from './LLMAnimationPanel';
 import AJPortfolioPanel from './AJPortfolioPanel';
+import LeftPanel from './LeftPanel';
 import { useRef } from 'react';
 
 function App() {
@@ -18,8 +19,15 @@ function App() {
       {/* Top Navigation Bar */}
       <TopNavigationBar scrollToSection={scrollToSection} />
 
-      {/* Full-width animation panel */}
-      <LLMAnimationPanel />
+      <div className="flex w-full h-screen">
+        {/* Left Panel */}
+        <LeftPanel id="left-panel"/>
+
+        {/* LLM Animation Panel */}
+        <div className="flex-1">
+          <LLMAnimationPanel />
+        </div>
+      </div>
 
       {/* Portfolio with left panel and cards */}
       <div ref={portfolioRef} className="flex flex-1">
