@@ -7,7 +7,7 @@ export default function LeftPanel({ id }) {
   const iconSize = 52; // single variable for all icon sizes
 
   return (
-    <aside className="flex flex-col w-64 md:w-1/4 lg:w-1/5 bg-green-50 p-6 border-r border-green-200">
+    <aside id="left-panel" className="flex flex-col w-80 bg-green-50 p-6 border-r border-green-200">
       <div className="flex-shrink-0 w-full flex justify-center mb-4">
         {/* Profile image */}
         <img
