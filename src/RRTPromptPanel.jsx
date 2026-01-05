@@ -9,7 +9,7 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
   const [charIndex, setCharIndex] = useState(0);
 
   const promptLines = [
-    "ajaay@SPECTRAL-PC> cat something_cool.txt",
+    "ajaay@SPECTRAL-PC ~ > cat something_cool.txt",
     "",
     "The bidirectional RRT-connect algorithm is my personal favorite.",
     "It elicits a spectacular probabilistic dance...two rapidly expanding trees of nodes in the configuration space.",
@@ -17,8 +17,8 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
     "",
     "Want to see it live in action?",
     "",
-    "ajaay@SPECTRAL-PC> bazel build //main:rrt_runner",
-    "ajaay@SPECTRAL-PC> ./bazel-bin/main/rrt_runner",
+    "ajaay@SPECTRAL-PC ~ > bazel build //main:rrt_runner",
+    "ajaay@SPECTRAL-PC ~ > ./bazel-bin/main/rrt_runner",
     "-----------------------------------------------------------------------------",
     "Press ENTER to run the bidirectional RRT animation",
     "-----------------------------------------------------------------------------"
@@ -103,8 +103,8 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
         const promptY = padding + (linesToDisplay.length + 1) * lineHeight;
         ctx.font = font;
         ctx.fillStyle = "#d9faff";
-        ctx.fillText("ajaay@SPECTRAL-PC>", padding, promptY);
-        const textWidth = ctx.measureText("ajaay@SPECTRAL-PC> ").width;
+        ctx.fillText("ajaay@SPECTRAL-PC ~ >", padding, promptY);
+        const textWidth = ctx.measureText("ajaay@SPECTRAL-PC ~ > ").width;
         ctx.fillRect(padding + textWidth + 4, promptY - fontSize, fontSize / 2 + 4, fontSize);
       }
 

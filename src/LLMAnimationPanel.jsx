@@ -13,11 +13,11 @@ const SAMPLE_TEXT = [
   "Aligning neural weights...",
   "Calibrating attention layers...",
   "Ready. Generating response:",
-  "\najaay@SPECTRAL-PC> cat welcome_to_the_show.txt",
+  "\najaay@SPECTRAL-PC ~ > cat welcome_to_the_show.txt",
   "\nWho am I, you may ask?",
   "\nThe name's AJ. AJ Chandrasekaran.",
   "\nWelcome to my personal site.",
-  "\najaay@SPECTRAL-PC>"
+  "\najaay@SPECTRAL-PC ~ >"
 ].join("\n");
 
 export default function LLMAnimationPanel() {
@@ -132,7 +132,7 @@ export default function LLMAnimationPanel() {
         }
       });
 
-      // Solid cursor at the end
+      // Solid cursor at the endq
       if (cursorVisible) {
         const lastLine = visibleLines[visibleLines.length - 1] || "";
         ctx.font = normalFont;
