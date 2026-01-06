@@ -36,15 +36,15 @@ function App() {
       <TopNavigationBar scrollToSection={scrollToSection} />
 
       {/* Main Content Area */}
-      <div className="flex flex-1 w-full">
+      <div className="flex flex-1 w-full relative">
 
         {/* LEFT COLUMN: Left Panel */}
-        <div className="w-72 shrink-0">
+        <div className="w-80 shrink-0 h-screen fixed top-0 left-0">
           <LeftPanel />
         </div>
 
         {/* RIGHT COLUMN: LLM + Portfolio */}
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 ml-80">
           {/* LLM Animation Panel */}
           <LLMAnimationPanel />
 
@@ -54,7 +54,7 @@ function App() {
           </div>
 
           {/* RRT Section */}
-          <section id="rrt" className="py-16 px-0 -mx-6 space-y-4">
+          <section id="rrt" className="py-16 px-0 space-y-4">
           {/* RRTPromptPanel: user presses Enter to start */}
             <RRTPromptPanel onEnter={handleStartRRT} />
 
