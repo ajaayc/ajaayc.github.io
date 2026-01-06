@@ -35,19 +35,25 @@ function App() {
       {/* Top Navigation Bar */}
       <TopNavigationBar scrollToSection={scrollToSection} />
 
-      <div className="flex w-full h-screen">
-        {/* Left Panel */}
-        <LeftPanel id="left-panel"/>
+      {/* Main Content Area */}
+      <div className="flex flex-1 w-full">
 
-        {/* LLM Animation Panel */}
-        <div className="flex-1">
-          <LLMAnimationPanel />
+        {/* LEFT COLUMN: Left Panel */}
+        <div className="w-72 shrink-0">
+          <LeftPanel />
         </div>
-      </div>
 
-      {/* Portfolio with left panel and cards */}
-      <div ref={portfolioRef} className="flex flex-1">
-        <AJPortfolioPanel />
+        {/* RIGHT COLUMN: LLM + Portfolio */}
+        <div className="flex flex-col flex-1">
+          {/* LLM Animation Panel */}
+          <LLMAnimationPanel />
+
+          {/* Portfolio */}
+          <div ref={portfolioRef}>
+            <AJPortfolioPanel />
+          </div>
+        </div>
+
       </div>
 
       {/* RRT Section */}
