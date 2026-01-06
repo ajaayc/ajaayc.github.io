@@ -12,7 +12,10 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
     "ajaay@SPECTRAL-PC ~ > cat something_cool.txt",
     "",
     "The bidirectional RRT-connect algorithm is my personal favorite.",
-    "It elicits a spectacular probabilistic dance...two rapidly expanding trees of nodes in the configuration space.",
+    "",
+    "It elicits a spectacular probabilistic dance...two rapidly expanding",
+    "trees of nodes in the configuration space.",
+    "",
     "Reaching towards each other to find a connection...a collision-free path from start to end.",
     "",
     "Want to see it live in action?",
@@ -38,10 +41,10 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
     canvas.width = width;
     canvas.height = heightPx;
 
-    // Dynamic font sizing
-    const fontSize = Math.floor(heightPx * 0.045);
+    // Updated font size and spacing to match LLMAnimationPanel
+    const fontSize = Math.floor(heightPx * 0.035);
     const lineHeight = fontSize * 1.5;
-    const padding = fontSize * 1.5;
+    const padding = fontSize * 2; // padding same as LLM panel
     const font = `${fontSize}px monospace`;
     const boldFont = `bold ${fontSize}px monospace`;
 
@@ -63,7 +66,7 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
       // Draw typed lines
       linesToDisplay.forEach((line, i) => {
         let x = padding;
-        const y = padding + i * lineHeight + fontSize;
+        const y = padding + i * lineHeight;
 
         if (highlightLines.includes(line)) {
           ctx.font = boldFont;
@@ -80,7 +83,7 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
       if (!entered && linesToDisplay.length < promptLines.length) {
         const currentLine = promptLines[linesToDisplay.length].slice(0, charIndex);
         let x = padding;
-        const y = padding + linesToDisplay.length * lineHeight + fontSize;
+        const y = padding + linesToDisplay.length * lineHeight;
 
         if (highlightLines.includes(promptLines[linesToDisplay.length])) {
           ctx.font = boldFont;
@@ -92,23 +95,23 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
 
         ctx.fillText(currentLine, x, y);
 
+        // Updated cursor size to match LLM panel
         if (showCursor) {
           const textWidth = ctx.measureText(currentLine).width;
-          ctx.fillRect(x + textWidth + 4, y - fontSize + 4, fontSize / 2 + 4, fontSize);
+          ctx.fillRect(x + textWidth + 2, y - fontSize, fontSize / 2, fontSize);
         }
       }
 
       // After Enter pressed, show solid prompt
       if (entered) {
-        const promptY = padding + (linesToDisplay.length + 1) * lineHeight;
+        const promptY = padding + linesToDisplay.length * lineHeight;
         ctx.font = font;
         ctx.fillStyle = "#d9faff";
         ctx.fillText("ajaay@SPECTRAL-PC ~ >", padding, promptY);
         const textWidth = ctx.measureText("ajaay@SPECTRAL-PC ~ > ").width;
-        ctx.fillRect(padding + textWidth + 4, promptY - fontSize, fontSize / 2 + 4, fontSize);
+        ctx.fillRect(padding + textWidth + 2, promptY - fontSize, fontSize / 2, fontSize);
       }
 
-      // Reset shadow to avoid affecting cursor
       ctx.shadowBlur = 0;
     }
 
@@ -142,7 +145,7 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
       } else {
         setCharIndex((i) => i + 1);
       }
-    }, 10); // Typing speed updated to 10ms per character
+    }, 10);
 
     return () => clearTimeout(timeout);
   }, [charIndex, linesToDisplay, entered]);
