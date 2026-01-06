@@ -52,18 +52,20 @@ function App() {
           <div ref={portfolioRef}>
             <AJPortfolioPanel />
           </div>
+
+          {/* RRT Section */}
+          <section id="rrt" className="py-16 px-0 -mx-6 space-y-4">
+          {/* RRTPromptPanel: user presses Enter to start */}
+            <RRTPromptPanel onEnter={handleStartRRT} />
+
+            {/* RRTAnimationPanel: starts animation when rrtStarted is true */}
+            <RRTAnimationPanel ref={rrtPanelRef} navbarId="navbar" startAnimation={rrtStarted} />
+          </section>
         </div>
 
       </div>
 
-      {/* RRT Section */}
-      <section id="rrt" className="py-16 px-0 -mx-6 space-y-4">
-        {/* RRTPromptPanel: user presses Enter to start */}
-        <RRTPromptPanel onEnter={handleStartRRT} />
 
-        {/* RRTAnimationPanel: starts animation when rrtStarted is true */}
-        <RRTAnimationPanel ref={rrtPanelRef} navbarId="navbar" startAnimation={rrtStarted} />
-      </section>
 
       {/* Full-width animation panel */}
       {/* <RRTAnimationPanel /> */}
