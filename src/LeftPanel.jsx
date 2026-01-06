@@ -3,7 +3,6 @@ import React from 'react';
 import { FaGithub, FaYoutube, FaLinkedin } from 'react-icons/fa';
 
 export default function LeftPanel({ id }) {
-  const personalWebsite = 'https://yourwebsite.com';
   const iconSize = 52; // single variable for all icon sizes
 
   return (
@@ -23,7 +22,7 @@ export default function LeftPanel({ id }) {
       </p>
       <div className="flex gap-4 mt-4">
         <a
-          href={personalWebsite}
+          href="https://github.com/ajaayc"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-700 hover:text-green-600"
@@ -31,7 +30,7 @@ export default function LeftPanel({ id }) {
           <FaGithub size={iconSize} />
         </a>
         <a
-          href={personalWebsite}
+          href="https://www.youtube.com/@ajaaychandrasekaran2002"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-700 hover:text-green-600"
@@ -39,7 +38,7 @@ export default function LeftPanel({ id }) {
           <FaYoutube size={iconSize} />
         </a>
         <a
-          href={personalWebsite}
+          href="https://www.linkedin.com/in/ajaayc"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-700 hover:text-green-600"
