@@ -89,10 +89,12 @@ export default function AJPortfolioPanel() {
         <section id="about" className="py-16">
           <h2 className="text-2xl font-bold text-green-700 mb-6">About Me</h2>
           <p className="text-gray-600 leading-loose text-2xl max-w-full" style={{ whiteSpace: 'pre-line' }}>
-            {`Greetings! Welcome to my personal site.
-            
-            I am an engineer and an aspiring roboticist with a background in software development and mathematics. I pursued my bachelors in computer science and my masters in electrical and computer engineering at the University of Michigan in Ann Arbor, MI. Professional hobbies include tinkering with all kinds of software and hardware systems, architecting robust software (especially for autonomous systems), and playing with the language of mathematics.
+            {`I am a software engineer, roboticist, and AI enthusiast with a background in software development and mathematics. I pursued my bachelors in computer science and my masters in electrical and computer engineering at the University of Michigan in Ann Arbor, MI.
+
+            Professional hobbies include tinkering with all kinds of software and hardware systems, architecting robust software (especially for autonomous systems), and playing with the language of mathematics.
               
+            Personal hobbies include Latin dancing, hunting for treasure, traveling, and reading an assortment of fiction and non-fiction texts.
+
             My first name Ajaay is a modification of the Indian name Ajay. I tell everyone to just call me AJ (Ay-Jay)!
               
             My last name Chandrasekaran is based on the Indian name Chandrasekhar. I pronounce it as Chan-dra-say-ker-in.
