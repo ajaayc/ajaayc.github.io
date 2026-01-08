@@ -52,33 +52,54 @@ export default function AJPortfolioPanel() {
   const companies = [
     {
       id: 1,
-      name: 'Company A',
-      role: 'Role at Company A',
-      description: 'Detailed info about Company A',
-      images: ['https://via.placeholder.com/300x180', 'https://via.placeholder.com/300x180'],
+      name: 'Neya',
+      role: 'Robotics Software Engineer',
+      description: 'Working on U.S. Army Ground Vehicle Systems Center projects.',
+      backgroundImage: '/img/company_img/neya_splash.png',
+      logo: '/img/company_img/neya_systems_logo.jpeg',
+      links: [
+        { name: 'Neya Systems', url: 'https://neyarobotics.com/' },
+        { name: 'GVSC DEVCOM', url: 'https://gvsc.devcom.army.mil/' },
+      ],
     },
     {
       id: 2,
-      name: 'Company B',
-      role: 'Role at Company B',
-      description: 'Detailed info about Company B',
-      images: ['https://via.placeholder.com/300x180', 'https://via.placeholder.com/300x180'],
+      name: 'Stellantis',
+      role: 'AI Motion Planning Software Engineer',
+      description: 'Working on STLA AutoDrive platform.',
+      backgroundImage: '/img/company_img/stla_brain.jpg',
+      logo: '/img/company_img/stellantis.svg',
+      links: [
+        { name: 'Stellantis', url: 'https://www.stellantis.com/en' },
+        { name: 'STLA AutoDrive', url: 'https://europe.autonews.com/automakers/stellantis-launches-23-billion-software-push' },
+      ],
     },
     {
       id: 3,
-      name: 'Company C',
-      role: 'Role at Company C',
-      description: 'Detailed info about Company C',
-      images: ['https://via.placeholder.com/300x180', 'https://via.placeholder.com/300x180'],
+      name: 'Epic',
+      role: 'Software Developer',
+      description: 'Working on Epic ASAP electronic medical record software.',
+      backgroundImage: '/img/company_img/epic_hyperspace.jpg',
+      logo: '/img/company_img/epic_logo.png',
+      links: [
+        { name: 'Epic', url: 'https://www.epic.com/' },
+        { name: 'Epic ASAP', url: 'https://www.epic.com/software/specialty-care' },
+      ],
     },
     {
       id: 4,
-      name: 'Company D',
-      role: 'Role at Company D',
-      description: 'Detailed info about Company D',
-      images: ['https://via.placeholder.com/300x180', 'https://via.placeholder.com/300x180'],
+      name: 'UMTRI',
+      role: 'Graduate Student',
+      description: 'Working on software/hardware system that interfaces with Lidar, camera, GPS, and Mobileye.',
+      backgroundImage: '/img/company_img/mcity.jpg',
+      logo: '/img/company_img/umtri_logo.png',
+      links: [
+        { name: 'UMTRI', url: 'https://www.umtri.umich.edu/' },
+      ],
     },
   ];
+
+
 
   return (
     <div className="flex flex-1 bg-white text-gray-900 font-sans antialiased">
@@ -111,17 +132,30 @@ export default function AJPortfolioPanel() {
               <div
                 key={company.id}
                 onClick={() => setSelectedCompany(company)}
-                className="border border-green-200 rounded-xl p-4 flex flex-col items-center gap-4 cursor-pointer hover:shadow-lg transition-shadow"
+                className="relative border border-green-200 rounded-xl overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
               >
-                <div className="w-full h-36 bg-green-100 flex items-center justify-center text-green-500 font-bold text-xl">Logo</div>
-                <div className="text-center">
-                  <h3 className="font-semibold text-lg text-gray-900">{company.name}</h3>
-                  <p className="text-sm text-gray-600 mt-1">{company.role}</p>
+                {/* Background image */}
+                <div
+                  className="w-full h-36 bg-cover bg-center flex items-center justify-center"
+                  style={{ backgroundImage: `url(${company.backgroundImage})` }}
+                >
+                  {/* Logo overlay */}
+                  <img
+                    className="w-20 h-20 object-contain rounded bg-white/80 p-1"
+                    src={company.logo}
+                    alt={`${company.name} logo`}
+                  />
+                </div>
+            
+                {/* Description */}
+                <div className="p-4">
+                  <p className="text-gray-600 text-sm">{company.description}</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
+
 
         {/* PROJECT CARDS */}
         <section id="projects" className="py-16">
