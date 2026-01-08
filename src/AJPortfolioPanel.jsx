@@ -123,54 +123,64 @@ export default function AJPortfolioPanel() {
           </p>
         </section>
 
-        {/* PROFESSIONAL EXPERIENCE CARDS */}
-        <section id="experience" className="py-16">
-          <h2 className="text-2xl font-bold text-green-700 mb-6">Professional Experience</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
-            {companies.map((company) => (
-              <div
-                key={company.id}
-                className="border border-green-200 rounded-xl overflow-hidden shadow-lg flex flex-col"
-              >
-                {/* Background image with logo overlay */}
-                <div
-                  className="relative w-full h-36 bg-cover bg-center flex items-center justify-center"
-                  style={{ backgroundImage: `url(${company.backgroundImage})` }}
-                >
-                  <img
-                    src={company.logo}
-                    alt={`${company.name} logo`}
-                    className="w-20 h-20 object-contain rounded bg-white/80 p-1"
-                  />
-                </div>
-            
-                {/* Content below the image */}
-                <div className="p-4 flex flex-col flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900">{company.name}</h3>
-                  {company.role && <p className="text-gray-600 text-sm mb-2">{company.role}</p>}
-                  <p className="text-gray-700 text-sm mb-4">{company.description}</p>
+{/* PROFESSIONAL EXPERIENCE CARDS */}
+<section id="experience" className="py-16">
+  <h2 className="text-2xl font-bold text-green-700 mb-6">Professional Experience</h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
+    {companies.map((company) => (
+      <div
+        key={company.id}
+        className="border border-green-200 rounded-xl overflow-hidden shadow-lg flex flex-col"
+      >
+        {/* Background image */}
+        <div
+          className="w-full h-48 md:h-80 lg:h-96 bg-cover bg-center"
+          style={{ backgroundImage: `url(${company.backgroundImage})` }}
+        />
 
-                  {/* Action Buttons */}
-                  {company.links && company.links.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mt-auto">
-                      {company.links.map((link, idx) => (
-                        <a
-                          key={idx}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition text-sm"
-                        >
-                          {link.name}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
+        {/* Content with logo on the left and text on the right */}
+        <div className="p-4 flex flex-col md:flex-row md:items-start gap-4">
+          {/* Logo on the left */}
+          <div className="flex-shrink-0 flex items-start">
+            <img
+              src={company.logo}
+              alt={`${company.name} logo`}
+              className="w-28 h-28 md:w-32 md:h-32 object-contain rounded bg-white/80 p-1"
+            />
           </div>
-        </section>
+
+          {/* Textual description */}
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold text-gray-900">{company.name}</h3>
+            {company.role && <p className="text-gray-600 text-sm mb-2">{company.role}</p>}
+            <p className="text-gray-700 text-sm mb-4">{company.description}</p>
+
+            {/* Action Buttons */}
+            {company.links && company.links.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-auto">
+                {company.links.map((link, idx) => (
+                  <a
+                    key={idx}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition text-sm"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+
+
+
 
         {/* PROJECT CARDS */}
         <section id="projects" className="py-16">
