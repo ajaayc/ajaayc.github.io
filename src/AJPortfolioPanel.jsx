@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import LeftPanel from './LeftPanel';
 import ProjectModal from './modals/ProjectModal';
-import CompanyModal from './modals/CompanyModal';
 
 export default function AJPortfolioPanel() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -209,7 +208,6 @@ export default function AJPortfolioPanel() {
 
       {/* Modals */}
       {selectedProject && <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />}
-      {selectedCompany && <CompanyModal company={selectedCompany} onClose={() => setSelectedCompany(null)} />}
     </div>
   );
 }
