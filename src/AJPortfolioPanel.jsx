@@ -131,31 +131,47 @@ export default function AJPortfolioPanel() {
             {companies.map((company) => (
               <div
                 key={company.id}
-                onClick={() => setSelectedCompany(company)}
-                className="relative border border-green-200 rounded-xl overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
+                className="border border-green-200 rounded-xl overflow-hidden shadow-lg flex flex-col"
               >
-                {/* Background image */}
+                {/* Background image with logo overlay */}
                 <div
-                  className="w-full h-36 bg-cover bg-center flex items-center justify-center"
+                  className="relative w-full h-36 bg-cover bg-center flex items-center justify-center"
                   style={{ backgroundImage: `url(${company.backgroundImage})` }}
                 >
-                  {/* Logo overlay */}
                   <img
-                    className="w-20 h-20 object-contain rounded bg-white/80 p-1"
                     src={company.logo}
                     alt={`${company.name} logo`}
+                    className="w-20 h-20 object-contain rounded bg-white/80 p-1"
                   />
                 </div>
             
-                {/* Description */}
-                <div className="p-4">
-                  <p className="text-gray-600 text-sm">{company.description}</p>
+                {/* Content below the image */}
+                <div className="p-4 flex flex-col flex-1">
+                  <h3 className="text-lg font-semibold text-gray-900">{company.name}</h3>
+                  {company.role && <p className="text-gray-600 text-sm mb-2">{company.role}</p>}
+                  <p className="text-gray-700 text-sm mb-4">{company.description}</p>
+
+                  {/* Action Buttons */}
+                  {company.links && company.links.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {company.links.map((link, idx) => (
+                        <a
+                          key={idx}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition text-sm"
+                        >
+                          {link.name}
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
           </div>
         </section>
-
 
         {/* PROJECT CARDS */}
         <section id="projects" className="py-16">
