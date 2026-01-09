@@ -105,21 +105,47 @@ export default function AJPortfolioPanel() {
 
       {/* Main Content */}
       <main className="flex-1 max-w-full mx-auto px-6 py-16">
+
         {/* ABOUT */}
         <section id="about" className="py-16">
-          <h2 className="text-2xl font-bold text-green-700 mb-6">About Me</h2>
-          <p className="text-gray-600 leading-loose text-2xl max-w-full" style={{ whiteSpace: 'pre-line' }}>
-            {`I am a software engineer, roboticist, and AI enthusiast with a background in software development and mathematics. I pursued my bachelors in computer science and my masters in electrical and computer engineering at the University of Michigan in Ann Arbor, MI.
+          <h2 className="text-3xl font-extrabold text-green-800 mb-8">About Me</h2>
 
+          <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
+            I am a software engineer, roboticist, and AI enthusiast with a background in software development and mathematics. I pursued my bachelors in computer science and my masters in electrical and computer engineering at the University of Michigan in Ann Arbor, MI.
+          </p>
+
+          <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
             Professional hobbies include tinkering with all kinds of software and hardware systems, architecting robust software (especially for autonomous systems), and playing with the language of mathematics.
-              
-            Personal hobbies include Latin dancing, hunting for treasure, traveling, and reading an assortment of fiction and non-fiction texts.
+          </p>
 
-            My first name Ajaay is a modification of the Indian name Ajay. I tell everyone to just call me AJ (Ay-Jay)!
-              
-            My last name Chandrasekaran is based on the Indian name Chandrasekhar. I pronounce it as Chan-dra-say-ker-in.
-              
-            This site serves primarily as a personal portfolio of various projects that I have worked on.`}
+          <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
+            Personal hobbies include Latin dancing, hunting for treasure, traveling, and reading an assortment of fiction and non-fiction texts.
+          </p>
+
+          <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
+            My first name{' '}
+            <a
+              href="https://en.wikipedia.org/wiki/Ajay_(given_name)"
+              className="text-blue-600 underline hover:text-blue-700"
+            >
+              Ajay
+            </a>{' '}
+            is a modification of the Indian name Ajay. I tell everyone to just call me AJ (Ay-Jay)!
+          </p>
+
+          <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
+            My last name{' '}
+            <a
+              href="https://en.wikipedia.org/wiki/Chandrasekhar"
+              className="text-blue-600 underline hover:text-blue-700"
+            >
+              Chandrasekaran
+            </a>{' '}
+            is based on the Indian name Chandrasekhar. I pronounce it as Chan-dra-say-ker-in.
+          </p>
+
+          <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
+            This site serves primarily as a personal portfolio of various projects that I have worked on.
           </p>
         </section>
 
