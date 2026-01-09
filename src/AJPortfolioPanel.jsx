@@ -51,9 +51,9 @@ export default function AJPortfolioPanel() {
   const companies = [
     {
       id: 1,
-      name: 'Neya',
+      name: 'Neya Systems',
       role: 'Robotics Software Engineer',
-      description: 'Working on U.S. Army Ground Vehicle Systems Center projects.',
+      description: 'Worked on various U.S. Army Ground Vehicle Systems Center projects.',
       backgroundImage: '/img/company_img/neya_splash.png',
       logo: '/img/company_img/neya_systems_logo.jpeg',
       links: [
@@ -63,11 +63,11 @@ export default function AJPortfolioPanel() {
     },
     {
       id: 2,
-      name: 'Stellantis',
-      role: 'AI Motion Planning Software Engineer',
-      description: 'Working on STLA AutoDrive platform.',
-      backgroundImage: '/img/company_img/stla_brain.jpg',
-      logo: '/img/company_img/stellantis.svg',
+      name: 'Stellantis (Formerly Fiat Chrysler Automobiles)',
+      role: 'Vehicle Motion Planning Software Engineer',
+      description: 'Worked on STLA AutoDrive platform.',
+      backgroundImage: '/img/company_img/Stellantis_AutoDrive_full.jpg',
+      logo: '/img/company_img/Stellantis_logo_blue_background.jpg',
       links: [
         { name: 'Stellantis', url: 'https://www.stellantis.com/en' },
         { name: 'STLA AutoDrive', url: 'https://europe.autonews.com/automakers/stellantis-launches-23-billion-software-push' },
@@ -77,8 +77,8 @@ export default function AJPortfolioPanel() {
       id: 3,
       name: 'Epic',
       role: 'Software Developer',
-      description: 'Working on Epic ASAP electronic medical record software.',
-      backgroundImage: '/img/company_img/epic_hyperspace.jpg',
+      description: 'Worked on Epic ASAP electronic medical record software.',
+      backgroundImage: '/img/company_img/epic_hyperspace_2.png',
       logo: '/img/company_img/epic_logo.png',
       links: [
         { name: 'Epic', url: 'https://www.epic.com/' },
@@ -87,9 +87,9 @@ export default function AJPortfolioPanel() {
     },
     {
       id: 4,
-      name: 'UMTRI',
-      role: 'Graduate Student',
-      description: 'Working on software/hardware system that interfaces with Lidar, camera, GPS, and Mobileye.',
+      name: 'University of Michigan Transportation Research Institute (UMTRI)',
+      role: 'Graduate Student Research Assistant',
+      description: 'Worked on software/hardware system that interfaces with Lidar, camera, GPS, and Mobileye.',
       backgroundImage: '/img/company_img/mcity.jpg',
       logo: '/img/company_img/umtri_logo.png',
       links: [
@@ -123,64 +123,59 @@ export default function AJPortfolioPanel() {
           </p>
         </section>
 
-{/* PROFESSIONAL EXPERIENCE CARDS */}
-<section id="experience" className="py-16">
-  <h2 className="text-2xl font-bold text-green-700 mb-6">Professional Experience</h2>
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
-    {companies.map((company) => (
-      <div
-        key={company.id}
-        className="border border-green-200 rounded-xl overflow-hidden shadow-lg flex flex-col"
-      >
-        {/* Background image */}
-        <div
-          className="w-full h-48 md:h-80 lg:h-96 bg-cover bg-center"
-          style={{ backgroundImage: `url(${company.backgroundImage})` }}
-        />
+        {/* PROFESSIONAL EXPERIENCE CARDS */}
+        <section id="experience" className="py-16">
+          <h2 className="text-2xl font-bold text-green-700 mb-6">Professional Experience</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {companies.map((company) => (
+              <div
+                key={company.id}
+                className="border border-green-200 rounded-xl overflow-hidden shadow-lg flex flex-col"
+              >
+                {/* Main background image at top */}
+                <div
+                  className="w-full h-64 md:h-80 lg:h-96 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${company.backgroundImage})` }}
+                />
 
-        {/* Content with logo on the left and text on the right */}
-        <div className="p-4 flex flex-col md:flex-row md:items-start gap-4">
-          {/* Logo on the left */}
-          <div className="flex-shrink-0 flex items-start">
-            <img
-              src={company.logo}
-              alt={`${company.name} logo`}
-              className="w-28 h-28 md:w-32 md:h-32 object-contain rounded bg-white/80 p-1"
-            />
-          </div>
+                {/* Content: logo left, text right */}
+                <div className="p-4 flex flex-row gap-4">
+                  {/* Logo */}
+                  <div className="flex-shrink-0 flex items-start">
+                    <img
+                      src={company.logo}
+                      alt={`${company.name} logo`}
+                      className="w-20 h-20 md:w-24 md:h-24 object-contain rounded bg-white/80 p-1"
+                    />
+                  </div>
 
-          {/* Textual description */}
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold text-gray-900">{company.name}</h3>
-            {company.role && <p className="text-gray-600 text-sm mb-2">{company.role}</p>}
-            <p className="text-gray-700 text-sm mb-4">{company.description}</p>
+                  {/* Text and buttons */}
+                  <div className="flex-1 flex flex-col">
+                    <h3 className="text-lg font-semibold text-gray-900">{company.name}</h3>
+                    {company.role && <p className="text-gray-600 text-sm mb-2">{company.role}</p>}
+                    <p className="text-gray-700 text-sm mb-4">{company.description}</p>
 
-            {/* Action Buttons */}
-            {company.links && company.links.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-auto">
-                {company.links.map((link, idx) => (
-                  <a
-                    key={idx}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition text-sm"
-                  >
-                    {link.name}
-                  </a>
-                ))}
+                    {company.links && company.links.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mt-auto">
+                        {company.links.map((link, idx) => (
+                          <a
+                            key={idx}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition text-sm"
+                          >
+                            {link.name}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
-            )}
+            ))}
           </div>
-        </div>
-      </div>
-    ))}
-  </div>
-</section>
-
-
-
-
+        </section>
 
         {/* PROJECT CARDS */}
         <section id="projects" className="py-16">
