@@ -189,9 +189,9 @@ export default function AJPortfolioPanel() {
 
                   {/* Text and buttons */}
                   <div className="flex-1 flex flex-col min-w-0">
-                    <h3 className="text-lg font-semibold text-gray-900 truncate">{company.name}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 break-words">{company.name}</h3>
                     {company.role && (
-                      <p className="text-gray-600 text-sm mb-2 truncate">{company.role}</p>
+                      <p className="text-gray-600 text-sm mb-2 break-words">{company.role}</p>
                     )}
                     <p className="text-gray-700 text-sm mb-4 break-words">{company.description}</p>
 
