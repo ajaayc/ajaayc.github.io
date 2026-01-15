@@ -3,221 +3,121 @@ import LeftPanel from './LeftPanel';
 import ProjectModal from './modals/ProjectModal';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Project content components
+import PlybotContent from './projects/PlybotContent';
+import MDOTContent from './projects/MDOTContent';
+import CollisionContent from './projects/CollisionContent';
+import DNNVehicleContent from './projects/DNNVehicleContent';
+import MobileRoboticsContent from './projects/MobileRoboticsContent';
+import TrashbotContent from './projects/TrashbotContent';
+import BotLabContent from './projects/BotLabContent';
+import KinevalContent from './projects/KinevalContent';
+import PIDControllerContent from './projects/PIDControllerContent';
+
 export default function AJPortfolioPanel() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedCompany, setSelectedCompany] = useState(null);
 
   const projects = [
     {
-      id: 1,
-      title: 'Plybot Testbed',
-      date: 'In progress as of Sept 2023',
-      media: [
-        { type: 'image', src: '/img/plybot2.jpg', alt: 'Plybot prototype' }
-      ],
-      long: `
-  I am working on an autonomous robotic platform that will eventually serve as my personal testbed for implementing and evaluating algorithms for:
-  
-  - Localization and mapping
-  - Motion planning
-  - Reinforcement learning (After training models via simulation)
-  - Control
-  - Computer vision
-  
-  This is a side project which I am personally directing in order to further expand my practical knowledge of electrical circuitry and embedded systems as well as implementations of algorithms for autonomous robotics.
-  
-  The images above depict an initial prototype (work in progress) that will be controlled by the MSP-EXP430FR6989 microcontroller board.
-  
-  I have plans to eventually migrate to a prototype that would use one of the NVIDIA Jetson products and the Robot Operating System (ROS) framework.
-  
-  I received inspiration for this project from the Robot Builder's Bonanza, authored by the late roboticist Gordan McComb. Practical Electronics for Inventors has also been a very useful resource.
-  
-  I look forward to linking interesting videos of the Plybot Testbed in the near future as I make more progress on it. I plan to make the code and schematics publicly available on Github for anyone who desires to replicate it.
-      `,
+      title: "Plybot Testbed",
+      date: "Sept 2023 - Present",
       paperLink: null,
       codeLink: null,
+      siteLink: null,
+      videoLink: null,
+      posterLink: null,
+      preview: "img/plybot2.jpg",
+      long: <PlybotContent />,
     },
     {
-      id: 2,
-      title: 'MDOT Lane Marking Evaluation',
-      date: 'May 2017 - Jun 2018',
-      media: [
-        { type: 'image', src: '/img/velodyne.png', alt: 'Velodyne Lidar' },
-        { type: 'image', src: '/img/mobileye.JPG', alt: 'Mobileye Unit' },
-        { type: 'image', src: '/img/ajaayCar.JPG', alt: 'Car equipped with sensors' },
-        { type: 'video', src: 'https://www.youtube.com/embed/agMfXfZdug4', alt: 'Lane marking evaluation video' }
-      ],
-      long: `
-  As a research assistant at the University of Michigan Transportation Research Institute in Ann Arbor, MI, I worked under Dr. Daniel Park on a project to evaluate the effectiveness of various road lanemarking materials. The project was funded by the Michigan Department of Transportation (MDOT).
-  
-  In 2017, a section of the US-23 highway between Ann Arbor, MI and Brighton, MI was paved with different lanemarking materials along different stretches. We planned to perform a study over a 2-year period to determine how well each lanemarking material on the highway lasted over time; we expected that the different stretches of the highway would be impacted similarly by various environmental factors, such as temperature and precipitation.
-  
-  To achieve our goal we required a method to take measurements of the lanemarkings' conditions on the US-23 highway once during each month so that after the 2-year period we could retrospectively analyze how the lanemarkings' conditions changed over time. Our solution to this problem was to equip a Honda Accord car with various sensors, including:
-  
-  - Novatel GPS
-  - Quanergy M-8 Lidar
-  - Mobileye unit
-  - Camera
-  
-  We proceeded to engineer a software system that would be executed on the car to collect data of the road conditions from each of these sensors while a human operator drove the car along the US-23 highway once each month.
-  
-  For this project, I developed multi-threaded C++ code utilizing the VTK and PCL libraries to extract, interpret, and visualize data collected from our Lidar. We experimented with two Lidars: The Quanergy M-8 and the Velodyne HDL-64E. Each of these Lidars outputs [x,y,z] point clouds of their surroundings as well as point intensities. We were mostly interested in examining the point intensity measurements of the lanemarkings. In theory, we could see how the intensity values of the points representing lanemarkings changed over time. The degradation of the highway pavement by the Michigan weather would result in lower intensity points returned by the Lidar for various lanemarking materials.
-  
-  I also developed C++ code to interface with our car's Mobileye unit via the vehicle's CAN message network. The Mobileye communicated data regarding the status of the left and right lanemarkings on the road in front of the driver. Its data arrived in real time as a sequence of bytes that needed to be converted into a human readable format.
-  
-  Finally, I facilitated the collection of data from all four of our sensors simultaneously by helping to create a single module that would run all four sensor collection programs together as individual threads of a single CPU process. The module ran on a single HP i7 laptop during each of the car's monthly drives.
-  
-  I was very proud of our final software system. This project necessitated a wonderful combination of both robotics and computer science knowledge.
-      `,
-      paperLink: 'https://github.com/ajaayc/Velodyne-HDL-64E-Packet-Parser',
-      codeLink: 'https://github.com/ajaayc/Velodyne-HDL-64E-Packet-Parser',
-    },
-    {
-      id: 3,
-      title: 'Collision Estimation for Safe Planning',
-      date: 'Mar 2018 - Apr 2018',
-      media: [
-        { type: 'image', src: '/img/env_setup.png', alt: 'Simulation environment setup' },
-        { type: 'image', src: '/img/motion_pic.PNG', alt: 'Motion plan snapshot' }
-      ],
-      long: `
-  For my Motion Planning course, I devised and implemented a Gaussian Mixture Model-based algorithm in C++ to expand upon existing methods to estimate the probability that a robot following a pre-generated motion plan would collide with an obstacle.
-  
-  The motivation for this work is that a robot can benefit from quantifying the approximate safety of a motion plan before executing it. While a motion planner should generate a collision-free path, collisions may be possible as the robot follows the path due to natural uncertainty in the data it receives from its sensors and random noise in how it makes movements. Given a probability of collision before executing a motion plan, a robot can either execute it or revise the plan until it can find a "safer" plan.
-  
-  Existing methods to compute the exact probability of collision for a motion plan rely on running thousands of Monte-Carlo simulations of the robot following the motion plan, which is computationally expensive. The goal of this work is to accurately estimate the probability of collision in a shorter amount of time.
-  
-  For this work, I utilized the OpenRAVE simulation framework and Armadillo C++ linear algebra library to simulate a linear feedback controller and an Extended Kalman Filter estimate for the position of a PR2 robot as it attempted to follow a pre-generated motion plan. I performed experiments to examine my algorithm's performance and presented my research in a paper and a conference talk.
-  
-  Unfortunately, my algorithm did not perform as well as I had hoped, but I learned much from the experience in regards to conducting independent research. I plan to work more on my algorithm in the future to improve its accuracy in estimating a probability of collision for a motion plan.
-      `,
-      paperLink: 'resources/ajaay_paper.pdf',
-      codeLink: 'https://github.com/ajaayc/Probability-of-Collision-for-Safe-Planning',
-    },
-    {
-      id: 4,
-      title: 'Deep Neural Network Vehicle Detection System',
-      date: 'Nov 2017 - Dec 2017',
-      media: [
-        { type: 'image', src: '/img/carBox.jpg', alt: 'Detected car bounding boxes' },
-        { type: 'image', src: '/img/graph.png', alt: 'Training performance graph' }
-      ],
-      long: `
-  For my Self-Driving Cars course, I worked in a team to implement a classifier to count the number of cars in an arbitrary image generated from Grand Theft Auto (GTA) simulation. We utilized the TensorFlow Python Object Detector API on AWS EC2 GPU instances to train a fast-RCNN with 50 layers. We trained the RCNN on ~6,000 training images with known bounding box locations of cars and we specified two classifications for a detected object: {Car, Not Car}.
-  
-  Using our model, my team ranked 5th place among 35 teams in the class competition by achieving a 63% mean absolute error on the instructor's test set of GTA images with unknown car counts.
-      `,
-      paperLink: 'https://github.com/ajaayc/Car_Detection/blob/master/Perception%20Final%20Report.pdf',
-      codeLink: 'https://github.com/ajaayc/Car_Detection',
-    },
-    {
-      id: 5,
-      title: 'Mobile Robotics iSAM Implementation',
-      date: 'Mar 2018 - Apr 2018',
-      media: [
-        { type: 'image', src: '/img/victoriaPark.png', alt: 'Victoria Park dataset' },
-        { type: 'image', src: '/img/JCBB.png', alt: 'JCBB algorithm visualization' }
-      ],
-      long: `
-  For my Mobile Robotics course, I worked in a team to implement the incremental smoothing and mapping (iSAM) approach to the Simultaneous Localization and Mapping (SLAM) problem.
-  
-  Prior to working on this project, I had implemented various state estimation algorithms in Matlab for localization, including the Extended Kalman Filter, Unscented Kalman Filter, and Particle Filter. This project was unique for me in that it was the first smoothing algorithm I worked with to tackle the SLAM problem. Filtering approaches to SLAM generally estimate the current state of a robot given a sequence of past measurements and actions. However, smoothing approaches improve upon the estimates of the entire sequence of the current and past states of the robot, considering the sequence as an overarching model to be smoothed.
-  
-  My main contribution to this project was in the implementation of the joint compatibility branch and bound (JCBB) algorithm for data association. At a single point in time, given a set of N robot sensor measurements and M landmarks, the JCBB algorithm examines various combinations of sensor-landmark mappings and uses the Mahalanobis Distance metric to determine which measurements are most likely to be associated with which landmarks.
-  
-  We applied the iSAM algorithm on the Victoria Park dataset. The JCBB algorithm proved to be more effective than standard data association methods when we applied it within the iSAM algorithm on the dataset.
-      `,
+      title: "MDOT Lane Marking Evaluation",
+      date: "May 2017 - Jun 2018",
       paperLink: null,
-      codeLink: 'https://github.com/Scarabrine/EECS568Project_Team2_iSAM',
+      codeLink: "https://github.com/ajaayc/Velodyne-HDL-64E-Packet-Parser",
+      siteLink: null,
+      videoLink: null,
+      posterLink: null,
+      preview: "img/velodyne.png",
+      long: <MDOTContent />,
     },
     {
-      id: 6,
-      title: 'Trashbot',
-      date: 'Mar 2017 - Apr 2017',
-      media: [
-        { type: 'video', src: 'https://www.youtube.com/embed/a6qHyMERqR0?start=29', alt: 'Trashbot video' },
-        { type: 'image', src: '/img/trashbot.jpg', alt: 'Trashbot top view' },
-        { type: 'image', src: '/img/insideTrashbot.jpg', alt: 'Trashbot internal view' }
-      ],
-      long: `
-  For my Autonomous Robotics Laboratory senior design course, I collaborated with a team to build a robot that autonomously navigates and detects and removes trash in its environment. The motivation for this project stemmed from noticing the plethora of trash across the UofM campus during football Saturdays. In theory, we could deploy a fleet of these trash collecting robots after a football game to pick up and dispose of various pieces of trash.
-  
-  We built the robot over a span of 2 months, and it was comprised of various hardware subsystems, including:
-  
-  - A MagicBot base
-  - An Arduino and motor controllers
-  - A robotic arm
-  - A Microsoft Kinect
-  - A PS2 Controller
-  
-  My major contribution to this project was in engineering the TrashBot's robotic arm to pick up various objects. My teammate programmatically analyzed point clouds of data from the Microsoft Kinect attached to the robot, and he provided data to the robotic arm representing the centroids of various objects.
-  
-  Given the [x,y,z] position of an object centroid in the frame of the Kinect coordinate system, I used Python to apply homogeneous matrix transformations to convert the coordinates to the frame of the robotic arm's coordinate system. Following that, I implemented a trigonometry-based inverse kinematics algorithm to determine the joint angles that the arm would need in order to position its end-effector (claw) over that object's centroid point. Finally, I implemented a state machine to facilitate the movement of the arm to pick up and dispose of an object into the TrashBot's onboard trash receptacle without collisions.
-  
-  This experience gave me the opportunity to work with various physical components and it made me very comfortable with getting my hands dirty. We enjoyed many trips to the local hardware store to piece this robot together. It was very rewarding to see the final product!
-      `,
+      title: "Collision Estimation for Safe Planning",
+      date: "Mar 2018 - Apr 2018",
+      paperLink: "resources/ajaay_paper.pdf",
+      codeLink: "https://github.com/ajaayc/Probability-of-Collision-for-Safe-Planning",
+      siteLink: null,
+      videoLink: null,
+      posterLink: null,
+      preview: "img/env_setup.png",
+      long: <CollisionContent />,
+    },
+    {
+      title: "Deep Neural Network Vehicle Detection System",
+      date: "Nov 2017 - Dec 2017",
+      paperLink: "https://github.com/ajaayc/Car_Detection/blob/master/Perception%20Final%20Report.pdf",
+      codeLink: "https://github.com/ajaayc/Car_Detection",
+      siteLink: null,
+      videoLink: null,
+      posterLink: null,
+      preview: "img/carBox.jpg",
+      long: <DNNVehicleContent />,
+    },
+    {
+      title: "Mobile Robotics iSAM Implementation",
+      date: "Mar 2018 - Apr 2018",
       paperLink: null,
-      codeLink: 'https://github.com/bonsairobo/trashbot',
+      codeLink: "https://github.com/Scarabrine/EECS568Project_Team2_iSAM",
+      siteLink: null,
+      videoLink: null,
+      posterLink: null,
+      preview: "img/victoriaPark.png",
+      long: <MobileRoboticsContent />,
     },
     {
-      id: 7,
-      title: 'BotLab Challenge',
-      date: 'Jan 2017 - Feb 2017',
-      media: [
-        { type: 'video', src: 'https://www.youtube.com/embed/B0mL6WQhMzk', alt: 'BotLab Challenge video' }
-      ],
-      long: `
-  For my Autonomous Robotics Laboratory course, I worked in a team to compete in the course's Bot Escape Challenge competition. We were given the UofM April Lab's MAEbot platform, and we were tasked with building algorithms to help the MAEbot explore and escape from a wooden maze enclosure.
-  
-  Using C++, we implemented various algorithms on the MAEbot, including:
-  
-  - A* Path Planning
-  - Occupancy Grid Mapping
-  - MonteCarlo Localization
-  - PID Control
-  
-  The experience of implementing the algorithms on the MAEbot and competing in the class competition was very rewarding. There were many robotics concepts that I had learned from simulation and theory, but we found that implementing these algorithms on a real robot would actually be significantly more difficult.
-      `,
+      title: "Trashbot",
+      date: "Mar 2017 - Apr 2017",
+      paperLink: null,
+      codeLink: "https://github.com/bonsairobo/trashbot",
+      siteLink: null,
+      videoLink: "https://www.youtube.com/embed/a6qHyMERqR0?start=29",
+      posterLink: null,
+      preview: "img/trashbot.jpg",
+      long: <TrashbotContent />,
+    },
+    {
+      title: "BotLab Challenge",
+      date: "Jan 2017 - Feb 2017",
       paperLink: null,
       codeLink: null,
+      siteLink: null,
+      videoLink: "https://www.youtube.com/embed/B0mL6WQhMzk",
+      posterLink: null,
+      preview: "img/botlab.jpg",
+      long: <BotLabContent />,
     },
     {
-      id: 8,
-      title: 'Kinveval Robot Simulator',
-      date: 'Sept 2016 - Dec 2016',
-      media: [
-        { type: 'image', src: '/img/RRT_Planner.png', alt: 'RRT Planner' },
-        { type: 'image', src: '/img/RRTConnect_2D_Kineval.png', alt: 'RRTConnect 2D Kineval' },
-        { type: 'video', src: 'https://www.youtube.com/embed/1tOVkg2UzNM', alt: 'Inverse kinematics demo' }
-      ],
-      long: `
-  For my Robot Kinematics and Dynamics course, I implemented various robotics algorithms in the Kineval simulation framework, a Three.js-based platform made by Professor Chad Jenkins.
-  
-  In order to better understand the modeling and control of autonomous agents, I implemented the following features in the framework:
-  
-  - Path planning via A* algorithm
-  - Euler and velocity verlet integrator and a PID controller for an inverted pendulum
-  - Finite state machine "dance controller"
-  - Forward kinematics via quaternions and homogeneous matrix transformations
-  - Inverse kinematics via the Jacobian transpose and Jacobian pseudo-inverse methods
-  - Motion planning via RRT and RRT-Connect algorithms in 2D and 3D workspaces
-      `,
-      paperLink: 'https://github.com/autorob/kineval-stencil',
-      codeLink: null,
+      title: "Kineval Robot Simulator",
+      date: "Sept 2016 - Dec 2016",
+      paperLink: null,
+      codeLink: "https://github.com/autorob/kineval-stencil",
+      siteLink: null,
+      videoLink: null,
+      posterLink: null,
+      preview: "img/RRT_Planner.png",
+      long: <KinevalContent />,
     },
     {
-      id: 9,
-      title: 'PID Controller for Magnetically Levitated Ball',
-      date: 'Nov 2017 - Dec 2017',
-      media: [
-        { type: 'video', src: 'https://www.youtube.com/embed/BY0sY5yXz3I', alt: 'PID Controller for MagLev Ball' }
-      ],
-      long: `
-  For my Control Systems Design course, I worked in a team to build a PID controller in Simulink to control the position of a magnetically levitated ball. Building the controller required first deriving a physical model consisting of the magnetic and gravitational forces acting upon the ball. After deriving the physical model, we linearized the model about the input current required to cause the magnetic force to keep the ball at a constant height. Following that, we tuned our PID controller to meet specifications for steady-state error, settling time, and overshoot.
-      `,
+      title: "PID Controller for Magnetically Levitated Ball",
+      date: "Nov 2017 - Dec 2017",
       paperLink: null,
       codeLink: null,
-    }
+      siteLink: null,
+      videoLink: "https://www.youtube.com/embed/BY0sY5yXz3I",
+      posterLink: null,
+      preview: "img/pid_controller.jpg",
+      long: <PIDControllerContent />,
+    },
   ];
   
   
