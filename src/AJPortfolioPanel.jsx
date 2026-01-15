@@ -152,7 +152,13 @@ export default function AJPortfolioPanel() {
         {/* PROFESSIONAL EXPERIENCE CARDS */}
         <section id="experience" className="py-16">
           <h2 className="text-2xl font-bold text-green-700 mb-6">Professional Experience</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div
+            className="grid gap-6 w-full"
+            style={{
+              gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+              boxSizing: 'border-box',
+            }}
+          >
             {companies.map((company) => (
               <div
                 key={company.id}
