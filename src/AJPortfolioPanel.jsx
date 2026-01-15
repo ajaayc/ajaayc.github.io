@@ -44,7 +44,7 @@ export default function AJPortfolioPanel() {
     {
       title: "Collision Estimation for Safe Planning",
       date: "Mar 2018 - Apr 2018",
-      paperLink: "resources/ajaay_paper.pdf",
+      paperLink: "/papers/probability_of_collision_for_safe_planning.pdf",
       codeLink: "https://github.com/ajaayc/Probability-of-Collision-for-Safe-Planning",
       siteLink: null,
       videoLink: null,
@@ -346,8 +346,35 @@ export default function AJPortfolioPanel() {
   </div>
 </section>
 
+{/* MISC WORK */}
+<section id="misc" className="py-16">
+  <h2 className="text-2xl font-bold text-green-700 mb-6">Misc Work</h2>
+  <p className="text-gray-600 leading-relaxed max-w-full">
 
 
+    <h3 className="text-xl font-semibold text-green-700 mb-4">Papers</h3>
+    <p>
+  <a
+    href="/papers/automation_theft_of_labor.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-blue-600 underline"
+  >
+    Automation, the Thief of Labor
+  </a>
+</p>
+<p>
+      <a
+        href="/papers/robotic_caregivers_for_the_elderly_ethical_examination.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        Robotic Caregivers for the Elderly, An Ethical Examination
+      </a>
+    </p>
+  </p>
+</section>
 
 
 
