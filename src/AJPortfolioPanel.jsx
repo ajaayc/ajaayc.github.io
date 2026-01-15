@@ -323,72 +323,66 @@ export default function AJPortfolioPanel() {
           </p>
         </section>
 
-        {/* PROFESSIONAL EXPERIENCE CARDS */}
-        <section id="experience" className="py-16">
-          <h2 className="text-2xl font-bold text-green-700 mb-6">Professional Experience</h2>
+ {/* PROFESSIONAL EXPERIENCE CARDS */}
+<section id="experience" className="py-16">
+  <h2 className="text-2xl font-bold text-green-700 mb-6">Professional Experience</h2>
 
-          <motion.div
-            className="grid gap-6 w-full max-w-full mx-auto"
-            style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}
-            layout
-          >
-            {companies.map((company) => (
-              <motion.div
-                key={company.id}
-                layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                whileHover={{ scale: 1.03 }}
-                className="border border-green-200 rounded-xl overflow-hidden shadow-lg flex flex-col bg-white"
-              >
-                {/* Main background image at top */}
-                <div
-                  className="w-full h-64 md:h-80 lg:h-96 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${company.backgroundImage})` }}
-                />
+  <div
+    className="grid gap-6 w-full max-w-full mx-auto"
+    style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}
+  >
+    {companies.map((company) => (
+      <div
+        key={company.id}
+        className="border border-green-200 rounded-xl overflow-hidden shadow-lg flex flex-col bg-white"
+      >
+        {/* Main background image at top */}
+        <div
+          className="w-full h-64 md:h-80 lg:h-96 bg-cover bg-center"
+          style={{ backgroundImage: `url(${company.backgroundImage})` }}
+        />
 
-                {/* Content: logo left, text right */}
-                <div className="p-4 flex flex-row gap-4 min-w-0">
-                  {/* Logo */}
-                  <div className="flex-shrink-0 flex items-start">
-                    <img
-                      src={company.logo}
-                      alt={`${company.name} logo`}
-                      className="w-20 h-20 md:w-24 md:h-24 object-contain rounded bg-white/80 p-1"
-                    />
-                  </div>
+        {/* Content: logo left, text right */}
+        <div className="p-4 flex flex-row gap-4 min-w-0">
+          {/* Logo */}
+          <div className="flex-shrink-0 flex items-start">
+            <img
+              src={company.logo}
+              alt={`${company.name} logo`}
+              className="w-20 h-20 md:w-24 md:h-24 object-contain rounded bg-white/80 p-1"
+            />
+          </div>
 
-                  {/* Text and buttons */}
-                  <div className="flex-1 flex flex-col min-w-0">
-                  <h3 className="text-lg font-semibold text-gray-900 break-words">{company.name}</h3>
-                    {company.role && (
-                      <p className="text-gray-600 text-sm mb-2 break-words">{company.role}</p>
-                    )}
-                    <p className="text-gray-700 text-sm mb-4 break-words">{company.description}</p>
+          {/* Text and buttons */}
+          <div className="flex-1 flex flex-col min-w-0">
+            <h3 className="text-lg font-semibold text-gray-900 break-words">{company.name}</h3>
+            {company.role && (
+              <p className="text-gray-600 text-sm mb-2 break-words">{company.role}</p>
+            )}
+            <p className="text-gray-700 text-sm mb-4 break-words">{company.description}</p>
 
-                    {company.links && company.links.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mt-auto">
-                        {company.links.map((link, idx) => (
-                          <a
-                            key={idx}
-                            href={link.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition text-sm"
-                          >
-                            {link.name}
-                          </a>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </section>
+            {company.links && company.links.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-auto">
+                {company.links.map((link, idx) => (
+                  <a
+                    key={idx}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition text-sm"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
 
 {/* PROJECT CARDS */}
 <section id="projects" className="py-16">
