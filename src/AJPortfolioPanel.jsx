@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import LeftPanel from './LeftPanel';
 import ProjectModal from './modals/ProjectModal';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function AJPortfolioPanel() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -152,17 +153,22 @@ export default function AJPortfolioPanel() {
         {/* PROFESSIONAL EXPERIENCE CARDS */}
         <section id="experience" className="py-16">
           <h2 className="text-2xl font-bold text-green-700 mb-6">Professional Experience</h2>
-          <div
-            className="grid gap-6 w-full"
-            style={{
-              gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-              boxSizing: 'border-box',
-            }}
+
+          <motion.div
+            className="grid gap-6 w-full max-w-full mx-auto"
+            style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}
+            layout
           >
             {companies.map((company) => (
-              <div
+              <motion.div
                 key={company.id}
-                className="border border-green-200 rounded-xl overflow-hidden shadow-lg flex flex-col"
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.03 }}
+                className="border border-green-200 rounded-xl overflow-hidden shadow-lg flex flex-col bg-white"
               >
                 {/* Main background image at top */}
                 <div
@@ -171,7 +177,7 @@ export default function AJPortfolioPanel() {
                 />
 
                 {/* Content: logo left, text right */}
-                <div className="p-4 flex flex-row gap-4">
+                <div className="p-4 flex flex-row gap-4 min-w-0">
                   {/* Logo */}
                   <div className="flex-shrink-0 flex items-start">
                     <img
@@ -182,10 +188,12 @@ export default function AJPortfolioPanel() {
                   </div>
 
                   {/* Text and buttons */}
-                  <div className="flex-1 flex flex-col">
-                    <h3 className="text-lg font-semibold text-gray-900">{company.name}</h3>
-                    {company.role && <p className="text-gray-600 text-sm mb-2">{company.role}</p>}
-                    <p className="text-gray-700 text-sm mb-4">{company.description}</p>
+                  <div className="flex-1 flex flex-col min-w-0">
+                    <h3 className="text-lg font-semibold text-gray-900 truncate">{company.name}</h3>
+                    {company.role && (
+                      <p className="text-gray-600 text-sm mb-2 truncate">{company.role}</p>
+                    )}
+                    <p className="text-gray-700 text-sm mb-4 break-words">{company.description}</p>
 
                     {company.links && company.links.length > 0 && (
                       <div className="flex flex-wrap gap-2 mt-auto">
@@ -204,9 +212,9 @@ export default function AJPortfolioPanel() {
                     )}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         {/* PROJECT CARDS */}
