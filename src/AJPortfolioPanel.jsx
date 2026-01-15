@@ -395,7 +395,7 @@ export default function AJPortfolioPanel() {
   <h2 className="text-2xl font-bold text-green-700 mb-8">Projects</h2>
   <div
     className="grid gap-8 w-full max-w-full mx-auto"
-    style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }} // min width updated
+    style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}
   >
     {projects.map((project) => {
       const firstMedia = project.media && project.media.length > 0 ? project.media[0] : null;
@@ -409,45 +409,46 @@ export default function AJPortfolioPanel() {
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
           whileHover={{ scale: 1.03 }}
-          className="border border-green-200 rounded-xl p-6 flex flex-col items-center gap-4 cursor-pointer hover:shadow-lg transition-shadow min-w-[300px]"
+          className="border border-green-200 rounded-xl flex flex-col cursor-pointer hover:shadow-lg transition-shadow min-w-[300px]"
           onClick={() => setSelectedProject(project)}
         >
           {/* Media preview */}
-          {firstMedia ? (
-            firstMedia.type === 'image' ? (
-              <img
-                src={firstMedia.src}
-                alt={firstMedia.alt || project.title}
-                className="w-full h-64 md:h-72 lg:h-80 object-cover rounded"
-              />
-            ) : firstMedia.type === 'video' ? (
-              <iframe
-                src={firstMedia.src}
-                title={firstMedia.alt || project.title}
-                className="w-full h-64 md:h-72 lg:h-80 rounded"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            ) : null
-          ) : (
-            <div className="w-full h-64 md:h-72 lg:h-80 bg-green-100 flex items-center justify-center text-green-500 font-bold text-2xl">
-              No Preview
-            </div>
-          )}
+          <div className="w-full flex-shrink-0">
+            {firstMedia ? (
+              firstMedia.type === 'image' ? (
+                <img
+                  src={firstMedia.src}
+                  alt={firstMedia.alt || project.title}
+                  className="w-full h-72 md:h-80 lg:h-96 object-cover rounded-t-xl"
+                />
+              ) : firstMedia.type === 'video' ? (
+                <iframe
+                  src={firstMedia.src}
+                  title={firstMedia.alt || project.title}
+                  className="w-full h-72 md:h-80 lg:h-96 rounded-t-xl"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : null
+            ) : (
+              <div className="w-full h-72 md:h-80 lg:h-96 bg-green-100 flex items-center justify-center text-green-500 font-bold text-2xl rounded-t-xl">
+                No Preview
+              </div>
+            )}
+          </div>
 
-          {/* Title */}
-          <h3 className="font-semibold text-xl text-gray-900 text-center break-words">{project.title}</h3>
-
-          {/* Date interval */}
-          {project.date && <p className="text-sm text-gray-500">{project.date}</p>}
-
-          {/* Short description */}
-          {project.short && <p className="text-base text-gray-600 text-center">{project.short}</p>}
+          {/* Text content */}
+          <div className="p-6 flex-1 flex flex-col min-w-0">
+            <h3 className="font-semibold text-xl text-gray-900 text-center break-words">{project.title}</h3>
+            {project.date && <p className="text-sm text-gray-500 mt-1">{project.date}</p>}
+            {project.short && <p className="text-base text-gray-600 text-center mt-2 break-words">{project.short}</p>}
+          </div>
         </motion.div>
       );
     })}
   </div>
 </section>
+
 
 
 
