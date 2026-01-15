@@ -2,52 +2,73 @@ import React from 'react';
 import Modal from './Modal';
 
 export default function ProjectModal({ project, onClose }) {
-  const { title, images, long, date, paperLink, codeLink } = project;
+  const { title, media, long, date, paperLink, codeLink } = project;
 
   return (
-    <Modal isOpen={!!project} onClose={onClose}>
-      <h3 className="text-xl font-bold mb-1">{title}</h3>
+    <Modal
+      isOpen={!!project}
+      onClose={onClose}
+      className="max-w-[90vw] max-h-[90vh] p-6"
+    >
+      {/* Scrollable content */}
+      <div className="overflow-y-auto max-h-[85vh] pr-3">
+        <h3 className="text-2xl font-bold mb-2">{title}</h3>
 
-      {/* Date interval */}
-      {date && <p className="text-sm text-gray-500 mb-4">{date}</p>}
+        {date && <p className="text-sm text-gray-500 mb-4">{date}</p>}
 
-      {/* Images */}
-      <div className="flex gap-2 mb-4 flex-wrap">
-        {images.map((img, idx) => (
-          <img
-            key={idx}
-            src={img}
-            alt={`${title} ${idx + 1}`}
-            className="w-48 max-w-full h-auto object-cover rounded"
-          />
-        ))}
-      </div>
+        {/* Media */}
+        <div className="flex flex-col gap-4 mb-4">
+          {media.map((item, idx) =>
+            item.type === 'image' ? (
+              <img
+                key={idx}
+                src={item.src}
+                alt={item.alt || `${title} ${idx + 1}`}
+                className="w-full h-auto object-cover rounded"
+              />
+            ) : item.type === 'video' ? (
+              <div key={idx} className="w-full aspect-video">
+                <iframe
+                  className="w-full h-full rounded"
+                  src={item.src}
+                  title={item.alt || `${title} video ${idx + 1}`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ) : null
+          )}
+        </div>
 
-      {/* Description */}
-      <p className="mb-4">{long}</p>
+        {/* Full project description with preserved formatting */}
+        <div className="mb-4 text-gray-800 whitespace-pre-line">
+          {long}
+        </div>
 
-      {/* Optional links */}
-      <div className="flex gap-4">
-        {paperLink && (
-          <a
-            href={paperLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:underline"
-          >
-            [Paper]
-          </a>
-        )}
-        {codeLink && (
-          <a
-            href={codeLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:underline"
-          >
-            [Code]
-          </a>
-        )}
+        {/* Optional links */}
+        <div className="flex flex-wrap gap-4">
+          {paperLink && (
+            <a
+              href={paperLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              [Paper]
+            </a>
+          )}
+          {codeLink && (
+            <a
+              href={codeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              [Code]
+            </a>
+          )}
+        </div>
       </div>
     </Modal>
   );
