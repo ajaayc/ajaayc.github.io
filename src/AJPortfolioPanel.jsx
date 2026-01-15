@@ -80,7 +80,7 @@ export default function AJPortfolioPanel() {
       paperLink: null,
       codeLink: "https://github.com/bonsairobo/trashbot",
       siteLink: null,
-      videoLink: "https://www.youtube.com/embed/a6qHyMERqR0?start=29",
+      videoLink: "https://www.youtube.com/a6qHyMERqR0?start=29",
       posterLink: null,
       preview: "img/trashbot.jpg", // first image in TrashbotContent
       long: <TrashbotContent />,
@@ -91,7 +91,7 @@ export default function AJPortfolioPanel() {
       paperLink: null,
       codeLink: null,
       siteLink: null,
-      videoLink: "https://www.youtube.com/embed/B0mL6WQhMzk",
+      videoLink: "https://www.youtube.com/B0mL6WQhMzk",
       posterLink: null,
       preview: "https://www.youtube.com/embed/B0mL6WQhMzk", // first video in BotLabContent
       long: <BotLabContent />,
@@ -113,7 +113,7 @@ export default function AJPortfolioPanel() {
       paperLink: null,
       codeLink: null,
       siteLink: null,
-      videoLink: "https://www.youtube.com/embed/BY0sY5yXz3I",
+      videoLink: "https://www.youtube.com/BY0sY5yXz3I",
       posterLink: null,
       preview: "https://www.youtube.com/embed/BY0sY5yXz3I", // first video in PIDControllerContent
       long: <PIDControllerContent />,
@@ -194,7 +194,16 @@ export default function AJPortfolioPanel() {
           </p>
 
           <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
-            Personal hobbies include Latin dancing, hunting for treasure, traveling, and reading an assortment of fiction and non-fiction texts.
+            Personal hobbies include Latin dancing (primarily salsa and bachata),{' '}
+            <a
+              href="https://explorersweb.com/after-forrest-fenn-the-new-american-treasure-hunt/"
+              className="text-blue-600 underline hover:text-blue-700"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              hunting for treasure
+            </a>
+            , playing boardgames, traveling, and reading an assortment of fictional and non-fictional texts.
           </p>
 
           <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
