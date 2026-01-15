@@ -80,7 +80,7 @@ export default function AJPortfolioPanel() {
       paperLink: null,
       codeLink: "https://github.com/bonsairobo/trashbot",
       siteLink: null,
-      videoLink: "https://www.youtube.com/a6qHyMERqR0?start=29",
+      videoLink: "https://www.youtube.com/watch?v=a6qHyMERqR0?start=29",
       posterLink: null,
       preview: "img/trashbot.jpg", // first image in TrashbotContent
       long: <TrashbotContent />,
@@ -91,7 +91,7 @@ export default function AJPortfolioPanel() {
       paperLink: null,
       codeLink: null,
       siteLink: null,
-      videoLink: "https://www.youtube.com/B0mL6WQhMzk",
+      videoLink: "https://www.youtube.com/watch?v=B0mL6WQhMzk",
       posterLink: null,
       preview: "https://www.youtube.com/embed/B0mL6WQhMzk", // first video in BotLabContent
       long: <BotLabContent />,
@@ -113,7 +113,7 @@ export default function AJPortfolioPanel() {
       paperLink: null,
       codeLink: null,
       siteLink: null,
-      videoLink: "https://www.youtube.com/BY0sY5yXz3I",
+      videoLink: "https://www.youtube.com/watch?v=BY0sY5yXz3I",
       posterLink: null,
       preview: "https://www.youtube.com/embed/BY0sY5yXz3I", // first video in PIDControllerContent
       long: <PIDControllerContent />,
