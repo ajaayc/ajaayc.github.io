@@ -38,17 +38,16 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
     const ctx = canvas.getContext("2d");
     const width = canvas.offsetWidth;
     const heightPx = height;
+
     canvas.width = width;
     canvas.height = heightPx;
 
-    // Updated font size and spacing to match LLMAnimationPanel
     const fontSize = Math.floor(heightPx * 0.035);
     const lineHeight = fontSize * 1.5;
-    const padding = fontSize * 2; // padding same as LLM panel
+    const padding = fontSize * 2;
+
     const font = `${fontSize}px monospace`;
     const boldFont = `bold ${fontSize}px monospace`;
-
-    ctx.font = font;
 
     let animationFrame;
 
@@ -59,19 +58,25 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
       ctx.fillStyle = "#0b0f14";
       ctx.fillRect(0, 0, width, heightPx);
 
-      // Glow effect
+      // Base terminal glow (applies to all text)
       ctx.shadowColor = "#4cc9f0";
-      ctx.shadowBlur = 10;
+      ctx.shadowBlur = 6;
 
-      // Draw typed lines
+      // Draw completed lines
       linesToDisplay.forEach((line, i) => {
-        let x = padding;
+        const x = padding;
         const y = padding + i * lineHeight;
 
         if (highlightLines.includes(line)) {
+          const pulse = !entered
+            ? 8 + 6 * Math.sin(Date.now() * 0.004)
+            : 6;
+
+          ctx.shadowBlur = pulse;
           ctx.font = boldFont;
           ctx.fillStyle = "#ff4d4d";
           ctx.fillText(line, x, y);
+          ctx.shadowBlur = 6; // restore baseline glow
         } else {
           ctx.font = font;
           ctx.fillStyle = "#d9faff";
@@ -81,35 +86,51 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
 
       // Draw current typing line
       if (!entered && linesToDisplay.length < promptLines.length) {
-        const currentLine = promptLines[linesToDisplay.length].slice(0, charIndex);
-        let x = padding;
+        const fullLine = promptLines[linesToDisplay.length];
+        const currentLine = fullLine.slice(0, charIndex);
+        const x = padding;
         const y = padding + linesToDisplay.length * lineHeight;
 
-        if (highlightLines.includes(promptLines[linesToDisplay.length])) {
+        if (highlightLines.includes(fullLine)) {
+          const pulse = 8 + 6 * Math.sin(Date.now() * 0.004);
+          ctx.shadowBlur = pulse;
           ctx.font = boldFont;
           ctx.fillStyle = "#ff4d4d";
         } else {
+          ctx.shadowBlur = 6;
           ctx.font = font;
           ctx.fillStyle = "#d9faff";
         }
 
         ctx.fillText(currentLine, x, y);
 
-        // Updated cursor size to match LLM panel
+        // Cursor
         if (showCursor) {
           const textWidth = ctx.measureText(currentLine).width;
-          ctx.fillRect(x + textWidth + 2, y - fontSize, fontSize / 2, fontSize);
+          ctx.fillRect(
+            x + textWidth + 2,
+            y - fontSize,
+            fontSize / 2,
+            fontSize
+          );
         }
       }
 
-      // After Enter pressed, show solid prompt
+      // After Enter pressed
       if (entered) {
-        const promptY = padding + linesToDisplay.length * lineHeight;
+        const y = padding + linesToDisplay.length * lineHeight;
+        ctx.shadowBlur = 6;
         ctx.font = font;
         ctx.fillStyle = "#d9faff";
-        ctx.fillText("ajaay@SPECTRAL-PC ~ >", padding, promptY);
+        ctx.fillText("ajaay@SPECTRAL-PC ~ >", padding, y);
+
         const textWidth = ctx.measureText("ajaay@SPECTRAL-PC ~ > ").width;
-        ctx.fillRect(padding + textWidth + 2, promptY - fontSize, fontSize / 2, fontSize);
+        ctx.fillRect(
+          padding + textWidth + 2,
+          y - fontSize,
+          fontSize / 2,
+          fontSize
+        );
       }
 
       ctx.shadowBlur = 0;
@@ -121,14 +142,13 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
     }
 
     loop();
-
     return () => cancelAnimationFrame(animationFrame);
   }, [showCursor, linesToDisplay, charIndex, entered, height]);
 
-  // Blink cursor only during typing
+  // Cursor blink
   useEffect(() => {
     if (entered) return;
-    const interval = setInterval(() => setShowCursor((prev) => !prev), 500);
+    const interval = setInterval(() => setShowCursor(prev => !prev), 500);
     return () => clearInterval(interval);
   }, [entered]);
 
@@ -138,19 +158,19 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
     if (linesToDisplay.length >= promptLines.length) return;
 
     const timeout = setTimeout(() => {
-      const currentLine = promptLines[linesToDisplay.length];
-      if (charIndex + 1 > currentLine.length) {
-        setLinesToDisplay((prev) => [...prev, currentLine]);
+      const line = promptLines[linesToDisplay.length];
+      if (charIndex + 1 > line.length) {
+        setLinesToDisplay(prev => [...prev, line]);
         setCharIndex(0);
       } else {
-        setCharIndex((i) => i + 1);
+        setCharIndex(i => i + 1);
       }
     }, 10);
 
     return () => clearTimeout(timeout);
   }, [charIndex, linesToDisplay, entered]);
 
-  // Listen for Enter key
+  // Enter key listener
   useEffect(() => {
     function handleKeyDown(e) {
       if (e.key === "Enter" && !entered) {
