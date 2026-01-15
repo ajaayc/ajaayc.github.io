@@ -390,7 +390,7 @@ export default function AJPortfolioPanel() {
           </motion.div>
         </section>
 
- {/* PROJECT CARDS */}
+{/* PROJECT CARDS */}
 <section id="projects" className="py-16">
   <h2 className="text-2xl font-bold text-green-700 mb-8">Projects</h2>
   <div
@@ -409,8 +409,8 @@ export default function AJPortfolioPanel() {
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
           whileHover={{ scale: 1.03 }}
-          className="border border-green-200 rounded-xl flex flex-col cursor-pointer hover:shadow-lg transition-shadow min-w-[300px]"
-          onClick={() => setSelectedProject(project)}
+          className="border border-green-200 rounded-xl flex flex-col hover:shadow-lg transition-shadow min-w-[300px] cursor-pointer"
+          onClick={() => setSelectedProject(project)} // modal trigger restored
         >
           {/* Media preview */}
           <div className="w-full flex-shrink-0">
@@ -425,7 +425,7 @@ export default function AJPortfolioPanel() {
                 <iframe
                   src={firstMedia.src}
                   title={firstMedia.alt || project.title}
-                  className="w-full h-72 md:h-80 lg:h-96 rounded-t-xl"
+                  className="w-full h-72 md:h-80 lg:h-96 rounded-t-xl pointer-events-none" // prevents accidental playback
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
@@ -448,6 +448,7 @@ export default function AJPortfolioPanel() {
     })}
   </div>
 </section>
+
 
 
 
