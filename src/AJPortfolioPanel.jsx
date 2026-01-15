@@ -27,7 +27,7 @@ export default function AJPortfolioPanel() {
       siteLink: null,
       videoLink: null,
       posterLink: null,
-      preview: "img/plybot2.jpg",
+      preview: "img/plybot2.jpg", // first image in PlybotContent
       long: <PlybotContent />,
     },
     {
@@ -38,7 +38,7 @@ export default function AJPortfolioPanel() {
       siteLink: null,
       videoLink: null,
       posterLink: null,
-      preview: "img/velodyne.png",
+      preview: "img/velodyne.png", // first image in MDOTContent
       long: <MDOTContent />,
     },
     {
@@ -49,7 +49,7 @@ export default function AJPortfolioPanel() {
       siteLink: null,
       videoLink: null,
       posterLink: null,
-      preview: "img/env_setup.png",
+      preview: "img/env_setup.png", // first image in CollisionContent
       long: <CollisionContent />,
     },
     {
@@ -60,7 +60,7 @@ export default function AJPortfolioPanel() {
       siteLink: null,
       videoLink: null,
       posterLink: null,
-      preview: "img/carBox.jpg",
+      preview: "img/carBox.jpg", // first image in DNNVehicleContent
       long: <DNNVehicleContent />,
     },
     {
@@ -71,7 +71,7 @@ export default function AJPortfolioPanel() {
       siteLink: null,
       videoLink: null,
       posterLink: null,
-      preview: "img/victoriaPark.png",
+      preview: "img/victoriaPark.png", // first image in MobileRoboticsContent
       long: <MobileRoboticsContent />,
     },
     {
@@ -82,7 +82,7 @@ export default function AJPortfolioPanel() {
       siteLink: null,
       videoLink: "https://www.youtube.com/embed/a6qHyMERqR0?start=29",
       posterLink: null,
-      preview: "img/trashbot.jpg",
+      preview: "img/trashbot.jpg", // first image in TrashbotContent
       long: <TrashbotContent />,
     },
     {
@@ -93,18 +93,18 @@ export default function AJPortfolioPanel() {
       siteLink: null,
       videoLink: "https://www.youtube.com/embed/B0mL6WQhMzk",
       posterLink: null,
-      preview: "img/botlab.jpg",
+      preview: "https://www.youtube.com/embed/B0mL6WQhMzk", // first video in BotLabContent
       long: <BotLabContent />,
     },
     {
-      title: "Kineval Robot Simulator",
+      title: "Kinveval Robot Simulator",
       date: "Sept 2016 - Dec 2016",
       paperLink: null,
       codeLink: "https://github.com/autorob/kineval-stencil",
       siteLink: null,
       videoLink: null,
       posterLink: null,
-      preview: "img/RRT_Planner.png",
+      preview: "img/RRT_Planner.png", // first image in KinevalContent
       long: <KinevalContent />,
     },
     {
@@ -115,10 +115,11 @@ export default function AJPortfolioPanel() {
       siteLink: null,
       videoLink: "https://www.youtube.com/embed/BY0sY5yXz3I",
       posterLink: null,
-      preview: "img/pid_controller.jpg",
+      preview: "https://www.youtube.com/embed/BY0sY5yXz3I", // first video in PIDControllerContent
       long: <PIDControllerContent />,
     },
   ];
+  
   
   
 
@@ -297,57 +298,54 @@ export default function AJPortfolioPanel() {
     className="grid gap-8 w-full max-w-full mx-auto"
     style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}
   >
-    {projects.map((project) => {
-      const firstMedia = project.media && project.media.length > 0 ? project.media[0] : null;
+    {projects.map((project) => (
+      <motion.div
+        key={project.title} // using title as unique key
+        layout
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+        whileHover={{ scale: 1.03 }}
+        className="border border-green-200 rounded-xl flex flex-col hover:shadow-lg transition-shadow min-w-[300px] cursor-pointer"
+        onClick={() => setSelectedProject(project)}
+      >
+        {/* Media preview */}
+        <div className="w-full flex-shrink-0">
+          {project.preview.endsWith('.jpg') ||
+          project.preview.endsWith('.png') ||
+          project.preview.endsWith('.jpeg') ? (
+            <img
+              src={project.preview}
+              alt={project.title}
+              className="w-full h-72 md:h-80 lg:h-96 object-cover rounded-t-xl"
+            />
+          ) : project.preview.startsWith('http') ? (
+            <iframe
+              src={project.preview}
+              title={project.title}
+              className="w-full h-72 md:h-80 lg:h-96 rounded-t-xl pointer-events-none"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          ) : (
+            <div className="w-full h-72 md:h-80 lg:h-96 bg-green-100 flex items-center justify-center text-green-500 font-bold text-2xl rounded-t-xl">
+              No Preview
+            </div>
+          )}
+        </div>
 
-      return (
-        <motion.div
-          key={project.id}
-          layout
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-          whileHover={{ scale: 1.03 }}
-          className="border border-green-200 rounded-xl flex flex-col hover:shadow-lg transition-shadow min-w-[300px] cursor-pointer"
-          onClick={() => setSelectedProject(project)} // modal trigger restored
-        >
-          {/* Media preview */}
-          <div className="w-full flex-shrink-0">
-            {firstMedia ? (
-              firstMedia.type === 'image' ? (
-                <img
-                  src={firstMedia.src}
-                  alt={firstMedia.alt || project.title}
-                  className="w-full h-72 md:h-80 lg:h-96 object-cover rounded-t-xl"
-                />
-              ) : firstMedia.type === 'video' ? (
-                <iframe
-                  src={firstMedia.src}
-                  title={firstMedia.alt || project.title}
-                  className="w-full h-72 md:h-80 lg:h-96 rounded-t-xl pointer-events-none" // prevents accidental playback
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              ) : null
-            ) : (
-              <div className="w-full h-72 md:h-80 lg:h-96 bg-green-100 flex items-center justify-center text-green-500 font-bold text-2xl rounded-t-xl">
-                No Preview
-              </div>
-            )}
-          </div>
-
-          {/* Text content */}
-          <div className="p-6 flex-1 flex flex-col min-w-0">
-            <h3 className="font-semibold text-xl text-gray-900 text-center break-words">{project.title}</h3>
-            {project.date && <p className="text-sm text-gray-500 mt-1">{project.date}</p>}
-            {project.short && <p className="text-base text-gray-600 text-center mt-2 break-words">{project.short}</p>}
-          </div>
-        </motion.div>
-      );
-    })}
+        {/* Text content */}
+        <div className="p-6 flex-1 flex flex-col min-w-0">
+          <h3 className="font-semibold text-xl text-gray-900 text-center break-words">{project.title}</h3>
+          {project.date && <p className="text-sm text-gray-500 mt-1">{project.date}</p>}
+          {project.short && <p className="text-base text-gray-600 text-center mt-2 break-words">{project.short}</p>}
+        </div>
+      </motion.div>
+    ))}
   </div>
 </section>
+
 
 
 
