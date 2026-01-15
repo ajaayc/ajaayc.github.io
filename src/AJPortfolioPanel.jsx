@@ -376,17 +376,23 @@ export default function AJPortfolioPanel() {
   </p>
 </section>
 
-
-
-
-        {/* CONTACT */}
-        <section id="contact" className="py-16">
-          <h2 className="text-2xl font-bold text-green-700 mb-6">Contact</h2>
-          <p className="text-gray-600 leading-relaxed max-w-full">
-            Placeholder contact info.
-          </p>
-        </section>
-      </main>
+          {/* CONTACT */}
+          <section id="contact" className="py-16">
+            <h2 className="text-2xl font-bold text-green-700 mb-6">Contact</h2>
+            <p className="text-gray-600 leading-relaxed max-w-full">
+              Please shoot me a message through {' '}
+              <a
+                href="https://www.linkedin.com/in/ajaayc/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline"
+              >
+                Linkedin
+              </a>
+              . I look forward to connecting with you!
+            </p>
+          </section>
+    </main>
 
       {/* Modals */}
       {selectedProject && <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />}
