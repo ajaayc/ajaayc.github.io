@@ -21,7 +21,6 @@ export default function Modal({ isOpen, onClose, children }) {
 
   // Click outside to close handler
   const handleOverlayClick = (e) => {
-    // Only close if the overlay itself was clicked, not the modal content
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -36,13 +35,15 @@ export default function Modal({ isOpen, onClose, children }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        onClick={handleOverlayClick} // <-- overlay click closes modal
+        onClick={handleOverlayClick} // overlay click closes modal
+        transition={{ duration: 0.2 }}
       >
         <motion.div
           className="bg-white rounded-xl p-6 max-w-3xl w-full relative"
-          initial={{ scale: 0.8 }}
-          animate={{ scale: 1 }}
-          exit={{ scale: 0.8 }}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.8, opacity: 0 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
         >
           {/* Close Icon */}
           <button
