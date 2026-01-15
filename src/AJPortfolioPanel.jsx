@@ -390,55 +390,59 @@ export default function AJPortfolioPanel() {
           </motion.div>
         </section>
 
-        {/* PROJECT CARDS */}
-        <section id="projects" className="py-16">
-          <h2 className="text-2xl font-bold text-green-700 mb-8">Projects</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {projects.map((project) => {
-              const firstMedia = project.media && project.media.length > 0 ? project.media[0] : null;
+ {/* PROJECT CARDS */}
+<section id="projects" className="py-16">
+  <h2 className="text-2xl font-bold text-green-700 mb-8">Projects</h2>
+  <div
+    className="grid gap-8 w-full"
+    style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}
+  >
+    {projects.map((project) => {
+      const firstMedia = project.media && project.media.length > 0 ? project.media[0] : null;
 
-              return (
-                <div
-                  key={project.id}
-                  onClick={() => setSelectedProject(project)}
-                  className="border border-green-200 rounded-xl p-6 flex flex-col items-center gap-4 cursor-pointer hover:shadow-lg transition-shadow"
-                >
-                  {/* Media preview */}
-                  {firstMedia ? (
-                    firstMedia.type === 'image' ? (
-                      <img
-                        src={firstMedia.src}
-                        alt={firstMedia.alt || project.title}
-                        className="w-full h-64 md:h-72 lg:h-80 object-cover rounded"
-                      />
-                    ) : firstMedia.type === 'video' ? (
-                      <iframe
-                        src={firstMedia.src}
-                        title={firstMedia.alt || project.title}
-                        className="w-full h-64 md:h-72 lg:h-80 rounded"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    ) : null
-                  ) : (
-                    <div className="w-full h-64 md:h-72 lg:h-80 bg-green-100 flex items-center justify-center text-green-500 font-bold text-2xl">
-                      No Preview
-                    </div>
-                  )}
+      return (
+        <div
+          key={project.id}
+          onClick={() => setSelectedProject(project)}
+          className="border border-green-200 rounded-xl overflow-hidden cursor-pointer hover:shadow-lg transition-shadow flex flex-col"
+        >
+          {/* Media preview */}
+          {firstMedia ? (
+            firstMedia.type === 'image' ? (
+              <img
+                src={firstMedia.src}
+                alt={firstMedia.alt || project.title}
+                className="w-full h-64 md:h-72 lg:h-80 object-cover"
+              />
+            ) : firstMedia.type === 'video' ? (
+              <iframe
+                src={firstMedia.src}
+                title={firstMedia.alt || project.title}
+                className="w-full h-64 md:h-72 lg:h-80"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            ) : null
+          ) : (
+            <div className="w-full h-64 md:h-72 lg:h-80 bg-green-100 flex items-center justify-center text-green-500 font-bold text-2xl">
+              No Preview
+            </div>
+          )}
 
-                  {/* Title */}
-                  <h3 className="font-semibold text-xl text-gray-900">{project.title}</h3>
-
-                  {/* Date interval */}
-                  {project.date && <p className="text-sm text-gray-500">{project.date}</p>}
-
-                  {/* Short description */}
-                  {project.short && <p className="text-base text-gray-600 text-center">{project.short}</p>}
-                </div>
-              );
-            })}
+          {/* Text content */}
+          <div className="p-6 flex-1 flex flex-col min-w-0">
+            <h3 className="font-semibold text-xl text-gray-900 break-words">{project.title}</h3>
+            {project.date && <p className="text-sm text-gray-500 mt-1">{project.date}</p>}
+            {project.short && (
+              <p className="text-base text-gray-600 mt-2 break-words">{project.short}</p>
+            )}
           </div>
-        </section>
+        </div>
+      );
+    })}
+  </div>
+</section>
+
 
         {/* CONTACT */}
         <section id="contact" className="py-16">
