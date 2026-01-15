@@ -394,17 +394,23 @@ export default function AJPortfolioPanel() {
 <section id="projects" className="py-16">
   <h2 className="text-2xl font-bold text-green-700 mb-8">Projects</h2>
   <div
-    className="grid gap-8 w-full"
-    style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}
+    className="grid gap-8 w-full max-w-full mx-auto"
+    style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }} // min width updated
   >
     {projects.map((project) => {
       const firstMedia = project.media && project.media.length > 0 ? project.media[0] : null;
 
       return (
-        <div
+        <motion.div
           key={project.id}
+          layout
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+          whileHover={{ scale: 1.03 }}
+          className="border border-green-200 rounded-xl p-6 flex flex-col items-center gap-4 cursor-pointer hover:shadow-lg transition-shadow min-w-[300px]"
           onClick={() => setSelectedProject(project)}
-          className="border border-green-200 rounded-xl overflow-hidden cursor-pointer hover:shadow-lg transition-shadow flex flex-col"
         >
           {/* Media preview */}
           {firstMedia ? (
@@ -412,13 +418,13 @@ export default function AJPortfolioPanel() {
               <img
                 src={firstMedia.src}
                 alt={firstMedia.alt || project.title}
-                className="w-full h-64 md:h-72 lg:h-80 object-cover"
+                className="w-full h-64 md:h-72 lg:h-80 object-cover rounded"
               />
             ) : firstMedia.type === 'video' ? (
               <iframe
                 src={firstMedia.src}
                 title={firstMedia.alt || project.title}
-                className="w-full h-64 md:h-72 lg:h-80"
+                className="w-full h-64 md:h-72 lg:h-80 rounded"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
@@ -429,19 +435,21 @@ export default function AJPortfolioPanel() {
             </div>
           )}
 
-          {/* Text content */}
-          <div className="p-6 flex-1 flex flex-col min-w-0">
-            <h3 className="font-semibold text-xl text-gray-900 break-words">{project.title}</h3>
-            {project.date && <p className="text-sm text-gray-500 mt-1">{project.date}</p>}
-            {project.short && (
-              <p className="text-base text-gray-600 mt-2 break-words">{project.short}</p>
-            )}
-          </div>
-        </div>
+          {/* Title */}
+          <h3 className="font-semibold text-xl text-gray-900 text-center break-words">{project.title}</h3>
+
+          {/* Date interval */}
+          {project.date && <p className="text-sm text-gray-500">{project.date}</p>}
+
+          {/* Short description */}
+          {project.short && <p className="text-base text-gray-600 text-center">{project.short}</p>}
+        </motion.div>
       );
     })}
   </div>
 </section>
+
+
 
 
         {/* CONTACT */}
