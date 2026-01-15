@@ -19,6 +19,14 @@ export default function Modal({ isOpen, onClose, children }) {
 
   if (!isOpen) return null;
 
+  // Click outside to close handler
+  const handleOverlayClick = (e) => {
+    // Only close if the overlay itself was clicked, not the modal content
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
     <AnimatePresence>
       <motion.div
@@ -28,6 +36,7 @@ export default function Modal({ isOpen, onClose, children }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        onClick={handleOverlayClick} // <-- overlay click closes modal
       >
         <motion.div
           className="bg-white rounded-xl p-6 max-w-3xl w-full relative"
