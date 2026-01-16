@@ -369,10 +369,23 @@ export default function AJPortfolioPanel() {
         </div>
 
         {/* Text content */}
-        <div className="p-6 flex-1 flex flex-col min-w-0">
-          <h3 className="font-semibold text-xl text-gray-900 text-center break-words">{project.title}</h3>
-          {project.date && <p className="text-sm text-gray-500 mt-1">{project.date}</p>}
-          {project.short && <p className="text-base text-gray-600 text-center mt-2 break-words">{project.short}</p>}
+        <div className="p-6 flex-1 flex flex-col min-w-0 relative pb-12">
+          <h3 className="font-semibold text-xl text-gray-900 text-center break-words">
+            {project.title}
+          </h3>
+
+          {project.short && (
+            <p className="text-base text-gray-600 text-center mt-2 break-words">
+              {project.short}
+            </p>
+          )}
+
+          {/* Date anchored bottom-right */}
+          {project.date && (
+            <p className="absolute bottom-4 right-6 text-sm text-gray-500">
+              {project.date}
+            </p>
+          )}
         </div>
       </motion.div>
     ))}
