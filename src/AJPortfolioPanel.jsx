@@ -30,6 +30,7 @@ export default function AJPortfolioPanel() {
       videoLink: null,
       posterLink: null,
       preview: "img/plybot2.jpg", // first image in PlybotContent
+      short: null,
       long: <PlybotContent />,
     },
     {
@@ -41,6 +42,7 @@ export default function AJPortfolioPanel() {
       videoLink: null,
       posterLink: null,
       preview: "img/velodyne.png", // first image in MDOTContent
+      short: null,
       long: <MDOTContent />,
     },
     {
@@ -52,6 +54,7 @@ export default function AJPortfolioPanel() {
       videoLink: null,
       posterLink: null,
       preview: "img/env_setup.png", // first image in CollisionContent
+      short: null,
       long: <CollisionContent />,
     },
     {
@@ -63,6 +66,7 @@ export default function AJPortfolioPanel() {
       videoLink: null,
       posterLink: null,
       preview: "img/carBox.jpg", // first image in DNNVehicleContent
+      short: null,
       long: <DNNVehicleContent />,
     },
     {
@@ -74,6 +78,7 @@ export default function AJPortfolioPanel() {
       videoLink: null,
       posterLink: null,
       preview: "img/victoriaPark.png", // first image in MobileRoboticsContent
+      short: null,
       long: <MobileRoboticsContent />,
     },
     {
@@ -85,6 +90,7 @@ export default function AJPortfolioPanel() {
       videoLink: "https://www.youtube.com/watch?v=a6qHyMERqR0?start=29",
       posterLink: null,
       preview: "img/trashbot.jpg", // first image in TrashbotContent
+      short: null,
       long: <TrashbotContent />,
     },
     {
@@ -96,6 +102,7 @@ export default function AJPortfolioPanel() {
       videoLink: "https://www.youtube.com/watch?v=B0mL6WQhMzk",
       posterLink: null,
       preview: "https://www.youtube.com/embed/B0mL6WQhMzk", // first video in BotLabContent
+      short: null,
       long: <BotLabContent />,
     },
     {
@@ -107,6 +114,7 @@ export default function AJPortfolioPanel() {
       videoLink: null,
       posterLink: null,
       preview: "img/RRT_Planner.png", // first image in KinevalContent
+      short: null,
       long: <KinevalContent />,
     },
     {
@@ -118,6 +126,7 @@ export default function AJPortfolioPanel() {
       videoLink: "https://www.youtube.com/watch?v=BY0sY5yXz3I",
       posterLink: null,
       preview: "https://www.youtube.com/embed/BY0sY5yXz3I", // first video in PIDControllerContent
+      short: null,
       long: <PIDControllerContent />,
     },
     {
@@ -129,6 +138,7 @@ export default function AJPortfolioPanel() {
       videoLink: null,
       posterLink: "/documents/KECPoster.pdf",
       preview: "img/fafimage.jpg",
+      short: null,
       long: <KECContent />,
     },
     {
@@ -140,6 +150,7 @@ export default function AJPortfolioPanel() {
       videoLink: "https://www.youtube.com/watch?v=b2tw21Ra3BU",
       posterLink: "/documents/phlebPoster.pdf",
       preview: "img/phlebSimulationScreenshot.png",
+      short: null,
       long: <PhlebSimulationContent />,
     }
   ];
