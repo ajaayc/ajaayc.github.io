@@ -60,7 +60,8 @@ export default function AJPortfolioPanel() {
     {
       title: "Deep Neural Network Vehicle Detection System",
       date: "Nov 2017 - Dec 2017",
-      paperLink: "https://github.com/ajaayc/Car_Detection/blob/master/Perception%20Final%20Report.pdf",
+      paperLink:
+        "https://github.com/ajaayc/Car_Detection/blob/master/Perception%20Final%20Report.pdf",
       codeLink: "https://github.com/ajaayc/Car_Detection",
       siteLink: null,
       videoLink: null,
@@ -152,11 +153,8 @@ export default function AJPortfolioPanel() {
       preview: "img/phlebSimulationScreenshot.png",
       short: null,
       long: <PhlebSimulationContent />,
-    }
+    },
   ];
-  
-  
-  
 
   const companies = [
     {
@@ -180,7 +178,10 @@ export default function AJPortfolioPanel() {
       logo: '/img/company_img/Stellantis_logo_blue_background.jpg',
       links: [
         { name: 'Stellantis', url: 'https://www.stellantis.com/en' },
-        { name: 'STLA AutoDrive', url: 'https://europe.autonews.com/automakers/stellantis-launches-23-billion-software-push' },
+        {
+          name: 'STLA AutoDrive',
+          url: 'https://europe.autonews.com/automakers/stellantis-launches-23-billion-software-push',
+        },
       ],
     },
     {
@@ -199,33 +200,32 @@ export default function AJPortfolioPanel() {
       id: 4,
       name: 'University of Michigan Transportation Research Institute (UMTRI)',
       role: 'Graduate Student Research Assistant',
-      description: 'Worked on software/hardware system that interfaces with Lidar, camera, GPS, and Mobileye.',
+      description:
+        'Worked on software/hardware system that interfaces with Lidar, camera, GPS, and Mobileye.',
       backgroundImage: '/img/company_img/mcity.jpg',
       logo: '/img/company_img/umtri_logo.png',
-      links: [
-        { name: 'UMTRI', url: 'https://www.umtri.umich.edu/' },
-      ],
+      links: [{ name: 'UMTRI', url: 'https://www.umtri.umich.edu/' }],
     },
   ];
 
-
-
   return (
     <div className="flex flex-1 bg-white text-gray-900 font-sans antialiased">
-
       {/* Main Content */}
       <main className="flex-1 max-w-full mx-auto px-6 py-16">
-
         {/* ABOUT */}
         <section id="about" className="py-16">
           <h2 className="text-3xl font-extrabold text-green-800 mb-8">About Me</h2>
 
           <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
-            I am a software engineer, roboticist, and AI enthusiast with a background in software development and mathematics. I pursued my bachelors in computer science and my masters in electrical and computer engineering at the University of Michigan in Ann Arbor, MI.
+            I am a software engineer, roboticist, and AI enthusiast with a background in software
+            development and mathematics. I pursued my bachelors in computer science and my masters
+            in electrical and computer engineering at the University of Michigan in Ann Arbor, MI.
           </p>
 
           <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
-            Professional hobbies include tinkering with all kinds of software and hardware systems, architecting robust software (especially for autonomous systems), and playing with the language of mathematics.
+            Professional hobbies include tinkering with all kinds of software and hardware systems,
+            architecting robust software (especially for autonomous systems), and playing with the
+            language of mathematics.
           </p>
 
           <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
@@ -238,7 +238,8 @@ export default function AJPortfolioPanel() {
             >
               hunting for treasure
             </a>
-            , playing boardgames, traveling, and reading an assortment of fictional and non-fictional texts.
+            , playing boardgames, traveling, and reading an assortment of fictional and
+            non-fictional texts.
           </p>
 
           <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
@@ -264,195 +265,205 @@ export default function AJPortfolioPanel() {
           </p>
 
           <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
-            This site serves primarily as a personal portfolio of various projects that I have worked on.
+            This site serves primarily as a personal portfolio of various projects that I have
+            worked on.
           </p>
         </section>
 
-{/* PROFESSIONAL EXPERIENCE CARDS */}
-<section id="experience" className="py-16">
-  <h2 className="text-2xl font-bold text-green-700 mb-6">Professional Experience</h2>
+        {/* PROFESSIONAL EXPERIENCE CARDS */}
+        <section id="experience" className="py-16">
+          <h2 className="text-2xl font-bold text-green-700 mb-6">
+            Professional Experience
+          </h2>
 
-  <div
-    className="grid gap-6 w-full max-w-full mx-auto"
-    style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}
-  >
-    {companies.map((company) => (
-      <div
-        key={company.id}
-        className="border border-green-200 rounded-xl overflow-hidden shadow-lg flex flex-col bg-white"
-      >
-        {/* Main background image at top */}
-        <div
-          className="w-full h-64 md:h-80 lg:h-96 bg-cover bg-center"
-          style={{ backgroundImage: `url(${company.backgroundImage})` }}
-        />
+          <div
+            className="grid gap-6 w-full max-w-full mx-auto"
+            style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}
+          >
+            {companies.map((company) => (
+              <div
+                key={company.id}
+                className="border border-green-200 rounded-xl overflow-hidden shadow-lg flex flex-col bg-white"
+              >
+                {/* Main background image at top */}
+                <div
+                  className="w-full h-64 md:h-80 lg:h-96 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${company.backgroundImage})` }}
+                />
 
-        {/* Content: logo left, text right */}
-        <div className="p-4 flex flex-col flex-1 min-w-0">
-          <div className="flex flex-row gap-4">
-            {/* Logo */}
-            <div className="flex-shrink-0 flex items-start">
-              <img
-                src={company.logo}
-                alt={`${company.name} logo`}
-                className="w-20 h-20 md:w-24 md:h-24 object-contain rounded bg-white/80 p-1"
-              />
-            </div>
+                {/* Content: logo left, text right */}
+                <div className="p-4 flex flex-col flex-1 min-w-0">
+                  <div className="flex flex-row gap-4">
+                    {/* Logo */}
+                    <div className="flex-shrink-0 flex items-start">
+                      <img
+                        src={company.logo}
+                        alt={`${company.name} logo`}
+                        className="w-20 h-20 md:w-24 md:h-24 object-contain rounded bg-white/80 p-1"
+                      />
+                    </div>
 
-            {/* Text content */}
-            <div className="flex-1 flex flex-col min-w-0">
-              <h3 className="text-lg font-semibold text-gray-900 break-words">{company.name}</h3>
-              {company.role && (
-                <p className="text-gray-600 text-sm mb-2 break-words">{company.role}</p>
-              )}
-              <p className="text-gray-700 text-sm break-words">{company.description}</p>
-            </div>
-          </div>
+                    {/* Text content */}
+                    <div className="flex-1 flex flex-col min-w-0">
+                      <h3 className="text-lg font-semibold text-gray-900 break-words">
+                        {company.name}
+                      </h3>
+                      {company.role && (
+                        <p className="text-gray-600 text-sm mb-2 break-words">
+                          {company.role}
+                        </p>
+                      )}
+                      <p className="text-gray-700 text-sm break-words">
+                        {company.description}
+                      </p>
+                    </div>
+                  </div>
 
-          {/* Links/buttons: aligned bottom-right */}
-          {company.links && company.links.length > 0 && (
-            <div className="flex flex-col mt-auto">
-              <div className="flex flex-wrap gap-2 justify-end pt-3">
-                {company.links.map((link, idx) => (
-                  <a
-                    key={idx}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition text-sm"
-                  >
-                    {link.name}
-                  </a>
-                ))}
+                  {/* Links/buttons: aligned bottom-right */}
+                  {company.links && company.links.length > 0 && (
+                    <div className="flex flex-col mt-auto">
+                      <div className="flex flex-wrap gap-2 justify-end pt-3">
+                        {company.links.map((link, idx) => (
+                          <a
+                            key={idx}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition text-sm"
+                          >
+                            {link.name}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
-        </div>
-      </div>
-    ))}
-  </div>
-</section>
+            ))}
+          </div>
+        </section>
 
+        {/* PROJECT CARDS */}
+        <section id="projects" className="py-16">
+          <h2 className="text-2xl font-bold text-green-700 mb-8">Projects</h2>
+          <div
+            className="grid gap-8 w-full max-w-full mx-auto"
+            style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}
+          >
+            {projects.map((project) => (
+              <motion.div
+                key={project.title} // using title as unique key
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.03 }}
+                className="border border-green-200 rounded-xl flex flex-col hover:shadow-lg transition-shadow min-w-[300px] cursor-pointer"
+                onClick={() => setSelectedProject(project)}
+              >
+                {/* Media preview */}
+                <div className="w-full flex-shrink-0">
+                  {project.preview.endsWith('.jpg') ||
+                  project.preview.endsWith('.png') ||
+                  project.preview.endsWith('.jpeg') ? (
+                    <img
+                      src={project.preview}
+                      alt={project.title}
+                      className="w-full h-72 md:h-80 lg:h-96 object-cover rounded-t-xl"
+                    />
+                  ) : project.preview.startsWith('http') ? (
+                    <iframe
+                      src={project.preview}
+                      title={project.title}
+                      className="w-full h-72 md:h-80 lg:h-96 rounded-t-xl pointer-events-none"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <div className="w-full h-72 md:h-80 lg:h-96 bg-green-100 flex items-center justify-center text-green-500 font-bold text-2xl rounded-t-xl">
+                      No Preview
+                    </div>
+                  )}
+                </div>
 
+                {/* Text content */}
+                <div className="p-6 flex-1 flex flex-col min-w-0 relative pb-12">
+                  <h3 className="font-semibold text-xl text-gray-900 text-center break-words">
+                    {project.title}
+                  </h3>
 
-{/* PROJECT CARDS */}
-<section id="projects" className="py-16">
-  <h2 className="text-2xl font-bold text-green-700 mb-8">Projects</h2>
-  <div
-    className="grid gap-8 w-full max-w-full mx-auto"
-    style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}
-  >
-    {projects.map((project) => (
-      <motion.div
-        key={project.title} // using title as unique key
-        layout
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.3 }}
-        whileHover={{ scale: 1.03 }}
-        className="border border-green-200 rounded-xl flex flex-col hover:shadow-lg transition-shadow min-w-[300px] cursor-pointer"
-        onClick={() => setSelectedProject(project)}
-      >
-        {/* Media preview */}
-        <div className="w-full flex-shrink-0">
-          {project.preview.endsWith('.jpg') ||
-          project.preview.endsWith('.png') ||
-          project.preview.endsWith('.jpeg') ? (
-            <img
-              src={project.preview}
-              alt={project.title}
-              className="w-full h-72 md:h-80 lg:h-96 object-cover rounded-t-xl"
-            />
-          ) : project.preview.startsWith('http') ? (
-            <iframe
-              src={project.preview}
-              title={project.title}
-              className="w-full h-72 md:h-80 lg:h-96 rounded-t-xl pointer-events-none"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          ) : (
-            <div className="w-full h-72 md:h-80 lg:h-96 bg-green-100 flex items-center justify-center text-green-500 font-bold text-2xl rounded-t-xl">
-              No Preview
-            </div>
-          )}
-        </div>
+                  {project.short && (
+                    <p className="text-base text-gray-600 text-center mt-2 break-words">
+                      {project.short}
+                    </p>
+                  )}
 
-        {/* Text content */}
-        <div className="p-6 flex-1 flex flex-col min-w-0 relative pb-12">
-          <h3 className="font-semibold text-xl text-gray-900 text-center break-words">
-            {project.title}
-          </h3>
+                  {/* Date anchored bottom-right */}
+                  {project.date && (
+                    <p className="absolute bottom-4 right-6 text-sm text-gray-500">
+                      {project.date}
+                    </p>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
-          {project.short && (
-            <p className="text-base text-gray-600 text-center mt-2 break-words">
-              {project.short}
-            </p>
-          )}
-
-          {/* Date anchored bottom-right */}
-          {project.date && (
-            <p className="absolute bottom-4 right-6 text-sm text-gray-500">
-              {project.date}
-            </p>
-          )}
-        </div>
-      </motion.div>
-    ))}
-  </div>
-</section>
-
-{/* MISC WORK */}
-<section id="misc" className="py-16">
-  <h2 className="text-2xl font-bold text-green-700 mb-6">Misc Work</h2>
-  <p className="text-gray-600 leading-relaxed max-w-full">
-
-
-    <h3 className="text-xl font-semibold text-green-700 mb-4">Papers</h3>
-    <p>
-  <a
-    href="/documents/automation_theft_of_labor.pdf"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-blue-600 underline"
-  >
-    Automation, the Thief of Labor
-  </a>
-</p>
-<p>
-      <a
-        href="/documents/robotic_caregivers_for_the_elderly_ethical_examination.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-blue-600 underline"
-      >
-        Robotic Caregivers for the Elderly, An Ethical Examination
-      </a>
-    </p>
-  </p>
-</section>
-
-          {/* CONTACT */}
-          <section id="contact" className="py-16">
-            <h2 className="text-2xl font-bold text-green-700 mb-6">Contact</h2>
-            <p className="text-gray-600 leading-relaxed max-w-full">
-              Please shoot me a message through {' '}
+        {/* MISC WORK */}
+        <section id="misc" className="py-16">
+          <h2 className="text-2xl font-bold text-green-700 mb-6">Misc Work</h2>
+          <p className="text-gray-600 leading-relaxed max-w-full">
+            <h3 className="text-xl font-semibold text-green-700 mb-4">Papers</h3>
+            <p>
               <a
-                href="https://www.linkedin.com/in/ajaayc/"
+                href="/documents/automation_theft_of_labor.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 underline"
               >
-                Linkedin
+                Automation, the Thief of Labor
               </a>
-              . I look forward to connecting with you!
             </p>
-          </section>
-    </main>
+            <p>
+              <a
+                href="/documents/robotic_caregivers_for_the_elderly_ethical_examination.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline"
+              >
+                Robotic Caregivers for the Elderly, An Ethical Examination
+              </a>
+            </p>
+          </p>
+        </section>
+
+        {/* CONTACT */}
+        <section id="contact" className="py-16">
+          <h2 className="text-2xl font-bold text-green-700 mb-6">Contact</h2>
+          <p className="text-gray-600 leading-relaxed max-w-full">
+            Please shoot me a message through{' '}
+            <a
+              href="https://www.linkedin.com/in/ajaayc/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline"
+            >
+              Linkedin
+            </a>
+            . I look forward to connecting with you!
+          </p>
+        </section>
+      </main>
 
       {/* Modals */}
-      {selectedProject && <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />}
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </div>
   );
 }
