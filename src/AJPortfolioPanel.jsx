@@ -13,6 +13,7 @@ import TrashbotContent from './projects/TrashbotContent';
 import BotLabContent from './projects/BotLabContent';
 import KinevalContent from './projects/KinevalContent';
 import PIDControllerContent from './projects/PIDControllerContent';
+import KECContent from './projects/KECContent';
 
 export default function AJPortfolioPanel() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -118,6 +119,17 @@ export default function AJPortfolioPanel() {
       preview: "https://www.youtube.com/embed/BY0sY5yXz3I", // first video in PIDControllerContent
       long: <PIDControllerContent />,
     },
+    {
+      title: "Cloud-Based Ocular Disease Diagnosis with Machine Learning",
+      date: "Jan 2016 - Dec 2016",
+      paperLink: null,
+      codeLink: null,
+      siteLink: null,
+      videoLink: null,
+      posterLink: "/documents/KECPoster.pdf",
+      preview: "img/fafimage.jpg",
+      long: <KECContent />,
+    }
   ];
   
   
