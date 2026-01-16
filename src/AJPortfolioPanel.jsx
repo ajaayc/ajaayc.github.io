@@ -14,6 +14,7 @@ import BotLabContent from './projects/BotLabContent';
 import KinevalContent from './projects/KinevalContent';
 import PIDControllerContent from './projects/PIDControllerContent';
 import KECContent from './projects/KECContent';
+import PhlebSimulationContent from './projects/PhlebSimulationContent';
 
 export default function AJPortfolioPanel() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -129,6 +130,17 @@ export default function AJPortfolioPanel() {
       posterLink: "/documents/KECPoster.pdf",
       preview: "img/fafimage.jpg",
       long: <KECContent />,
+    },
+    {
+      title: "Discrete Event Simulation of a Phlebotomy Clinic",
+      date: "Jul 2015 - Feb 2016",
+      paperLink: null,
+      codeLink: null,
+      siteLink: null,
+      videoLink: "https://www.youtube.com/watch?v=b2tw21Ra3BU",
+      posterLink: "/documents/phlebPoster.pdf",
+      preview: "img/phlebSimulationScreenshot.png",
+      long: <PhlebSimulationContent />,
     }
   ];
   
