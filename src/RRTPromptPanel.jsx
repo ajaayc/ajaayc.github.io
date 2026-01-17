@@ -14,7 +14,6 @@ export default function RRTPromptPanel({ onEnter, height = 755 }) {
     "",
     "The bidirectional RRT-connect",
     "algorithm is my personal favorite.",
-    "my personal favorite.",
     "",
     "It elicits a spectacular probabilistic",
     "dance...two rapidly expanding trees",
