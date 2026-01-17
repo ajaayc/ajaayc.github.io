@@ -227,7 +227,7 @@ export default function AJPortfolioPanel() {
       <main className="flex-1 max-w-full mx-auto px-6 py-2">
         {/* ABOUT */}
         <section id="about" className="py-16">
-          <h2 className="text-3xl font-bold text-green-700 mb-8">About Me</h2>
+          <h1 className="text-3xl font-bold text-green-700 mb-8">About Me</h1>
 
           <p className="text-gray-700 leading-relaxed text-xl max-w-full mb-8">
             I am a software engineer, roboticist, and AI enthusiast with a background in software
@@ -285,9 +285,9 @@ export default function AJPortfolioPanel() {
 
         {/* PROFESSIONAL EXPERIENCE CARDS */}
         <section id="experience" className="py-12">
-          <h2 className="text-3xl font-bold text-green-700 mb-6">
+          <h1 className="text-3xl font-bold text-green-700 mb-6">
             Professional Experience
-          </h2>
+          </h1>
 
           <div
             className="grid gap-6 w-full max-w-full mx-auto"
@@ -318,9 +318,9 @@ export default function AJPortfolioPanel() {
 
                     {/* Text content */}
                     <div className="flex-1 flex flex-col min-w-0">
-                      <h3 className="text-lg font-semibold text-gray-900 break-words">
+                      <h2 className="text-lg font-semibold text-gray-900 break-words">
                         {company.name}
-                      </h3>
+                      </h2>
                       {company.role && (
                         <p className="text-gray-600 text-sm mb-2 break-words">
                           {company.role}
@@ -358,7 +358,7 @@ export default function AJPortfolioPanel() {
 
         {/* PROJECT CARDS */}
         <section id="projects" className="py-12">
-          <h2 className="text-3xl font-bold text-green-700 mb-8">Projects</h2>
+          <h1 className="text-3xl font-bold text-green-700 mb-8">Projects</h1>
           <div
             className="grid gap-8 w-full max-w-full mx-auto"
             style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}
@@ -402,9 +402,9 @@ export default function AJPortfolioPanel() {
 
                 {/* Text content */}
                 <div className="p-6 flex-1 flex flex-col min-w-0 relative pb-12">
-                  <h3 className="font-semibold text-xl text-gray-900 text-center break-words">
+                  <h2 className="font-semibold text-xl text-gray-900 text-center break-words">
                     {project.title}
-                  </h3>
+                  </h2>
 
                   {project.short && (
                     <p className="text-base text-gray-600 text-center mt-2 break-words">
@@ -426,8 +426,8 @@ export default function AJPortfolioPanel() {
 
         {/* MISC WORK */}
         <section id="misc" className="py-16">
-          <h2 className="text-3xl font-bold text-green-700 mb-6">Misc Work</h2>
-          <h3 className="text-xl font-semibold text-green-700 mb-4">Papers</h3>
+          <h1 className="text-3xl font-bold text-green-700 mb-6">Misc Work</h1>
+          <h2 className="text-xl font-semibold text-green-700 mb-4">Papers</h2>
           <p className="text-gray-600 leading-relaxed max-w-full">
             <p>
               <a
@@ -450,12 +450,12 @@ export default function AJPortfolioPanel() {
               </a>
             </p>
           </p>
-          {/* <h3 className="text-xl font-semibold text-green-700 mb-4"> Web Development Projects </h3>  */}
+          {/* <h2 className="text-xl font-semibold text-green-700 mb-4"> Web Development Projects </h2>  */}
         </section>
 
         {/* CONTACT */}
         <section id="contact" className="py-8">
-          <h2 className="text-3xl font-bold text-green-700 mb-6">Contact</h2>
+          <h1 className="text-3xl font-bold text-green-700 mb-6">Contact</h1>
           <p className="text-gray-600 leading-relaxed max-w-full">
             I am best reached via email:
             <img
