@@ -34,17 +34,17 @@ export default function RRTPromptPanel({ onEnter, height = 755 }) {
     "",
     "ajaay@SPECTRAL-PC ~ > \\",
     "bazel run ///main:rrt_runner",
-    "------------------------------------------",
-    "            Press ENTER to run            ",
-    "           the bidirectional RRT          ",
-    "------------------------------------------"
+    "------------------------------------",
+    "         Press ENTER to run         ",
+    "        the bidirectional RRT       ",
+    "------------------------------------"
   ];
 
   const highlightLines = [
-    "------------------------------------------",
-    "            Press ENTER to run            ",
-    "           the bidirectional RRT          ",
-    "------------------------------------------"
+    "------------------------------------",
+    "         Press ENTER to run         ",
+    "        the bidirectional RRT       ",
+    "------------------------------------"
   ];
 
   useEffect(() => {
