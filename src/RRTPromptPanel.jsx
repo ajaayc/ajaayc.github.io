@@ -102,14 +102,19 @@ export default function RRTPromptPanel({ onEnter, height = 755 }) {
     // Initial wrap
     wrapText();
 
-    // Re-wrap on resize
+    // Re-wrap on resize with debouncing
+    let resizeTimeout;
     function handleResize() {
-      wrapText();
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        wrapText();
+      }, 150); // Debounce resize events
     }
 
     window.addEventListener("resize", handleResize);
     
     return () => {
+      clearTimeout(resizeTimeout);
       window.removeEventListener("resize", handleResize);
     };
   }, [height]); // Only re-run when height changes
