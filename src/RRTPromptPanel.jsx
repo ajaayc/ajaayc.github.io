@@ -1,7 +1,7 @@
 // RRTPromptPanel.jsx
 import React, { useState, useEffect, useRef } from "react";
 
-export default function RRTPromptPanel({ onEnter, height = 735 }) {
+export default function RRTPromptPanel({ onEnter, height = 755 }) {
   const canvasRef = useRef(null);
   const [showCursor, setShowCursor] = useState(true);
   const [entered, setEntered] = useState(false);
@@ -35,13 +35,15 @@ export default function RRTPromptPanel({ onEnter, height = 735 }) {
     "ajaay@SPECTRAL-PC ~ > \\",
     "bazel run ///main:rrt_runner",
     "------------------------------------------",
-    "Press ENTER to run the bidirectional RRT",
+    "            Press ENTER to run            ",
+    "           the bidirectional RRT          ",
     "------------------------------------------"
   ];
 
   const highlightLines = [
     "------------------------------------------",
-    "Press ENTER to run the bidirectional RRT",
+    "            Press ENTER to run            ",
+    "           the bidirectional RRT          ",
     "------------------------------------------"
   ];
 
