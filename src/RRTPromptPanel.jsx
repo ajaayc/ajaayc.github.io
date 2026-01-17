@@ -11,27 +11,28 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
   const promptLines = [
     "ajaay@SPECTRAL-PC ~ > cat something_cool.txt",
     "",
-    "The bidirectional RRT-connect algorithm is my personal favorite.",
+    "The bidirectional RRT-connect algorithm is my",
+    "personal favorite.",
     "",
-    "It elicits a spectacular probabilistic dance...two rapidly expanding",
-    "trees of nodes in the configuration space.",
+    "It elicits a spectacular probabilistic dance...two",
+    "rapidly expanding trees of nodes in the",
+    "configuration space.",
     "",
-    "Reaching towards each other to find a connection...a collision-free",
-    "path from start to end.",
+    "Reaching towards each other to find a connection...",
+    "a collision-free path from start to end.",
     "",
     "Want to see it live in action?",
-    "",
     "ajaay@SPECTRAL-PC ~ > bazel build //main:rrt_runner",
     "ajaay@SPECTRAL-PC ~ > ./bazel-bin/main/rrt_runner",
-    "-----------------------------------------------------------------------------",
+    "----------------------------------------------------",
     "Press ENTER to run the bidirectional RRT animation",
-    "-----------------------------------------------------------------------------"
+    "----------------------------------------------------"
   ];
 
   const highlightLines = [
-    "-----------------------------------------------------------------------------",
+    "----------------------------------------------------",
     "Press ENTER to run the bidirectional RRT animation",
-    "-----------------------------------------------------------------------------"
+    "----------------------------------------------------"
   ];
 
   useEffect(() => {
