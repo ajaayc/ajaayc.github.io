@@ -2,17 +2,16 @@
 import React from 'react';
 import { FaGithub, FaYoutube, FaLinkedin } from 'react-icons/fa';
 
-export default function LeftPanel({ id }) {
-  const iconSize = 52; // single variable for all icon sizes
+export default function LeftPanel() {
+  const iconSize = 52;
 
   return (
-    <aside id="left-panel" className="flex flex-col w-full md:w-80 bg-green-50 p-6 border-r border-green-200 h-full">
+    <aside className="w-full md:w-80 md:h-screen md:fixed top-0 left-0 bg-green-50 p-6 border-r border-green-200">
       <div className="flex-shrink-0 w-full flex justify-center mb-4">
-        {/* Profile image */}
         <img
           src="img/guardian_cropped.jpg"
           alt="AJ Profile"
-          className="w-72 h-96 rounded-2xl object-cover mt-6"
+          className="w-72 h-96 rounded-2xl object-cover"
         />
       </div>
       <h1 className="text-3xl font-bold text-green-800 mb-4">Hi, I'm AJ.</h1>
