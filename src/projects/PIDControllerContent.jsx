@@ -18,7 +18,8 @@ export default function PIDMagLevBallContent() {
       </div>
 
       <p>
-        For my Control Systems Design course, I worked in a team to build a PID controller in Simulink to control the position of a magnetically levitated ball. Building the controller required first deriving a physical model consisting of the magnetic and gravitational forces acting upon the ball. After deriving the physical model, we linearized the model about the input current required to cause the magnetic force to keep the ball at a constant height. Following that, we tuned our PID controller to meet specifications for steady-state error, settling time, and overshoot.
+        For my Control Systems Design course, I worked in a team to build a PID controller in Simulink to control the position of a magnetically levitated ball. </p>
+      <p>Building the controller required first deriving a physical model consisting of the magnetic and gravitational forces acting upon the ball. After deriving the physical model, we linearized the model about the input current required to cause the magnetic force to keep the ball at a constant height. Following that, we tuned our PID controller to meet specifications for steady-state error, settling time, and overshoot.
       </p>
     </div>
   );
