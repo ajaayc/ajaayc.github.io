@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Top Navigation Bar */}
+      {/* Top Navigation Bar (fixed on all screens) */}
       <TopNavigationBar scrollToSection={(id) => {
         const el = document.querySelector(`#${id}`);
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -30,16 +30,13 @@ function App() {
       {/* Layout container: left panel + main content */}
       <div className="flex flex-col md:flex-row">
         {/* LEFT PANEL */}
-        <div className="w-full md:w-80 md:h-screen md:fixed top-16 md:top-16 left-0 bg-green-50 border-r border-green-200">
+        <div className="w-full md:w-80 md:h-screen md:fixed md:top-16 left-0 bg-green-50 border-r border-green-200 pt-16 md:pt-0">
           <LeftPanel />
         </div>
 
         {/* MAIN CONTENT */}
-        <div className="flex-1 md:ml-80 pt-16">
-          {/* LLM Animation Panel */}
+        <div className="flex-1 md:ml-80 pt-0 md:pt-16">
           <LLMAnimationPanel />
-
-          {/* Portfolio */}
           <AJPortfolioPanel />
 
           {/* RRT Section */}
