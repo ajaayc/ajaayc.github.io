@@ -5,11 +5,18 @@ export default function PlybotTestbed() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-4 justify-center mt-4">
+        <img src="img/plybot3.jpg" alt="Plybot prototype" className="w-full max-w-sm rounded" />
         <img src="img/plybot2.jpg" alt="Plybot prototype" className="w-full max-w-sm rounded" />
       </div>
 
+      <p className="text-red-600">
+        <b>
+          This is a work-in-progress project, which I started in late 2021. It has currently been shelved because life happens and priorities change. I may return to it at a future date when I see fit.
+        </b>
+      </p>
+
       <p>
-        I am working on an autonomous robotic platform that will eventually serve as my own personal testbed for implementing and evaluating algorithms for:
+        I began work on an autonomous robotic platform that would eventually serve as my own personal testbed for implementing and evaluating algorithms for:
       </p>
 
       <ul className="list-disc pl-5">
@@ -21,11 +28,11 @@ export default function PlybotTestbed() {
       </ul>
 
       <p>
-        This is a side project which I am personally directing in order to further expand my practical knowledge of electrical circuitry and embedded systems as well as implementations of algorithms for autonomous robotics.
+        This is a side project which I personally directed in order to further expand my practical knowledge of electrical circuitry and embedded systems as well as implementations of algorithms for autonomous robotics.
       </p>
 
       <p>
-        The images above depict an initial prototype (work in progress) that will be controlled by the <a href="https://www.ti.com/store/ti/en/p/product/?p=MSP-EXP430FR6989" className="text-blue-600 font-semibold hover:underline">MSP-EXP430FR6989</a> microcontroller board.
+        The images above depict an initial differential-drive prototype that would eventually be controlled by the <a href="https://www.ti.com/store/ti/en/p/product/?p=MSP-EXP430FR6989" className="text-blue-600 font-semibold hover:underline">MSP-EXP430FR6989</a> microcontroller board. In initial development, I used an Arduino Uno to control the motors.
       </p>
 
       <p>
@@ -37,7 +44,7 @@ export default function PlybotTestbed() {
       </p>
 
       <p>
-        I look forward to linking interesting videos of the Plybot Testbed in the near future as I make more progress on it. I plan to make the code and schematics publically available on Github for anyone who desires to replicate it.
+        If/when this project is in a working state, I plan to make the code and schematics publically available on Github for anyone who desires to replicate it.
       </p>
     </div>
   );

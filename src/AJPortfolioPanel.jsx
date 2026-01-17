@@ -22,14 +22,14 @@ export default function AJPortfolioPanel() {
 
   const projects = [
     {
-      title: "Plybot Testbed",
-      date: "Sept 2023 - Present",
+      title: "Plybot Testbed Initial Design",
+      date: "Sept 2021 - Feb 2022",
       paperLink: null,
       codeLink: null,
       siteLink: null,
       videoLink: null,
       posterLink: null,
-      preview: "img/plybot2.jpg", // first image in PlybotContent
+      preview: "img/plybot3.jpg", // first image in PlybotContent
       short: null,
       long: <PlybotContent />,
     },
