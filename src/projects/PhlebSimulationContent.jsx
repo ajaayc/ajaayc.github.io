@@ -21,7 +21,7 @@ return (
         </p>
 
         <p>
-            I developed the simulator in C++ as a CLI-based tool, which would aid hospital management in instituting policy changes that would increase patient throughput at the phlebotomy clinic. Hospital management could manipulate input various inputs of the simulator, such as the start/end time of the day, patient arrival rates (configurable as either a uniform or Poisson process), phlebotomist schedules, and the velocity of patient check-in and blood draws. Subsequently, management could then observe metrics pertinent to patient wait-times and phlebotomist utilization.
+            I developed the simulator in C++ as a CLI-based tool, which would aid hospital management in instituting policy changes that would increase patient throughput at the phlebotomy clinic. Hospital management could manipulate various inputs of the simulator, such as the start/end time of the day, patient arrival rates (configurable as either a uniform or Poisson process), phlebotomist schedules, and the velocity of patient check-in and blood draws. Subsequently, management could then observe metrics pertinent to patient wait-times and phlebotomist utilization.
         </p>
     </div>
 );
