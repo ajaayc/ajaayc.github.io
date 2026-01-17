@@ -189,10 +189,10 @@ export default function LLMAnimationPanel() {
   }, []);
 
   return (
-    <div style={{ width: "100%", height: "100%", overflow: "hidden", flex: 1 }}>
+    <div className="w-full flex-shrink-0 min-h-[24rem] md:min-h-[32rem] relative overflow-hidden">
       <canvas
         ref={canvasRef}
-        style={{ width: "100%", height: "100%", display: "block" }}
+        className="w-full h-full block"
       />
     </div>
   );

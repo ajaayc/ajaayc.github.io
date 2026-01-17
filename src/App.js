@@ -7,10 +7,7 @@ import RRTPromptPanel from './RRTPromptPanel';
 import { useState, useRef } from 'react';
 
 function App() {
-  const portfolioRef = useRef(null);
   const [rrtStarted, setRrtStarted] = useState(false);
-
-  //const rrtAnimationRef = useRef(null);
   const rrtPanelRef = useRef(null);
 
   const handleStartRRT = () => {
@@ -23,53 +20,43 @@ function App() {
     }
   };
 
-
   const scrollToSection = (id) => {
-    if (!portfolioRef.current) return;
-    const el = portfolioRef.current.querySelector(`#${id}`);
+    const el = document.querySelector(`#${id}`);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="h-screen flex flex-col">
       {/* Top Navigation Bar */}
       <TopNavigationBar scrollToSection={scrollToSection} />
 
       {/* Main Content Area */}
-      <div className="flex flex-1 w-full relative">
+      <div className="flex flex-1 overflow-hidden flex-col md:flex-row">
 
         {/* LEFT COLUMN: Left Panel */}
-        <div className="w-80 shrink-0 h-screen fixed top-0 left-0">
+        <div className="flex-shrink-0 bg-green-50 md:h-full">
           <LeftPanel />
         </div>
 
         {/* RIGHT COLUMN: LLM + Portfolio */}
-        <div className="flex flex-col flex-1 ml-80">
+        <div className="flex flex-col flex-1 overflow-auto">
           {/* LLM Animation Panel */}
           <LLMAnimationPanel />
 
           {/* Portfolio */}
-          <div ref={portfolioRef}>
-            <AJPortfolioPanel />
-          </div>
+          <AJPortfolioPanel />
 
           {/* RRT Section */}
-          <section id="rrt" className="pt-16 pb-0 px-0">
-          {/* RRTPromptPanel: user presses Enter to start */}
+          <section id="rrt" className="py-8 px-0 space-y-4">
+            {/* RRTPromptPanel: user presses Enter to start */}
             <RRTPromptPanel onEnter={handleStartRRT} />
 
             {/* RRTAnimationPanel: starts animation when rrtStarted is true */}
-            <RRTAnimationPanel ref={rrtPanelRef} navbarId="navbar" startAnimation={rrtStarted} />
+            <RRTAnimationPanel ref={rrtPanelRef} startAnimation={rrtStarted} />
           </section>
         </div>
 
       </div>
-
-
-
-      {/* Full-width animation panel */}
-      {/* <RRTAnimationPanel /> */}
-
     </div>
   );
 }
