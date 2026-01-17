@@ -118,7 +118,7 @@ export default function RRTPromptPanel({ onEnter, height = 350 }) {
         }
       }
 
-      // After Enter pressed
+      // After Enter is pressed
       if (entered) {
         const y = padding + linesToDisplay.length * lineHeight;
         ctx.shadowBlur = 6;
