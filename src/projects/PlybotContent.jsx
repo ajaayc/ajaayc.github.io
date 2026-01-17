@@ -40,11 +40,11 @@ export default function PlybotTestbed() {
       </p>
 
       <p>
-        I received inspiration for this project from the <a href="https://www.amazon.com/Robot-Builders-Bonanza-Gordon-McComb/dp/1260135012" className="text-blue-600 font-semibold hover:underline">Robot Builder's Bonanza</a>, authored by the late roboticist Gordan McComb. <a href="https://www.amazon.com/Practical-Electronics-Inventors-Fourth-Scherz/dp/1259587541" className="text-blue-600 font-semibold hover:underline">Practical Electronics for Inventors</a> has also been a very useful resource.
+        I received inspiration for this project from the <a href="https://www.amazon.com/Robot-Builders-Bonanza-Gordon-McComb/dp/1260135012" className="text-blue-600 font-semibold hover:underline">Robot Builder's Bonanza</a>, authored by the late roboticist Gordon McComb. <a href="https://www.amazon.com/Practical-Electronics-Inventors-Fourth-Scherz/dp/1259587541" className="text-blue-600 font-semibold hover:underline">Practical Electronics for Inventors</a> has also been a very useful resource.
       </p>
 
       <p>
-        If/when this project is in a working state, I plan to make the code and schematics publically available on Github for anyone who desires to replicate it.
+        If/when this project is in a working state, I plan to make the code and schematics publicly available on Github for anyone who desires to replicate it.
       </p>
     </div>
   );
