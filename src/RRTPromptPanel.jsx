@@ -1,51 +1,116 @@
 // RRTPromptPanel.jsx
 import React, { useState, useEffect, useRef } from "react";
 
+// Constants defined outside component to avoid re-creation
+const RAW_PROMPT_TEXT = [
+  "ajaay@SPECTRAL-PC ~ > \\",
+  "cat something_cool.txt",
+  "",
+  "The bidirectional RRT-connect algorithm is my personal favorite.",
+  "",
+  "It elicits a spectacular probabilistic dance...two rapidly expanding trees of nodes in the configuration space.",
+  "",
+  "Reaching towards each other to find a connection... a collision-free path from start to end.",
+  "",
+  "Want to see it live in action?",
+  "",
+  "ajaay@SPECTRAL-PC ~ > \\",
+  "bazel build //main:rrt_runner",
+  "",
+  "INFO: Build completed successfully, 2 total actions",
+  "",
+  "ajaay@SPECTRAL-PC ~ > \\",
+  "bazel run ///main:rrt_runner",
+  "------------------------------------",
+  "         Press ENTER to run         ",
+  "        the bidirectional RRT       ",
+  "------------------------------------"
+];
+
+const HIGHLIGHT_LINES = [
+  "------------------------------------",
+  "         Press ENTER to run         ",
+  "        the bidirectional RRT       ",
+  "------------------------------------"
+];
+
 export default function RRTPromptPanel({ onEnter, height = 755 }) {
   const canvasRef = useRef(null);
   const [showCursor, setShowCursor] = useState(true);
   const [entered, setEntered] = useState(false);
   const [linesToDisplay, setLinesToDisplay] = useState([]);
   const [charIndex, setCharIndex] = useState(0);
+  const [promptLines, setPromptLines] = useState([]);
 
-  const promptLines = [
-    "ajaay@SPECTRAL-PC ~ > \\",
-    "cat something_cool.txt",
-    "",
-    "The bidirectional RRT-connect",
-    "algorithm is my personal favorite.",
-    "my personal favorite.",
-    "",
-    "It elicits a spectacular probabilistic",
-    "dance...two rapidly expanding trees",
-    "of nodes in the configuration space.",
-    "",
-    "Reaching towards each other to find a",
-    "connection... a collision-free path",
-    "from start to end.",
-    "",
-    "Want to see it live in action?",
-    "",
-    "ajaay@SPECTRAL-PC ~ > \\",
-    "bazel build //main:rrt_runner",
-    "",
-    "INFO: Build completed successfully,",
-    "2 total actions",
-    "",
-    "ajaay@SPECTRAL-PC ~ > \\",
-    "bazel run ///main:rrt_runner",
-    "------------------------------------",
-    "         Press ENTER to run         ",
-    "        the bidirectional RRT       ",
-    "------------------------------------"
-  ];
+  // Wrap text based on canvas width
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext("2d");
+    const width = canvas.offsetWidth;
+    const fontSize = 16;
+    const padding = fontSize * 2;
+    const font = `${fontSize}px monospace`;
 
-  const highlightLines = [
-    "------------------------------------",
-    "         Press ENTER to run         ",
-    "        the bidirectional RRT       ",
-    "------------------------------------"
-  ];
+    function wrapText() {
+      const maxWidth = width - padding * 2;
+      ctx.font = font; // Set font for measurement
+      
+      const wrappedLines = [];
+      RAW_PROMPT_TEXT.forEach((para) => {
+        // Keep empty lines as-is
+        if (para === "") {
+          wrappedLines.push("");
+          return;
+        }
+        
+        // Don't wrap highlight lines
+        if (HIGHLIGHT_LINES.includes(para)) {
+          wrappedLines.push(para);
+          return;
+        }
+        
+        // Wrap regular text
+        const words = para.split(" ");
+        let line = "";
+        words.forEach((word) => {
+          const testLine = line + word + " ";
+          if (ctx.measureText(testLine).width > maxWidth) {
+            if (line !== "") {
+              wrappedLines.push(line.trim());
+              line = word + " ";
+            } else {
+              // Word is too long, add it anyway
+              wrappedLines.push(word);
+              line = "";
+            }
+          } else {
+            line = testLine;
+          }
+        });
+        if (line !== "") {
+          wrappedLines.push(line.trim());
+        }
+      });
+      
+      setPromptLines(wrappedLines);
+    }
+
+    // Initial wrap
+    wrapText();
+
+    // Re-wrap on resize
+    function handleResize() {
+      wrapText();
+    }
+
+    window.addEventListener("resize", handleResize);
+    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [height]); // Only re-run when height changes
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -81,7 +146,7 @@ export default function RRTPromptPanel({ onEnter, height = 755 }) {
         const x = padding;
         const y = padding + i * lineHeight;
 
-        if (highlightLines.includes(line)) {
+        if (HIGHLIGHT_LINES.includes(line)) {
           const pulse = !entered
             ? 8 + 6 * Math.sin(Date.now() * 0.004)
             : 6;
@@ -105,7 +170,7 @@ export default function RRTPromptPanel({ onEnter, height = 755 }) {
         const x = padding;
         const y = padding + linesToDisplay.length * lineHeight;
 
-        if (highlightLines.includes(fullLine)) {
+        if (HIGHLIGHT_LINES.includes(fullLine)) {
           const pulse = 8 + 6 * Math.sin(Date.now() * 0.004);
           ctx.shadowBlur = pulse;
           ctx.font = boldFont;
@@ -156,8 +221,10 @@ export default function RRTPromptPanel({ onEnter, height = 755 }) {
     }
 
     loop();
-    return () => cancelAnimationFrame(animationFrame);
-  }, [showCursor, linesToDisplay, charIndex, entered, height]);
+    return () => {
+      cancelAnimationFrame(animationFrame);
+    };
+  }, [showCursor, linesToDisplay, charIndex, entered, height, promptLines]);
 
   // Cursor blink
   useEffect(() => {
@@ -182,7 +249,7 @@ export default function RRTPromptPanel({ onEnter, height = 755 }) {
     }, 10);
 
     return () => clearTimeout(timeout);
-  }, [charIndex, linesToDisplay, entered]);
+  }, [charIndex, linesToDisplay, entered, promptLines]);
 
   // Enter key listener
   useEffect(() => {
