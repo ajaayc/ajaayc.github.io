@@ -7,8 +7,6 @@ export default function RRTPromptPanel({ onEnter, height = 735 }) {
   const [entered, setEntered] = useState(false);
   const [linesToDisplay, setLinesToDisplay] = useState([]);
   const [charIndex, setCharIndex] = useState(0);
-  const containerRef = useRef(null);
-
 
   const promptLines = [
     "ajaay@SPECTRAL-PC ~ > \\",
@@ -184,46 +182,20 @@ export default function RRTPromptPanel({ onEnter, height = 735 }) {
     return () => clearTimeout(timeout);
   }, [charIndex, linesToDisplay, entered]);
 
-  // Enter key listener (Desktop), touch listener (Mobile)
+  // Enter key listener
   useEffect(() => {
     function handleKeyDown(e) {
       if (e.key === "Enter" && !entered) {
         setEntered(true);
         onEnter();
-        removeListeners();
       }
     }
-  
-    function handleTouchStart() {
-      if (!entered) {
-        setEntered(true);
-        onEnter();
-        removeListeners();
-      }
-    }
-  
-    function removeListeners() {
-      window.removeEventListener("keydown", handleKeyDown);
-      const container = containerRef.current;
-      if (container) container.removeEventListener("touchstart", handleTouchStart);
-    }
-  
-    // Attach listeners
     window.addEventListener("keydown", handleKeyDown);
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener("touchstart", handleTouchStart, { passive: true });
-    }
-  
-    // Cleanup on unmount
-    return () => removeListeners();
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [entered, onEnter]);
-  
-  
 
   return (
     <div
-      ref={containerRef}
       className="w-full relative bg-black rounded-md shadow-lg overflow-hidden"
       style={{ height: `${height}px` }}
     >
