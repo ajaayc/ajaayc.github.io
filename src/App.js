@@ -1,11 +1,10 @@
-// App.js
+import React, { useState, useRef } from 'react';
 import TopNavigationBar from './TopNavigationBar';
-import RRTAnimationPanel from './RRTAnimationPanel';
 import LLMAnimationPanel from './LLMAnimationPanel';
 import AJPortfolioPanel from './AJPortfolioPanel';
 import LeftPanel from './LeftPanel';
 import RRTPromptPanel from './RRTPromptPanel';
-import { useState, useRef } from 'react';
+import RRTAnimationPanel from './RRTAnimationPanel';
 
 function App() {
   const [rrtStarted, setRrtStarted] = useState(false);
@@ -23,26 +22,28 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Top Navigation Bar */}
-      <TopNavigationBar
-        scrollToSection={(id) => {
-          const el = document.getElementById(id);
-          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }}
-      />
+      <TopNavigationBar scrollToSection={(id) => {
+        const el = document.querySelector(`#${id}`);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }} />
 
-      {/* Main container */}
-      <div className="flex flex-col md:flex-row w-full">
-        {/* Left panel */}
-        <div className="w-full md:w-80 md:h-auto md:fixed md:top-0 md:left-0">
+      {/* Layout container: left panel + main content */}
+      <div className="flex flex-col md:flex-row">
+        {/* LEFT PANEL */}
+        <div className="w-full md:w-80 md:h-screen md:fixed top-16 md:top-16 left-0 bg-green-50 border-r border-green-200">
           <LeftPanel />
         </div>
 
-        {/* Right/main content */}
-        <div className="flex-1 md:ml-80 md:pt-16">
+        {/* MAIN CONTENT */}
+        <div className="flex-1 md:ml-80 pt-16">
+          {/* LLM Animation Panel */}
           <LLMAnimationPanel />
+
+          {/* Portfolio */}
           <AJPortfolioPanel />
 
-          <section id="rrt" className="py-16 px-0 space-y-4">
+          {/* RRT Section */}
+          <section id="rrt" className="py-4">
             <RRTPromptPanel onEnter={handleStartRRT} />
             <RRTAnimationPanel ref={rrtPanelRef} startAnimation={rrtStarted} />
           </section>
