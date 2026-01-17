@@ -9,7 +9,7 @@ return (
         </div>
 
         <p>
-            For approximately two years of my undergrad, I was a student research assistant at the <a href="https://cheps.engin.umich.edu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:underline">University of Michigan-Center for Healthcare Engineering and Patient Safety (CHEPS)</a>, which is directed by my long-term mentor <a href="https://ioe.engin.umich.edu/people/cohn-amy-m/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:underline">Professor Amy Cohn</a>.
+            For approximately two years of my undergrad, I was a student research assistant at the <a href="https://cheps.engin.umich.edu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:underline">University of Michigan-Center for Healthcare Engineering and Patient Safety (CHEPS)</a>, which is directed by my long-term mentor, <a href="https://ioe.engin.umich.edu/people/cohn-amy-m/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:underline">Professor Amy Cohn</a>.
         </p>
         
         <p>
