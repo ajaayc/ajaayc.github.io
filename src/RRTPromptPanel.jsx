@@ -1,7 +1,7 @@
 // RRTPromptPanel.jsx
 import React, { useState, useEffect, useRef } from "react";
 
-export default function RRTPromptPanel({ onEnter, height = 425 }) {
+export default function RRTPromptPanel({ onEnter, height = 685 }) {
   const canvasRef = useRef(null);
   const [showCursor, setShowCursor] = useState(true);
   const [entered, setEntered] = useState(false);
@@ -11,28 +11,36 @@ export default function RRTPromptPanel({ onEnter, height = 425 }) {
   const promptLines = [
     "ajaay@SPECTRAL-PC ~ > cat something_cool.txt",
     "",
-    "The bidirectional RRT-connect algorithm is my",
-    "personal favorite.",
+    "The bidirectional RRT-connect algorithm is",
+    "my personal favorite.",
     "",
-    "It elicits a spectacular probabilistic dance...two",
-    "rapidly expanding trees of nodes in the",
-    "configuration space.",
+    "It elicits a spectacular probabilistic",
+    "dance...two rapidly expanding trees",
+    "of nodes in the configuration space.",
     "",
-    "Reaching towards each other to find a connection...",
-    "a collision-free path from start to end.",
+    "Reaching towards each other to find a",
+    "connection... a collision-free path",
+    "from start to end.",
     "",
     "Want to see it live in action?",
-    "ajaay@SPECTRAL-PC ~ > bazel build //main:rrt_runner",
-    "ajaay@SPECTRAL-PC ~ > ./bazel-bin/main/rrt_runner",
-    "----------------------------------------------------",
-    "Press ENTER to run the bidirectional RRT animation",
-    "----------------------------------------------------"
+    "",
+    "ajaay@SPECTRAL-PC ~ > \\",
+    "bazel build //main:rrt_runner",
+    "",
+    "INFO: Build completed successfully,",
+    "2 total actions",
+    "",
+    "ajaay@SPECTRAL-PC ~ > \\",
+    "bazel run ///main:rrt_runner",
+    "------------------------------------------",
+    "Press ENTER to run the bidirectional RRT",
+    "------------------------------------------"
   ];
 
   const highlightLines = [
-    "----------------------------------------------------",
-    "Press ENTER to run the bidirectional RRT animation",
-    "----------------------------------------------------"
+    "------------------------------------------",
+    "Press ENTER to run the bidirectional RRT",
+    "------------------------------------------"
   ];
 
   useEffect(() => {
@@ -44,7 +52,7 @@ export default function RRTPromptPanel({ onEnter, height = 425 }) {
     canvas.width = width;
     canvas.height = heightPx;
 
-    const fontSize = Math.floor(heightPx * 0.035);
+    const fontSize = 16;//Math.floor(heightPx * 0.035);
     const lineHeight = fontSize * 1.5;
     const padding = fontSize * 2;
 
