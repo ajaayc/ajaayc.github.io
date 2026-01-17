@@ -1,5 +1,5 @@
 // LLMAnimationPanel.jsx
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 /**
  * LLMAnimationPanel
@@ -22,22 +22,20 @@ const SAMPLE_TEXT = [
 
 export default function LLMAnimationPanel() {
   const canvasRef = useRef(null);
-  const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
-    // Measure canvas width based on parent container
-    const container = canvas.parentElement;
-    let width = container.clientWidth;
-    let heightPx = container.clientHeight;
+    // Initialize canvas size
+    let width = canvas.parentElement.clientWidth;
+    let heightPx = canvas.parentElement.clientHeight;
     canvas.width = width;
     canvas.height = heightPx;
 
     const fontSize = Math.floor(heightPx * 0.035);
     const lineHeight = fontSize * 1.5;
-    const padding = fontSize * 2; // slightly larger for better spacing
+    const padding = fontSize * 2;
 
     const normalFont = `${fontSize}px monospace`;
     const boldFont = `bold ${fontSize}px monospace`;
@@ -46,7 +44,7 @@ export default function LLMAnimationPanel() {
 
     let charIndex = 0;
     let lines = [""];
-    let cursorVisible = true; // solid cursor at the end
+    let cursorVisible = true;
     let typingDone = false;
 
     function wrapText() {
@@ -55,11 +53,9 @@ export default function LLMAnimationPanel() {
       const paragraphs = rawText.split("\n");
 
       lines = [];
-
       paragraphs.forEach((para) => {
         const words = para.split(" ");
         let line = "";
-
         words.forEach((word) => {
           const testLine = line + word + " ";
           if (ctx.measureText(testLine).width > maxWidth) {
@@ -69,7 +65,6 @@ export default function LLMAnimationPanel() {
             line = testLine;
           }
         });
-
         lines.push(line);
       });
     }
@@ -132,7 +127,7 @@ export default function LLMAnimationPanel() {
         }
       });
 
-      // Solid cursor at the endq
+      // Solid cursor
       if (cursorVisible) {
         const lastLine = visibleLines[visibleLines.length - 1] || "";
         ctx.font = normalFont;
@@ -143,31 +138,35 @@ export default function LLMAnimationPanel() {
       }
     }
 
+    // Typing animation
     const typingInterval = setInterval(() => {
       if (charIndex < SAMPLE_TEXT.length) {
         charIndex++;
         wrapText();
-      } else if (!typingDone) {
+        draw();
+      } else {
         typingDone = true;
-        cursorVisible = true; // solid cursor at the end
         clearInterval(cursorInterval);
       }
-      draw();
-    }, 12); // slightly slower typing for dramatic effect
+    }, 12);
 
+    // Blinking cursor
     const cursorInterval = setInterval(() => {
       if (!typingDone) {
         cursorVisible = !cursorVisible;
+        draw();
       }
     }, 500);
 
+    // Resize without restarting animation
     function handleResize() {
-      width = container.clientWidth;
-      heightPx = container.clientHeight;
+      width = canvas.parentElement.clientWidth;
+      heightPx = canvas.parentElement.clientHeight;
       canvas.width = width;
       canvas.height = heightPx;
       ctx.font = normalFont;
       wrapText();
+      draw();
     }
 
     window.addEventListener("resize", handleResize);
@@ -177,16 +176,7 @@ export default function LLMAnimationPanel() {
       clearInterval(cursorInterval);
       window.removeEventListener("resize", handleResize);
     };
-  }, [windowSize]);
-
-  // Update window size state on resize to trigger effect
-  useEffect(() => {
-    function onResize() {
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-    }
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+  }, []); // Run only once
 
   return (
     <div className="w-full flex-shrink-0 min-h-[24rem] md:min-h-[32rem] relative overflow-hidden">
