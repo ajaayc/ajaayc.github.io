@@ -48,6 +48,8 @@ export default function RRTPromptPanel({ onEnter, height = 755 }) {
     if (!canvas) return;
     
     const ctx = canvas.getContext("2d");
+    if (!ctx) return; // Guard against null context
+    
     const width = canvas.offsetWidth;
     const fontSize = 16;
     const padding = fontSize * 2;
@@ -114,7 +116,11 @@ export default function RRTPromptPanel({ onEnter, height = 755 }) {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
+    
     const ctx = canvas.getContext("2d");
+    if (!ctx) return; // Guard against null context
+    
     const width = canvas.offsetWidth;
     const heightPx = height;
 
