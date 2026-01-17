@@ -15,12 +15,25 @@ import KinevalContent from './projects/KinevalContent';
 import PIDControllerContent from './projects/PIDControllerContent';
 import KECContent from './projects/KECContent';
 import PhlebSimulationContent from './projects/PhlebSimulationContent';
+import PupperV3Content from './projects/PupperV3Content';
 
 export default function AJPortfolioPanel() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedCompany, setSelectedCompany] = useState(null);
 
   const projects = [
+    {
+      title: "Pupper V3",
+      date: "Oct 2025 - Present",
+      paperLink: null,
+      codeLink: null,
+      siteLink: null,
+      videoLink: null,
+      posterLink: null,
+      preview: "img/pupperv3_wip.jpg",
+      short: null,
+      long: <PupperV3Content />,
+    },
     {
       title: "Plybot Testbed Initial Design",
       date: "Sept 2021 - Feb 2022",
