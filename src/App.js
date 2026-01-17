@@ -54,7 +54,7 @@ function App() {
           </div>
 
           {/* RRT Section */}
-          <section id="rrt" className="py-16 px-0 space-y-4">
+          <section id="rrt" className="pt-16 pb-0 px-0">
           {/* RRTPromptPanel: user presses Enter to start */}
             <RRTPromptPanel onEnter={handleStartRRT} />
 
