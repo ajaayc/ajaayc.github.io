@@ -414,8 +414,8 @@ export default function AJPortfolioPanel() {
         {/* MISC WORK */}
         <section id="misc" className="py-16">
           <h2 className="text-2xl font-bold text-green-700 mb-6">Misc Work</h2>
+          <h3 className="text-xl font-semibold text-green-700 mb-4">Papers</h3>
           <p className="text-gray-600 leading-relaxed max-w-full">
-            <h3 className="text-xl font-semibold text-green-700 mb-4">Papers</h3>
             <p>
               <a
                 href="/documents/automation_theft_of_labor.pdf"
@@ -437,22 +437,20 @@ export default function AJPortfolioPanel() {
               </a>
             </p>
           </p>
+          {/* <h3 className="text-xl font-semibold text-green-700 mb-4"> Web Development Projects </h3>  */}
         </section>
 
         {/* CONTACT */}
         <section id="contact" className="py-16">
           <h2 className="text-2xl font-bold text-green-700 mb-6">Contact</h2>
           <p className="text-gray-600 leading-relaxed max-w-full">
-            Please shoot me a message through{' '}
-            <a
-              href="https://www.linkedin.com/in/ajaayc/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 underline"
-            >
-              Linkedin
-            </a>
-            . I look forward to connecting with you!
+            I am best reached via email:
+            <img
+              src="/img/emailpic.png"
+              alt="EmailPicture"
+            />
+
+            <p>I look forward to connecting with you!</p>
           </p>
         </section>
       </main>
