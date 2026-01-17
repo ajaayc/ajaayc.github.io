@@ -1,7 +1,7 @@
 // RRTPromptPanel.jsx
 import React, { useState, useEffect, useRef } from "react";
 
-export default function RRTPromptPanel({ onEnter, height = 685 }) {
+export default function RRTPromptPanel({ onEnter, height = 735 }) {
   const canvasRef = useRef(null);
   const [showCursor, setShowCursor] = useState(true);
   const [entered, setEntered] = useState(false);
@@ -9,9 +9,11 @@ export default function RRTPromptPanel({ onEnter, height = 685 }) {
   const [charIndex, setCharIndex] = useState(0);
 
   const promptLines = [
-    "ajaay@SPECTRAL-PC ~ > cat something_cool.txt",
+    "ajaay@SPECTRAL-PC ~ > \\",
+    "cat something_cool.txt",
     "",
-    "The bidirectional RRT-connect algorithm is",
+    "The bidirectional RRT-connect",
+    "algorithm is my personal favorite.",
     "my personal favorite.",
     "",
     "It elicits a spectacular probabilistic",
