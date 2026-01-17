@@ -1,48 +1,38 @@
-import React, { useRef, useEffect, useState, forwardRef } from 'react';
+import React, { useRef, useEffect, forwardRef } from 'react';
 
 const RRTAnimationPanel = forwardRef(({ navbarId, startAnimation }, ref) => {
   const canvasRef = useRef(null);
   const initializedRef = useRef(false);
-  const [panelHeight, setPanelHeight] = useState(window.innerHeight);
-  const [obstacles, setObstacles] = useState([]);
-  const [start, setStart] = useState({ x: 100, y: 0 });
-  const [goal, setGoal] = useState({ x: 0, y: 0 });
+  const obstaclesRef = useRef([]);
+  const startRef = useRef({ x: 100, y: 0 });
+  const goalRef = useRef({ x: 0, y: 0 });
 
-  // Update panel height
-  useEffect(() => {
-    function updateHeight() {
-      const navbar = document.getElementById(navbarId);
-      const navbarHeight = navbar ? navbar.offsetHeight : 0;
-      const fraction = 0.8;
-      setPanelHeight((window.innerHeight - navbarHeight) * fraction);
-    }
+  // Initialize canvas size once
+  const getPanelHeight = () => {
+    const navbar = document.getElementById(navbarId);
+    const navbarHeight = navbar ? navbar.offsetHeight : 0;
+    return (window.innerHeight - navbarHeight) * 0.8;
+  };
 
-    updateHeight();
-    window.addEventListener('resize', updateHeight);
-    return () => window.removeEventListener('resize', updateHeight);
-  }, [navbarId]);
-
-  // Initialize static scene
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-
-    const width = canvas.parentElement.offsetWidth;
-    const height = panelHeight;
-
+    let width = canvas.parentElement.offsetWidth;
+    let height = getPanelHeight();
     canvas.width = width;
     canvas.height = height;
 
+    // Start & Goal nodes
     const s = { x: 100, y: height / 2 };
     const g = { x: width - 100, y: height / 2 };
-    setStart(s);
-    setGoal(g);
+    startRef.current = s;
+    goalRef.current = g;
 
-    function rectContainsPoint(rect, p) {
-      return p.x >= rect.x && p.x <= rect.x + rect.width && p.y >= rect.y && p.y <= rect.y + rect.height;
-    }
+    // Generate obstacles
+    const rectContainsPoint = (rect, p) =>
+      p.x >= rect.x && p.x <= rect.x + rect.width && p.y >= rect.y && p.y <= rect.y + rect.height;
 
-    function generateObstacles(count = 25) {
+    const generateObstacles = (count = 25) => {
       const obs = [];
       const minSize = 60;
       const maxSize = 160;
@@ -57,42 +47,64 @@ const RRTAnimationPanel = forwardRef(({ navbarId, startAnimation }, ref) => {
         obs.push(candidate);
       }
       return obs;
-    }
+    };
 
-    const obsArray = generateObstacles();
-    setObstacles(obsArray);
+    obstaclesRef.current = generateObstacles();
 
     // Draw static scene once
-    ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = 'gray';
-    obsArray.forEach(o => ctx.fillRect(o.x, o.y, o.width, o.height));
+    const drawScene = () => {
+      ctx.clearRect(0, 0, width, height);
 
-    // Draw start node (square)
-    ctx.fillStyle = 'green';
-    ctx.fillRect(s.x - 10, s.y - 10, 20, 20);
+      // Obstacles
+      ctx.fillStyle = 'gray';
+      obstaclesRef.current.forEach(o => ctx.fillRect(o.x, o.y, o.width, o.height));
 
-    // Draw goal node (star)
-    ctx.fillStyle = 'yellow';
-    ctx.beginPath();
-    const spikes = 5, outer = 14, inner = 6;
-    let rot = Math.PI / 2 * 3;
-    let x = g.x, y = g.y;
-    let step = Math.PI / spikes;
-    ctx.moveTo(x, y - outer);
-    for (let i = 0; i < spikes; i++) {
-      ctx.lineTo(x + Math.cos(rot) * outer, y + Math.sin(rot) * outer);
-      rot += step;
-      ctx.lineTo(x + Math.cos(rot) * inner, y + Math.sin(rot) * inner);
-      rot += step;
-    }
-    ctx.closePath();
-    ctx.fill();
-  }, [panelHeight]);
+      // Start node (square)
+      ctx.fillStyle = 'green';
+      ctx.fillRect(s.x - 10, s.y - 10, 20, 20);
+
+      // Goal node (star)
+      ctx.fillStyle = 'yellow';
+      ctx.beginPath();
+      const spikes = 5, outer = 14, inner = 6;
+      let rot = Math.PI / 2 * 3;
+      let x = g.x, y = g.y;
+      let step = Math.PI / spikes;
+      ctx.moveTo(x, y - outer);
+      for (let i = 0; i < spikes; i++) {
+        ctx.lineTo(x + Math.cos(rot) * outer, y + Math.sin(rot) * outer);
+        rot += step;
+        ctx.lineTo(x + Math.cos(rot) * inner, y + Math.sin(rot) * inner);
+        rot += step;
+      }
+      ctx.closePath();
+      ctx.fill();
+    };
+
+    drawScene();
+
+    // Handle window resize gracefully
+    const handleResize = () => {
+      width = canvas.parentElement.offsetWidth;
+      height = getPanelHeight();
+      canvas.width = width;
+      canvas.height = height;
+
+      // Reposition start & goal
+      startRef.current = { x: 100, y: height / 2 };
+      goalRef.current = { x: width - 100, y: height / 2 };
+
+      // Redraw obstacles and nodes without restarting animation
+      drawScene();
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [navbarId]);
 
   // Animation effect
   useEffect(() => {
-    if (!startAnimation) return;
-    if (initializedRef.current) return;
+    if (!startAnimation || initializedRef.current) return;
     initializedRef.current = true;
 
     const canvas = canvasRef.current;
@@ -100,8 +112,9 @@ const RRTAnimationPanel = forwardRef(({ navbarId, startAnimation }, ref) => {
     const width = canvas.width;
     const height = canvas.height;
 
-    const nodesStart = [{ node: start, parent: null }];
-    const nodesGoal = [{ node: goal, parent: null }];
+    const nodesStart = [{ node: startRef.current, parent: null }];
+    const nodesGoal = [{ node: goalRef.current, parent: null }];
+    const obstacles = obstaclesRef.current;
 
     function distance(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
     function randomNode() { return { x: Math.random() * width, y: Math.random() * height }; }
@@ -130,7 +143,14 @@ const RRTAnimationPanel = forwardRef(({ navbarId, startAnimation }, ref) => {
       else if (type === 'square') ctx.fillRect(node.x - 5 * size, node.y - 5 * size, 10 * size, 10 * size);
       ctx.fill();
     }
-    function drawLine(a, b, color = 'blue', width = 2) { ctx.strokeStyle = color; ctx.lineWidth = width; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+    function drawLine(a, b, color = 'blue', widthLine = 2) {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = widthLine;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+    }
 
     let connected = false;
     let finalPath = [];
@@ -182,10 +202,10 @@ const RRTAnimationPanel = forwardRef(({ navbarId, startAnimation }, ref) => {
     }
 
     requestAnimationFrame(animate);
-  }, [startAnimation, panelHeight, start, goal, obstacles]);
+  }, [startAnimation]);
 
   return (
-    <div ref={ref} className="w-full relative bg-green-100" style={{ height: `${panelHeight}px` }}>
+    <div ref={ref} className="w-full relative bg-green-100" style={{ height: `${getPanelHeight()}px` }}>
       <canvas ref={canvasRef} className="w-full h-full" />
     </div>
   );
