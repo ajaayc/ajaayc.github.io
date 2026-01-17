@@ -1,7 +1,7 @@
 // RRTPromptPanel.jsx
 import React, { useState, useEffect, useRef } from "react";
 
-export default function RRTPromptPanel({ onEnter, height = 350 }) {
+export default function RRTPromptPanel({ onEnter, height = 425 }) {
   const canvasRef = useRef(null);
   const [showCursor, setShowCursor] = useState(true);
   const [entered, setEntered] = useState(false);
