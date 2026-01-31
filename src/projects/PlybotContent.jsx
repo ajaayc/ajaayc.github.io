@@ -11,7 +11,7 @@ export default function PlybotTestbed() {
 
       <p className="text-red-600">
         <b>
-          This is a work-in-progress project, which I started in late 2021. It has currently been shelved because life happens and priorities change. I may return to it at a future date when I see fit.
+          This is a work-in-progress project, which I started in late 2021. It has currently been shelved, but I did complete a strong initial design. I may return to it at a future date when I see fit.
         </b>
       </p>
 
